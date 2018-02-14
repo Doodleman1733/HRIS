@@ -1,0 +1,1384 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model WorkflowAddViewModel
+@{
+    ViewBag.Title = "Workflow/Add";
+}
+<div class="col-md-12 title">
+    ADD WORKFLOW
+</div>
+
+@using (Html.BeginForm("Add", "Workflow", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "workflowFrm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="body-content">
+        <div class="col-md-12 no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 no-padding margin-bottom-lg">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Company" })
+                                    @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.wflw_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.TextBoxFor(model => model.wflw_id, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                                    @Html.ValidationMessageFor(model => model.wflw_id, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="col-md-12 no-padding">
+                                    @Html.CheckBoxFor(model => model.active, new { @class = "" })
+                                    @Html.LabelFor(model => model.active, new { @class = "fs20 ff-nt2" })
+                                    @Html.ValidationMessageFor(model => model.active, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                                    @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2 margin-top-sm">
+                                    @Html.LabelFor(model => model.module_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.DropDownListFor(model => model.module_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Module" })
+                                    @Html.ValidationMessageFor(model => model.module_id, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding tabs-default h45 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">WORKFLOW STATUS</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 flex flex-center">
+                <div class="col-md-12">
+                    <div id="workflowStatus" class="col-md-12 margin-top-default" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">ID</th>
+                                    <th class="fs17 text-center">STATUS</th>
+                                    <th class="fs17 text-center">STATUS(PAST TENSE)</th>
+                                    <th class="fs17 text-center">END POINT</th>
+                                    <th class="fs17 text-center">WITH REMARKS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr class="not-included">
+                                    <td class="status_id default" value="1">1</td>
+                                    <td class="status1" value="START">START</td>
+                                    <td class="status2" value="STARTED">STARTED</td>
+                                    <td><span class="margin-left-lg margin-right-sm"><input type="checkbox" class="endpoint checkBig"></span></td>
+                                    <td><span class="margin-left-lg margin-right-sm"><input type="checkbox" class="withremarks checkBig"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pull-right margin-top-default margin-bottom-lg">
+                <div class="col-md-3 no-padding margin-right-sm">
+                    <input type="button" value="ADD" id="addworkflowStatus" class="bg-green002 button-default block h38 fs20 ff-nt2" data-toggle="modal" data-target="#mymodal" />
+                </div>
+                <div class="col-md-4 no-padding margin-right-sm">
+                    <input type="button" id="editworkflowStatus" value="EDIT" class="bg-blue003 button-default block h38 fs20 ff-nt2" data-toggle="modal" data-target="#mymodal" disabled />
+                </div>
+                <div class="col-md-4 no-padding-left">
+                    <input type="button" id="removeworkflowStatus" value="REMOVE" class="bg-green002 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+            </div>
+
+
+            <div class="col-md-12 no-padding tabs-default h45 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">WORKFLOW STATUS SETUP</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 ff-nt2 fs20 margin-top-default margin-left-default ">
+                FLOW SETUP
+            </div>
+            <div class="col-md-12 flex flex-center">
+
+                <div class="col-md-12">
+                    <div id="workFlowStatusFlow" class="col-md-12 margin-top-sm" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">SERIES</th>
+                                    <th class="fs17 text-center">STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fs20"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 pull-right margin-top-default margin-bottom-default">
+                <div class="col-md-3 no-padding margin-right-sm">
+                    <input type="button" id="addworkFlowStatusFlow" value="ADD" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                </div>
+                <div class="col-md-4 no-padding margin-right-sm">
+                    <input type="button" value="EDIT" id="editworkFlowStatusFlow" class="bg-blue003 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+                <div class="col-md-4 no-padding-left">
+                    <input type="button" id="saveworkFlowStatusFlow" value="SAVE" class="bg-green002 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+            </div>
+
+            <div class="col-md-12 ff-nt2 fs20 margin-left-default ">
+                USER SETUP
+            </div>
+            <div class="col-md-12 flex flex-center">
+
+                <div class="col-md-12">
+                    <div id="workFlowStatusUser" class="col-md-12 margin-top-sm" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">USER ID</th>
+                                    <th class="fs17 text-center">EDIT</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fs20"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 pull-right  margin-top-default margin-bottom-lg ">
+                <div class="col-md-3 no-padding margin-right-sm">
+                    <input type="button" id="addworkFlowStatusUser" value="ADD" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                </div>
+                <div class="col-md-4 no-padding margin-right-sm">
+                    <input type="button" value="EDIT" id="editworkFlowStatusUser" class="bg-blue003 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+                <div class="col-md-4 no-padding-left">
+                    <input type="button" id="saveworkFlowStatusUser" value="SAVE" class="bg-green002 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding tabs-default h45 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">CONDITION GROUP</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 flex flex-center">
+                <div class="col-md-12">
+                    <div id="conditionGroup" class="col-md-12 margin-top-default" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">CONDITION</th>
+                                    <th class="fs17 text-center">TABLE</th>
+                                    <th class="fs17 text-center">FIELD</th>
+                                    <th class="fs17 text-center">EXPRESSION</th>
+                                    <th class="fs17 text-center">VALUE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 pull-right  margin-top-default margin-bottom-lg ">
+                <div class="col-md-3 no-padding margin-right-sm">
+                    <input type="button" id="addConditionGroup" value="ADD" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                </div>
+                <div class="col-md-4 no-padding margin-right-sm">
+                    <input type="button" value="EDIT" id="editConditionGroup" class="bg-blue003 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+                <div class="col-md-4 no-padding-left">
+                    <input type="button" id="saveConditionGroup" value="SAVE" class="bg-green002 button-default block h38 fs20 ff-nt2" disabled />
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div class="col-md-4 pull-right  margin-top-default margin-bottom-lg">
+                    <div class="col-md-5 no-padding">
+                        <input type="button" value="SAVE" id="submit" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                    </div>
+                    <div class="col-md-6 no-padding-right">
+                        <a type="button" href='@Url.Content("~/Workflow")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CANCEL</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<div class="modal" id="mymodal" tabindex="-1" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="col-md-12 no-padding modal-content">
+            <div class="modal-body no-padding reset">
+                @using (Html.BeginForm("", "", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { @class = "form-horizontal", role = "form", @id = "workflowStatusModal" }))
+                {
+                    <span role="button" class="glyphicon glyphicon-remove pull-right margin-right-default margin-top-default" data-dismiss="modal"></span>
+
+                    <div class="col-md-12 flex flex-center margin-bottom-lg">
+                        <div class="col-md-9">
+                            <div class="col-md-12 margin-top-default pull-right">
+                                <div class="col-md-12 no-padding margin-right-sm margin-bottom-sm fs20 ff-nt2">
+                                    Status ID
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    <input type="text" name="status_id" id="status_id" maxlength="20" class="form-control h38 input-default" data-val="true" data-val-required="* Required">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="status_id" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default pull-right">
+                                <div class="col-md-12 no-padding margin-right-sm margin-bottom-sm fs20 ff-nt2">
+                                    Status
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    <input type="text" name="status1" id="status1" maxlength="50" class="form-control h38 input-default" data-val="true" data-val-required="* Required">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="status1" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default pull-right">
+                                <div class="col-md-12 no-padding margin-right-sm margin-bottom-sm fs20 ff-nt2">
+                                    Status (Past Tense)
+                                </div>
+                                <div class="col-md-12 no-padding ">
+                                    <input type="text" name="status2" id="status2" maxlength="50" class="form-control h38 input-default" data-val="true" data-val-required="* Required">
+                                    <span class="text-danger field-validation-error" data-valmsg-for="status2" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 margin-top-default pull-right">
+                                <div class="col-md-6 no-padding">
+                                    <div class="col-md-1 no-padding">
+                                        <input type="checkbox" name="endpoint" id="endpoint" class="input-default h25 block">
+                                    </div>
+                                    <div class="col-md-11 no-padding  margin-bottom-sm fs20 ff-nt2">
+                                        &nbsp; End Point
+                                    </div>
+                                </div>
+                                <div class="col-md-6 no-padding">
+                                    <div class="col-md-1 no-padding">
+                                        <input type="checkbox" name="withremarks" id="withremarks" class="input-default h25 block">
+                                    </div>
+                                    <div class="col-md-11 no-padding  margin-bottom-sm fs20 ff-nt2">
+                                        &nbsp; With Remarks
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-6 margin-top-lg no-padding pull-right">
+                            <div class="col-md-5 no-padding margin-right-sm margin-bottom-lg">
+                                <input type="submit" id="add" value="ADD" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                            </div>
+                            <div class="col-md-5 no-padding margin-bottom-lg">
+                                <input type="button" value="CLOSE" class="bg-orange001 button-default block h38 fs20 ff-nt2" data-dismiss="modal" />
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var fieldList, subModuleList;
+    var condition = [
+                    { value: 'AND', text: 'AND' },
+                    { value: 'OR', text: 'OR' }
+    ]
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onChange: function () {
+                $('#wflw_id').removeData('previousValue');
+                $('#workflowFrm').validate().element(':input[name="wflw_id"]');;
+            }
+        });
+
+        $('#module_id').selectize({
+            valueField: 'module_id',
+            labelField: 'sdisplay',
+            searchField: ['sdisplay'],
+            sortField: [{ field: 'sdisplay', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/getModules")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            }
+        });
+
+    }
+
+    function initializeEvents() {
+
+        //$('#module_id').on('change', function () {
+        //    var conditionLine = $('#conditionGroup tbody tr.not-included');
+        //    selectizeTable(conditionLine, '');
+        //    selectizeField(conditionLine, '');
+        //    selectizeExpression(conditionLine, '');
+        //});
+
+        $('#workflowStatusModal').on('submit', function (e) {
+            e.preventDefault();
+            var _this = $(this)
+            var table = $('#workflowStatus tbody');
+            var data = _this.serializeArray();
+            table.find('tr').removeClass('active');
+            if (!validateWorkflowStatusId()) {
+                if (_this.valid()) {
+                    var tr = $('<tr>', {class : "active"});
+                    for (x in data) {
+                        if (data[x].name == "status_id" || data[x].name == "status1" || data[x].name == "status2") {
+                            tr.append(
+                                '<td class="' + data[x].name + '" value="' + data[x].value + '">' + data[x].value + '</td>'
+                            );
+                        }
+                    }
+                    tr.append(
+                                '<td style="display:none"><ul id="workflowStatusFlow"></ul></td>' +
+                                '<td style="display:none"><ul id="workflowStatusUser"></ul></td>'
+                            );
+                    var endpoint = _this.find('#endpoint').is(':checked');
+                    var withremarks = _this.find('#withremarks').is(':checked');
+                    var edit = table.find('tr.edit').length;
+                    if (endpoint)
+                        tr.append(
+                            '<td><span class="margin-left-lg margin-right-sm"><input type="checkbox" class="endpoint checkBig" checked></span></td>'
+                           );
+                    if (!endpoint) {
+                        tr.append(
+                        '<td><span class="margin-left-lg margin-right-sm"><input type="checkbox" class="endpoint checkBig"></span></td>'
+                       );
+                    }
+                    if (withremarks) {
+                        tr.append(
+                           '<td><span class="margin-left-lg margin-right-sm"><input type="checkbox" class="withremarks checkBig" checked></span></td>'
+                           );
+                    }
+                    if (!withremarks) {
+                        tr.append(
+                           '<td><span class="margin-left-lg margin-right-sm"><input type="checkbox"  class="withremarks checkBig"></span></td>'
+                           );
+                    }
+                    if (edit) {
+                        $('#workflowStatus tbody').find('tr.edit').before(tr[0]);
+                        $('#workflowStatus tbody').find('tr.edit').remove();
+                    }
+                    if (!edit) {
+                        table.append(tr[0]);
+                    }
+                    _this[0].reset();
+                    $('#mymodal').find('#status_id').attr('readonly', false);
+                    $('#mymodal').modal('hide');
+                    saveStatusFlow();
+                    saveStatusUser();
+                    reset();
+                    table.find('tr').removeClass('active');
+                    $('#workFlowStatusUser tbody').html('');
+                    $('#workFlowStatusFlow tbody').html('');
+                    $('#editworkflowStatus').attr('disabled', true);
+                }
+            }
+        });
+
+        $('#addworkflowStatus').click(function () {
+            var table = $('#workflowStatus tbody');
+            table.find('tr').removeClass('active');
+            $('#editworkflowStatus').attr('disabled', true);
+            $('#workFlowStatusUser tbody').html('');
+            $('#workFlowStatusFlow tbody').html('');
+        });
+
+        $('#removeworkflowStatus').click(function () {
+            var selectedLine = $('#workflowStatus tbody tr.active');
+            bootbox.confirm({
+                size: "small",
+                message: "Remove Work Flow Status?",
+                closeButton: false,
+                buttons: {
+                    cancel: {
+                        label: "NO",
+                        className: "bg-orange001 text-white"
+                    },
+                    confirm: {
+                        label: "YES",
+                        className: "bg-green002 text-white"
+                    }
+
+                },
+                className: "fs17 ff-nt2",
+                callback: function (result) {
+                    if (result) {
+                        selectedLine.remove();
+                        $('#editworkflowStatus').attr('disabled', true);
+                        $('#removeworkflowStatus').attr('disabled', true);
+                    }
+                }
+            });
+        });
+
+        $('#editworkflowStatus').click(function () {
+            $('#workflowStatus tbody').find('tr.active').addClass('edit');
+            $('#mymodal').find('#add').val("SAVE");
+            $('#mymodal').find('#status_id').attr('readonly', true);
+            $('#workflowStatus tbody tr.active').each(function (index, elem) {
+                var endpoint = $(elem).find('.endpoint').is(':checked');
+                var withremarks = $(elem).find('.withremarks').is(':checked');
+                $('#workflowStatusModal #status_id').val($(elem).find('.status_id').text());
+                $('#workflowStatusModal #status1').val($(elem).find('.status1').text());
+                $('#workflowStatusModal #status2').val($(elem).find('.status2').text());
+                $('#workflowStatusModal #endpoint').iCheck(endpoint ? "check" : "uncheck");
+                $('#workflowStatusModal #withremarks').iCheck(withremarks ? "check" : "uncheck");
+            });
+            showStatusFlow();
+            showStatusUser();
+            reset();
+        });
+
+        $('#status_id').on('input', function () {
+            validateWorkflowStatusId();
+        });
+
+        $('#workflowStatus tbody').on('click', 'tr', function (e) {
+            var _this = $(this);
+            $('#editworkflowStatus').attr('disabled', true);
+            $('#workflowStatus tbody tr').not(_this).removeClass('active');
+            _this.addClass('active');
+            showStatusFlow();
+            showStatusUser();
+            if (!_this.find('.default').length) {
+                $('#editworkflowStatus').removeAttr('disabled');
+                $('#removeworkflowStatus').removeAttr('disabled').addClass('bg-orange001').removeClass('bg-blue003').removeClass('bg-green002');;
+                reset();
+            }
+        });
+
+        $('#workFlowStatusFlow tbody').on('click', 'tr', function (e) {
+            var _this = $(this);
+            if ($('#workFlowStatusFlow tbody').find('.edit').length != 1) {
+                $('#workFlowStatusFlow tbody tr').not(_this).removeClass('active');
+                _this.addClass('active');
+                $('#saveworkFlowStatusFlow').attr('disabled', false).val("SAVE").removeClass('bg-orange001').removeClass('bg-blue003').addClass('bg-green002');
+                $('#editworkFlowStatusFlow').attr('disabled', false);
+                if (_this.find('.status_id_to.close').length) {
+                     $('#saveworkFlowStatusFlow').attr('disabled', false).val("REMOVE").addClass('bg-orange001').removeClass('bg-blue003').removeClass('bg-green002');
+                }
+            }
+        });
+
+        $('#workFlowStatusUser tbody').on('click', 'tr', function (e) {
+            var _this = $(this);
+            //if ($('#workFlowStatusUser tbody').find('.edit').length != 1) {
+                $('#workFlowStatusUser tbody tr').not(_this).removeClass('active');
+                _this.addClass('active');
+                $('#saveworkFlowStatusUser').attr('disabled', false).val("SAVE").removeClass('bg-orange001').removeClass('bg-blue003').addClass('bg-green002');
+                $('#editworkFlowStatusUser').attr('disabled', false);
+                if (_this.find('.user_id.close').length) {
+                    $('#saveworkFlowStatusUser').attr('disabled', false).val("REMOVE").addClass('bg-orange001').removeClass('bg-blue003').removeClass('bg-green002');
+                //}
+            }
+        });
+
+        $('#addworkFlowStatusFlow').click(function () {
+            var id = $('#workflowStatus tbody tr.active').find('td').eq(1).text();
+            var select = $('#workflowStatus').find('tr.active').length;
+            var _this = $(this);
+            if (select) {
+                $('#workFlowStatusFlow tbody tr').removeClass('active');
+                _this.attr('disabled', true);
+                var tr = $('<tr>', { class: 'active save' });
+                tr.append(
+                        '<td align="center" class="id textAlign">' + (parseInt($('#workFlowStatusFlow tbody tr').length) + 1) + '</td>' +
+                        '<td class="fs13"><select class="status_id_to open"></select></td>'
+                    );
+                $('#workFlowStatusFlow tbody').append(tr[0]);
+                selectizeStatusFlow($('#workFlowStatusFlow tbody tr.active'), id, 0);
+                $('#saveworkFlowStatusFlow').attr('disabled', false);
+                $('#editworkFlowStatusFlow').attr('disabled', false).val("CANCEL").addClass('bg-orange001').removeClass('bg-blue003').removeClass('bg-green002');
+            }
+            else {
+                bootbox.alert({
+                    size: "small",
+                    message: "Please Select Work Flow Status",
+                    closeButton: false,
+                    className: "fs17 ff-nt2",
+                    buttons: {
+                        ok:
+                        {
+                            className: "bg-green002 text-white"
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#saveworkFlowStatusFlow').click(function () {
+            var selectedLine = $('#workFlowStatusFlow tbody tr.active');
+            if (selectedLine.length == 1) {
+                var status_id_to = selectedLine.find('.status_id_to.open option:selected').val();
+                var check = selectedLine.find('.status_id_to.open option:selected').text();
+                var id = selectedLine.find('.id').text();
+                var duplicate = 0;
+                $('#workFlowStatusFlow tbody tr').each(function (index, elem) {
+                    if ($(elem).find('input.status_id_to.close').val() == status_id_to) {
+                        duplicate++;
+                    }
+                });
+                if (check != 1 && duplicate == 0 && status_id_to != "" && $('#saveworkFlowStatusFlow').val() != "REMOVE") {
+                    var tr = $("<tr/>");
+                    tr.append(
+                            '<td align="center" class="id">' + id + '</td>' +
+                            '<td align="center">' + check + '<input type="hidden" class="status_id_to close" value="' + status_id_to + '" /></td>'
+                        );
+                    selectedLine.before(tr[0]);
+                    selectedLine.remove();
+                    $('#addworkFlowStatusFlow').attr('disabled', false);
+                    $('#saveworkFlowStatusFlow').attr('disabled', true);
+                    $('#editworkFlowStatusFlow').attr('disabled', true).val("EDIT").removeClass('bg-orange001').addClass('bg-blue003').removeClass('bg-green002');
+                    saveStatusFlow();
+                }
+                else if (status_id_to == "" && $('#saveworkFlowStatusFlow').val() != "REMOVE") {
+                    bootbox.alert({
+                        size: "small",
+                        message: "Cannot be Empty !",
+                        closeButton: false,
+                        className: "fs17 ff-nt2",
+                        buttons: {
+                            ok:
+                            {
+                                className: "bg-green002 text-white"
+                            }
+                        }
+                    });
+                }
+                else if ($('#saveworkFlowStatusFlow').val() == "REMOVE") {
+                    bootbox.confirm({
+                        size: "small",
+                        message: "Remove Work Flow Status?",
+                        closeButton: false,
+                        buttons: {
+                            cancel: {
+                                label: "NO",
+                                className: "bg-orange001 text-white"
+                            },
+                            confirm: {
+                                label: "YES",
+                                className: "bg-green002 text-white"
+                            }
+
+                        },
+                        className: "fs17 ff-nt2",
+                        callback: function (result) {
+                            if (result) {
+                                selectedLine.remove();
+                                $('#saveworkFlowStatusFlow').attr('disabled', true).val("SAVE").removeClass('bg-orange001').removeClass('bg-blue003').addClass('bg-green002');
+                                $('#editworkFlowStatusFlow').attr('disabled', true);
+                                saveStatusFlow();
+                            }
+
+                        }
+
+                    });
+                }
+                else {
+                    bootbox.alert({
+                        size: "small",
+                        message: "The selected ID already exist.",
+                        closeButton: false,
+                        className: "fs17 ff-nt2",
+                        buttons: {
+                            ok:
+                            {
+                                className: "bg-green002 text-white"
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $('#editworkFlowStatusFlow').click(function () {
+            var selectedLine = $('#workFlowStatusFlow tbody tr.active');
+            var default_id_to;
+            var _this = $(this);
+            if (selectedLine.length == 1) {
+                var status_id_to = selectedLine.find('input.status_id_to.close').val();
+                var id = selectedLine.find('td').eq(0).text();
+                default_id_to = selectedLine.find('td').eq(1).text();
+                if (_this.val() == "EDIT") {
+                    _this.val("CANCEL").addClass("edit");
+                    console.log(1);
+                    $('#saveworkFlowStatusFlow').attr('disabled', false).val("SAVE").removeClass('bg-orange001').removeClass('bg-blue003').addClass('bg-green002');
+                    var tr = $('<tr>', { class: 'active edit' });
+                    tr.append(
+                            '<td align="center" class="id">' + id + '</td>' +
+                            '<td class="fs13"><select class="status_id_to open"></select></td>'
+                        );
+                    selectedLine.after(tr[0]);
+                    selectedLine.remove();
+                    $('#addworkFlowStatusFlow').attr('disabled', true);
+                    selectizeStatusFlow($('#workFlowStatusFlow tbody tr.active'), id, status_id_to);
+
+                }
+                else if (_this.val() == "CANCEL" && _this.hasClass('edit')) {
+                    console.log(2);
+                    showStatusFlow();
+                    _this.attr('disabled', true).val("EDIT").removeClass('edit').removeClass('bg-orange001').addClass('bg-blue003').removeClass('bg-green002');
+                    $('#saveworkFlowStatusFlow').attr('disabled', true);
+                    $('#addworkFlowStatusFlow').attr('disabled', false);
+                }
+                else {
+                    console.log(3);
+                    selectedLine.remove();
+                    _this.attr('disabled', true).val("EDIT").removeClass('bg-orange001').addClass('bg-blue003').removeClass('bg-green002');
+                    $('#saveworkFlowStatusFlow').attr('disabled', true);
+                    $('#addworkFlowStatusFlow').attr('disabled', false);
+                }
+            }
+        });
+
+        $('#addworkFlowStatusUser').click(function () {
+            var select = $('#workflowStatus').find('tr.active');
+            if (select.length == 1) {
+                $('#workFlowStatusUser tbody tr').removeClass('active');
+                $('#addworkFlowStatusUser').attr('disabled', true);
+                var status_id = select.find('.status_id').text()
+                var tr = $('<tr>', { class: 'active save' });
+                tr.append(
+                        '<td style="display:none"><input type="hidden" class="id" value="' + (parseInt($('#workFlowStatusUser tbody tr').length) + 1) + '" ></td>' +
+                        '<td style="display:none"><input type="hidden" class="status_id" value="' + status_id + '" ></td>' +
+                        '<td><select class="user_id open"></select></td>' +
+                        '<td align="center" class="textAlign"><input type="checkbox" class="edit checkBig" ></td>' +
+                        '<td style="display:none" id="td_condition"><ul id="user_condition"></ul></td>'
+                    ).addClass('active');
+                $('#workFlowStatusUser tbody').append(tr[0]);
+                selectizeStatusUser($('#workFlowStatusUser tbody tr.active'));
+                $('#saveworkFlowStatusUser').attr('disabled', false);
+                $('#editworkFlowStatusUser').attr('disabled', false).val("CANCEL").addClass('bg-orange001').removeClass('bg-blue003').removeClass('bg-green002');
+            }
+            else {
+                bootbox.alert({
+                    size: "small",
+                    message: "Please Select Work Flow Status.",
+                    closeButton: false,
+                    className: "fs17 ff-nt2",
+                    buttons: {
+                        ok:
+                        {
+                            className: "bg-green002 text-white"
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#saveworkFlowStatusUser').click(function () {
+            var selectedLine = $('#workFlowStatusUser tbody tr.active');
+            if (selectedLine.length == 1) {
+                var user_id = selectedLine.find('.user_id.open option:selected').text();
+                var status_id = selectedLine.find('.status_id').val();
+                var id = selectedLine.find('.id').val();
+                var edit = selectedLine.find('.edit').is(':checked');
+                var duplicate = 0;
+
+                $('#workFlowStatusUser tbody tr').each(function (index, elem) {
+                    if ($(elem).find('input.user_id.close').val() == user_id) {
+                        duplicate++;
+                    }
+                });
+
+                if (user_id != '' && duplicate == 0 && user_id != "") {
+                    var tr = $("<tr/>");
+                    tr.append(
+                            '<td style="display:none"><input type="hidden" class="id" value="' + id + '" ></td>' +
+                            '<td style="display:none"><input type="hidden" class="status_id" value="' + status_id + '" ></td>' +
+                            '<td align="center">' + user_id + '<input type="hidden" class="user_id close" value="' + user_id + '" /></td>' +
+                            '<td align="center"><input type="checkbox" class="edit checkBig"></td>' +
+                            '<td style="display:none" id="td_condition">' + selectedLine.find('#td_condition').html() + '</td>'
+                        ).addClass('active');
+                    selectedLine.before(tr[0]);
+                    $('#workFlowStatusUser tbody tr.active input.edit').iCheck(edit ? "check" : "uncheck");
+                    selectedLine.remove();
+                    saveStatusUser();
+                    $('#addworkFlowStatusUser').attr('disabled', false);
+                    $('#saveworkFlowStatusUser').attr('disabled', true);
+                    $('#editworkFlowStatusUser').attr('disabled', true).val("EDIT").removeClass('bg-orange001').addClass('bg-blue003').removeClass('bg-green002');
+                    $('div.selectize-dropdown.single.user_id.open.plugin-remove_button').remove();
+                    $('#workFlowStatusUser tbody tr').removeClass('active');
+                }
+                else if (user_id == "" && $('#saveworkFlowStatusUser').val() != "REMOVE") {
+                    bootbox.alert({
+                        size: "small",
+                        message: "Cannot be empty !",
+                        closeButton: false,
+                        className: "fs17 ff-nt2",
+                        buttons: {
+                            ok:
+                            {
+                                className: "bg-green002 text-white"
+                            }
+                        }
+                    });
+                }
+                else if ($('#saveworkFlowStatusUser').val() == "REMOVE") {
+                    bootbox.confirm({
+                        size: "small",
+                        message: "Remove Work Flow Status?",
+                        closeButton: false,
+                        buttons: {
+                            cancel: {
+                                label: "NO",
+                                className: "bg-orange001 text-white"
+                            },
+                            confirm: {
+                                label: "YES",
+                                className: "bg-green002 text-white"
+                            }
+
+                        },
+                        className: "fs17 ff-nt2",
+                        callback: function (result) {
+                            if (result) {
+                                selectedLine.remove();
+                                saveStatusUser();
+                                $('#saveworkFlowStatusUser').attr('disabled', true).val("SAVE");
+                                $('#editworkFlowStatusUser').attr('disabled', true);
+                            }
+
+                        }
+
+                    });
+                }
+                else {
+                    bootbox.alert({
+                        size: "small",
+                        message: "The selected ID already exist.",
+                        closeButton: false,
+                        className: "fs17 ff-nt2",
+                        buttons: {
+                            ok:
+                            {
+                                className: "bg-green002 text-white"
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $('#editworkFlowStatusUser').click(function () {
+            var selectedLine = $('#workFlowStatusUser tbody tr.active');
+            var default_id_to;
+            var default_edit;
+            var _this = $(this);
+            if (selectedLine.length == 1) {
+                var id = selectedLine.find('input.id').val();
+                var user_id = selectedLine.find('input.user_id.close').val();
+                var status_id = selectedLine.find('.status_id').val();
+                var edit = selectedLine.find('input.edit').is(':checked');
+                $('#workflowStatus tr.active #workflowStatusUser li').each(function (index, elem) {
+                    if ($(elem).find('input.id').val() == id) {
+                        default_id_to = $(elem).find('input.user_id').val();
+                        default_edit = $(elem).find('input.edit').val();
+                    }
+                });
+                if (_this.val() == "EDIT") {
+                    _this.val("CANCEL").addClass("edit");
+                    $('#saveworkFlowStatusUser').attr('disabled', false).val("SAVE").removeClass('bg-orange001').removeClass('bg-blue003').addClass('bg-green002');
+                    var tr = $('<tr>', { class: 'active edit' });
+                    tr.append(
+                            '<td style="display:none"><input type="hidden" class="id" value="' + id + '" ></td>' +
+                            '<td style="display:none"><input type="hidden" class="status_id" value="' + status_id + '" ></td>' +
+                            '<td align="center"><select class="user_id open" style="margin:0px;" data-selected="' + user_id + '"></select></td>' +
+                            '<td align="center"><input type="checkbox" class="edit checkBig"></td>' +
+                            '<td style="display:none" id="td_condition"></td>'
+                        );
+                    selectedLine.after(tr[0]);
+                    selectedLine.remove();
+                        $('#workFlowStatusUser tbody tr.active input.edit').iCheck(edit ? "check" : "uncheck");
+                    $('#addworkFlowStatusUser').attr('disabled', true);
+                    selectizeStatusUser($('#workFlowStatusUser tbody tr.active'));
+
+                }
+                else if (_this.val() == "CANCEL" && _this.hasClass('edit')) {
+                    var tr = $('<tr/>');
+                    tr.append(
+                            '<td style="display:none"><input type="hidden" class="id" value="' + id + '" ></td>' +
+                            '<td style="display:none"><input type="hidden" class="status_id" value="' + status_id + '" ></td>' +
+                            '<td align="center">' + default_id_to + '<input type="hidden" class="user_id close" value="' + default_id_to + '" /></td>' +
+                            '<td align="center"><input type="checkbox" class="edit checkBig"></td>' +
+                            '<td style="display:none" id="td_condition">' + selectedLine.find('#td_condition').html() + '</td>'
+                        ).addClass('active');
+                    selectedLine.before(tr[0]);
+                    if (default_edit == "true") {
+                        $('#workFlowStatusUser tbody tr.active input[type="checkbox"].edit').prop('checked', true);
+                    }
+                    selectedLine.remove();
+                    selectizeStatusUser($('#workFlowStatusUser tbody tr.active'));
+                    _this.attr('disabled', true).val("EDIT");
+                    $('#saveworkFlowStatusUser').attr('disabled', true);
+                    $('#addworkFlowStatusUser').attr('disabled', false);
+                    $('#workFlowStatusUser tbody tr').removeClass('active');
+                }
+                else {
+                    selectedLine.remove();
+                    _this.attr('disabled', true).val("EDIT").removeClass('bg-orange001').addClass('bg-blue003').removeClass('bg-green002');
+                    $('#saveworkFlowStatusUser').attr('disabled', true);
+                    $('#addworkFlowStatusUser').attr('disabled', false);
+                }
+            }
+        });
+
+        $('#addConditionGroup').click(function () {
+            var select = $('#workFlowStatusUser').find('tr.active');
+            //if (select.length == 1) {
+                var tr = $('<tr>', { class: 'active save' });
+                tr.append(
+                        '<td><select id="condgrp_cond"></select></td>' +
+                        '<td><select class="tablename open"></select></td>' +
+                        '<td><select class="field open"></select></td>' +
+                        '<td><select class="expression open"></select></td>' +
+                        '<td id="td_value"><input type="text" class="form-control value open" style="margin:0px; padding:0px;" value="" /></td>'
+                    );
+                $('#conditionGroup tbody').append(tr[0]);
+                $('#saveConditionGroup').attr('disabled', false);
+                $('#editConditionGroup').attr('disabled', false).val("CANCEL").addClass('bg-orange001').removeClass('bg-blue003').removeClass('bg-green002');
+                var conditionLine = $('#conditionGroup tbody tr.active.save');
+                selectizeTable(conditionLine, '');
+                selectizeField(conditionLine, '');
+                selectizeExpression(conditionLine, '');
+                $('#condgrp_cond').selectize({
+                    dropdownParent: 'body',
+                });
+                $('#condgrp_cond')[0].selectize.addOption(condition);
+            //}
+            //else {
+            //    bootbox.alert({
+            //        size: "small",
+            //        message: "Please Select Work Flow Status User Setup.",
+            //        closeButton: false,
+            //        className: "fs17 ff-nt2",
+            //        buttons: {
+            //            ok:
+            //            {
+            //                className: "bg-green002 text-white"
+            //            }
+            //        }
+            //    });
+            //}
+        });
+
+        $('#saveConditionGroup').click(function () {
+            var selectedLine = $('#conditionGroup tbody tr.active.save');
+            if (selectedLine.length == 1) {
+                var tablename = selectedLine.find('.tablename.open').val();
+                var field = selectedLine.find('.field.open').val();
+                var expression = selectedLine.find('.expression.open').val();
+                var value = selectedLine.find('.value.open').val();
+                var duplicate = 0;
+                console.log(tablename)
+                console.log(field)
+                console.log(expression)
+                console.log(value)
+                if (selectedLine.find('select.condition.open').length == 1) {
+                    condition = selectedLine.find('select.condition.open').val();
+                }
+            }
+        });
+
+        $('#submit').on('click', function (e) {
+            var _this = $('#workflowFrm');
+            if (_this.valid()) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Add Workflow?",
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        if (result) {
+                            var model = submitForm();
+                            $.ajax({
+                                url: "@Url.Content("~/Workflow/Add")",
+                                method: 'post',
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ data: model }),
+                                success: function (results) {
+                                    if (!results) {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Error!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            }
+
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Successfully Saved!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            },
+                                            callback: function (result) {
+                                                window.location.href = '@Url.Content("~/Workflow/Index")';
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function saveStatusFlow() {
+        var selectedStatus = $('#workflowStatus tbody tr.active');
+        var status_id_from = selectedStatus.find('td').eq(0).text();
+        selectedStatus.find('#workflowStatusFlow').empty();
+        $('#workFlowStatusFlow tbody tr').each(function (index, elem) {
+            var id = $(elem).find('td').eq(0).text();
+            var status_id_to = $(elem).find('.status_id_to.close').val();
+            var li = $("<li/>");
+            li.append(
+                '<input type="hidden" class="id" value="' + id + '" />' +
+                '<input type="hidden" class="status_id_from" value="' + status_id_from + '" />' +
+                '<input type="hidden" class="status_id_to" value="' + status_id_to + '" />'
+                )
+            selectedStatus.find('#workflowStatusFlow').append(li[0]);
+        });
+        console.log(selectedStatus.length);
+    }
+
+    function saveStatusUser() {
+        var selectedStatus = $('#workflowStatus tbody tr.active');
+        selectedStatus.find('#workflowStatusUser').empty();
+        $('#workFlowStatusUser tbody tr').each(function (index, elem) {
+            var id = $(elem).find('.id').val();
+            var status_id = $(elem).find('.status_id').val();
+            var user_id = $(elem).find('.user_id.close').val();
+            var edit = $(elem).find('input.edit').is(':checked');
+            var li = $("<li/>");
+            li.append(
+                '<input type="hidden" class="id" value="' + id + '" />' +
+                '<input type="hidden" class="status_id" value="' + status_id + '" />' +
+                '<input type="hidden" class="user_id" value="' + user_id + '" />' +
+                '<input type="hidden" class="edit" value="' + edit + '" />'
+                )
+            selectedStatus.find('#workflowStatusUser').append(li[0]);
+        });
+    }
+
+    function showStatusFlow() {
+        $('#workFlowStatusFlow tbody').html('');
+        $('#workflowStatus tbody tr.active #workflowStatusFlow li').each(function (index, elem) {
+            var status_id_toSave;
+            $('#workflowStatus tbody tr').each(function (indexFlow, elemFlow) {
+                if ($(elemFlow).find('.status_id').text() == $(elem).find('.status_id_to').val()) {
+                    status_id_toSave = $(elemFlow).find('.status1').text();
+                }
+            });
+            var tr = $("<tr/>");
+            tr.append(
+                    '<td align="center">' + $(elem).find('.id').val() + '</td>' +
+                    '<td align="center">' + status_id_toSave + '<input type="hidden" class="status_id_to close" value="' + $(elem).find('.status_id_to').val() + '" /></td>'
+                );
+            $('#workFlowStatusFlow tbody').append(tr[0]);
+        });
+
+    }
+
+    function showStatusUser() {
+        $('#workFlowStatusUser tbody').html('');
+        $('#workflowStatus tbody tr.active #workflowStatusUser li').each(function (index, elem) {
+            var tr = $("<tr/>");
+            var id = $(elem).find('input.id').val();
+            var status_id = $(elem).find('input.status_id').val();
+            var user_id = $(elem).find('input.user_id').val();
+            var edit = $(elem).find('input.edit').val();
+            tr.append(
+                '<td style="display:none"><input type="hidden" class="id" value="' + id + '" ></td>' +
+                '<td style="display:none"><input type="hidden" class="status_id" value="' + status_id + '" ></td>' +
+                '<td align="center">' + user_id + '<input type="hidden" class="user_id close" value="' + user_id + '" ></td>'
+                );
+            if (edit == "true") {
+                tr.append(
+                '<td align="center"><input type="checkbox" class="edit checkBig" checked/></td>'
+                );
+            }
+            else if (edit == "false") {
+                tr.append(
+                '<td align="center"><input type="checkbox" class="edit checkBig"/></td>'
+                );
+            }
+            //'<td style="display:none" id="td_condition">' + selectedLine.find('#td_condition').html() + '</td>'
+            $('#workFlowStatusUser tbody').append(tr[0]);
+        });
+
+    }
+
+    function submitForm() {
+        var serial = $('#workflowFrm').serializeArray();
+        var comp_id = $('#comp_id').val();
+        var wflw_id = $('#wflw_id').val();
+        workflow = {};
+        workflow["WorkflowStatus"] = [];
+        for (var x in serial) {
+            workflow[serial[x].name] = serial[x].value;
+        }
+        var num = 1;
+        $('#workflowStatus tbody tr').each(function (index, elem) {
+            workflowStatus = {};
+            var endpoint = $(elem).find('.endpoint').is(":checked");
+            var withremarks = $(elem).find('.withremarks').is(":checked");
+            workflowStatus["comp_id"] = comp_id;
+            workflowStatus["wflw_id"] = wflw_id;
+            workflowStatus["status_id"] = $(elem).find('.status_id').text();
+            workflowStatus["status1"] = $(elem).find('.status1').text();
+            workflowStatus["status2"] = $(elem).find('.status2').text();
+            workflowStatus["workflowStatusFlow"] = [];
+            workflowStatus["workflowStatusUser"] = [];
+            $(elem).find('ul#workflowStatusFlow li').each(function (flowIndex, flowElem) {
+                workflowStatusFlows = {};
+                workflowStatusFlows["comp_id"] = comp_id;
+                workflowStatusFlows["wflw_id"] = wflw_id;
+                workflowStatusFlows["id"] = num;
+                workflowStatusFlows["status_id_from"] = $(flowElem).find('.status_id_from').val();
+                workflowStatusFlows["status_id_to"] = $(flowElem).find('.status_id_to').val();
+                workflowStatus["workflowStatusFlow"].push(workflowStatusFlows);
+                num++;
+            });
+
+            $(elem).find('ul#workflowStatusUser li').each(function (userIndex, userElem) {
+                workflowStatusUsers = {};
+                workflowStatusUsers["comp_id"] = comp_id;
+                workflowStatusUsers["wflw_id"] = wflw_id;
+                workflowStatusUsers["status_id"] = $(userElem).find('.status_id').val();
+                workflowStatusUsers["user_id"] = $(userElem).find('.user_id').val();
+                workflowStatusUsers["edit"] = $(userElem).find('.edit').val();
+                workflowStatus["workflowStatusUser"].push(workflowStatusUsers);
+
+            });
+            workflow["WorkflowStatus"].push(workflowStatus);
+
+        });
+        return workflow;
+    }
+
+    function selectizeStatusFlow(selectedLine, id, value) {
+        selectedLine.find('.status_id_to.open').selectize({ dropdownParent: 'body' });
+        var select = selectedLine.find('.status_id_to.open')[0].selectize;
+        $('#workflowStatus tbody tr:not(.not-included)').each(function (index, elem) {
+            var statusID = $(elem).find('td').eq(0).text();
+            var statusName = $(elem).find('.status1').attr('value');
+            if (statusID != 1) {
+                select.addOption({
+                    text: statusName,
+                    value: statusID
+                });
+
+                if (value != 0) {
+                    select.setValue(value);
+                }
+            }
+        });
+
+    }
+
+    function validateWorkflowStatusId() {
+        var flag = false;
+        var status_id = $('#status_id').val();
+        $('#status_validation').remove();
+        $("#workflowStatus  tbody tr:not(.edit)").each(function (index, elem) {
+            var statusid = $(elem).find('.status_id').text();
+            if (status_id == statusid) {
+                $('#status_id').after('<span class="text-danger field-validation-error" id="status_validation" data-valmsg-replace="true"><span for="sect_id" class="">* Duplicate Status ID</span></span>');
+                $('#status_id').focus();
+                flag = true;
+            }
+        }).promise().done(function () {
+            if (flag) {
+                flag = true;
+            }
+            else {
+                $('#status_validation').remove();
+                flag = false;
+            }
+        });
+        return flag;
+    }
+
+    function selectizeStatusUser(selectedLine) {
+
+        var comp_id = $('#comp_id').val();
+        selectedLine.find('select.user_id.open').selectize({
+            valueField: 'user_id',
+            labelField: 'user_id',
+            searchField: ['user_id'],
+            sortField: [{ field: 'user_id', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function () {
+                this.setValue($(this.$input[0]).data('selected'));
+            },
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: "@Url.Content("~/LookUp/getAllUsers")",
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+    function reset() {
+        $('#addworkFlowStatusFlow').attr('disabled', false);
+        $('#editworkFlowStatusFlow').attr('disabled', true);
+        $('#saveworkFlowStatusFlow').attr('disabled', true);
+        $('#addworkFlowStatusUser').attr('disabled', false);
+        $('#editworkFlowStatusUser').attr('disabled', true);
+        $('#saveworkFlowStatusUser').attr('disabled', true);
+    }
+
+    function selectizeTable(selectedLine, value) {
+        var module = $('#module_id').val();
+
+        selectedLine.find('.tablename.open').selectize({
+            valueField: 'table_id',
+            labelField: 'name1',
+            searchField: ['table_id'],
+            sortField: [{ field: 'table_id', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function () {
+                this.setValue($(this.$input[0]).data('selected'));
+            },
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: "@Url.Content("~/Workflow/TableList")",
+                        data: { module: module },
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+
+            onChange: function (value) {
+
+                if (!value.length) {
+                    return;
+                }
+                $.ajax({
+                    url: "@Url.Content("~/Workflow/FieldList")",
+                    method: 'get',
+                    data: { module: module, table: value },
+                    success: function (results) {
+                        console.log(results);
+                        fieldList[0].selectize.clearOptions();
+                        fieldList[0].selectize.load(function (callback) {
+                            callback(results);
+                        });
+                    }
+                });
+            }
+        });
+
+    }
+
+    function selectizeField(selectedLine, value) {
+        fieldList = selectedLine.find('.field.open').selectize({
+            valueField: 'element',
+            labelField: 'element',
+            searchField: ['element'],
+            sortField: [{ field: 'element', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function () {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+    }
+
+    function selectizeExpression(selectedLine, value) {
+        selectedLine.find('.expression.open').selectize({
+            dropdownParent: 'body',
+            onChange: function (value) {
+                if (value == 'IN' || value == 'NOT IN') {
+                    selectedLine.find('.value.open').removeClass('form-control');
+                    selectedLine.find('.value.open').selectize({
+                        dropdownParent: 'body',
+                        plugins: ['remove_button'],
+                        delimiter: '|',
+                        persist: false,
+                        create: function (input) {
+                            return {
+                                value: input,
+                                text: input
+                            }
+                        }
+                    });
+
+                    $(document).find('.selectize-input').css('max-height', '45px');
+                }
+                else {
+                    selectedLine.find('#td_value').html('<input type="text" class="value open" style="margin:0px;" value="" />');
+                }
+            }
+        });
+
+        var select = selectedLine.find('.expression.open')[0].selectize;
+        var condition = [
+                            { value: '<', text: '<' },
+                            { value: '>', text: '>' },
+                            { value: '=', text: '=' },
+                            { value: '<=', text: '<=' },
+                            { value: '=>', text: '=>' },
+                            { value: '!=', text: '!=' },
+                            { value: 'LIKE', text: 'CONTAINS' },
+                            { value: 'NOT LIKE', text: 'NOT CONTAINS' },
+                            { value: 'IN', text: 'IN' },
+                            { value: 'NOT IN', text: 'NOT IN' }
+        ]
+        select.addOption(condition);
+        if (value != '') {
+            select.setValue(value);
+        }
+    }
+
+</script>

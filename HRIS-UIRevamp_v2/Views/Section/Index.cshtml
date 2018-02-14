@@ -1,0 +1,155 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.SectionIndexViewModel
+@{
+    ViewBag.Title = "Section";
+}
+@using (Html.BeginForm("Index", "Section", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "sectForm" }))
+{
+<div class="col-md-12 title">
+    DIVISION
+</div>
+
+<div class="body-content flex flex-center">
+    <div class="col-md-8 margin-top-lg margin-bottom-lg">
+        <div class="col-md-12 margin-bottom-lg margin-top-default">
+            <div class="col-md-5 fs20 ff-nt2">
+                @Html.LabelFor(model => model.comp_id, new { @class = "" })
+            </div>
+            <div class="col-md-7 no-padding">
+                @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Company" })
+                @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-12 margin-bottom-lg">
+            <div class="col-md-5 fs20 ff-nt2">
+                @Html.LabelFor(model => model.sect_id, new { @class = "" })
+            </div>
+            <div class="col-md-7 no-padding">
+               @Html.TextBoxFor(model => model.sect_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Section ID" })
+            @Html.ValidationMessageFor(model => model.sect_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-12 no-padding">
+            <div class="col-md-12 no-padding margin-top-default">
+                <div class="col-md-2 h62 flex flex-center">
+                    <button class="button-default block bg-orange001 h45 fs20 ff-nt2" id="search">SEARCH</button>
+                </div>
+            </div>
+        </div>
+        <div class="margin-bottom-lg col-md-12 hidden" id="table">
+            <div class="col-md-12 fs17">
+                <table class="table table-hover dyna-theme001 d-table" id="section-table">
+                    <thead>
+                        <tr>
+                            <th data-dynatable-column="comp_id">COMPANY ID</th>
+                            <th data-dynatable-column="div_id">DIVISION ID</th>
+                            <th data-dynatable-column="dept_id">DEPARTMENT ID</th>
+                            <th data-dynatable-column="sect_id">SECTION ID</th>
+                            <th data-dynatable-column="name1">SECTION NAME</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>   
+</div>
+}
+<script>
+    var dtable;
+
+    var settings = {
+        features: {
+            paginate: true,
+            sort: true,
+            pushState: true,
+            search: false,
+            recordCount: true,
+            perPageSelect: false
+        },
+        dataset: {
+            ajax: true,
+            ajaxUrl: "@Url.Content("~/Section/SearchResult")",
+            ajaxOnLoad: false,
+            records: [],
+            perPageDefault: 10,
+            perPageOptions: [10, 20, 50, 100, 200, 500, 1000]
+        }
+    };
+
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents();
+    });
+
+    function initializeEvents() {
+
+        $("#sectForm").on('submit', function (e) {
+            e.preventDefault();
+            var id = $("#comp_id");
+            var sect = $("#sect_id");
+            if ($('#section-table').is(':visible')) {
+                if (sect.val().length) {
+                    dtable.queries.add('sect_id', sect.val());
+                } else {
+                    dtable.queries.remove('sect_id');
+                }
+                if (id.val().length) {
+                    dtable.queries.add('comp_id', id.val());
+                } else {
+                    dtable.queries.remove('comp_id');
+                }
+                dtable.process();
+            }
+        });
+    }
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            }
+        });
+
+        dtable = $(".d-table").bind('dynatable:init', function (e, dynatable) {
+
+            function initialize() {
+                var comp_id = $("#comp_id");
+                dynatable.queries.add('ajax', 'yes');
+                dynatable.queries.add('comp_id', comp_id.val());
+            }
+
+            initialize();
+            var table = $(this);
+            table.wrap('<div class="table-container" style="height:300px;overflow:auto;"></div>');
+            table.floatThead({
+                scrollContainer: function ($table) {
+                    return $table.closest('.table-container');
+                }
+            });
+        }).dynatable(settings).data('dynatable');
+    }
+
+    $("#search").click(function () {
+        $('#table').removeClass('hidden');
+    });
+
+</script>

@@ -1,0 +1,320 @@
+﻿@{
+    ViewBag.Title = "My DTR";
+}
+
+<div class="col-md-12 title">
+    MY DTR
+</div>
+<div class="body-content">
+    <div class="col-md-12 no-padding">
+        <div class="tabs-default margin-bottom-lg ff-nt2">
+            <button class="tab selected" tab-index="1">
+                <span class="fs34">MY DTR</span>
+            </button>
+            <button class="tab" tab-index="2">
+                <span class="fs34">FILED</span>
+            </button>
+        </div>
+        <div class="tab-container" tab-index="1">
+            <div class="col-md-12">
+                <div class="col-md-6 no-padding flex flex-center">
+                    <div class="col-md-6 no-padding border-right-orange">
+                        <div class="margin-bottom-sm">
+                            Employee Name
+                        </div>
+                        <div class="fs36 ff-nt2">
+                            MARK LAWRENCE MACUTAY
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 no-padding margin-bottom-default">
+                            <div class="col-md-6 no-padding ff-nt2">
+                                POSITION:
+                            </div>
+                            <div class="col-md-6 no-padding">
+                                MR Engineer
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-padding margin-bottom-default">
+                            <div class="col-md-6 no-padding ff-nt2">
+                                PROJECT:
+                            </div>
+                            <div class="col-md-6 no-padding">
+                                Frabelle de Salcedo
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-6 no-padding ff-nt2">
+                                IMMEDIATE SUPERVISOR
+                            </div>
+                            <div class="col-md-6 no-padding">
+                                Boyett Delos Santos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="fs32 ff-nt2 border-bottom-orange">
+                        SHIFT HOURS
+                    </div>
+                    <div class="col-md-3 margin-top-default no-padding">
+                        MORNING:
+                    </div>
+                    <div class="col-md-9 margin-top-default no-padding">
+                        8:00 - 17:00
+                    </div>
+                    <div class="col-md-3 margin-top-default no-padding">
+                        MIDSHIFT:
+                    </div>
+                    <div class="col-md-9 margin-top-default no-padding">
+                        11:00 - 20:00
+                    </div>
+                    <div class="col-md-3 margin-top-default no-padding">
+                        EVENING:
+                    </div>
+                    <div class="col-md-9 margin-top-default no-padding">
+                        15:00 - 24:00
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-lg flex flex-center">
+                <div class="col-md-4 no-padding-left">
+                    <input class="input-default h62 fs20 block" type="text" placeholder="Cut Off Period" />
+                </div>
+                <div class="col-md-2">
+                    <button class="button-default block h45 fs20 ff-nt2">SEARCH</button>
+                </div>
+                <div class="col-md-6">
+                    <a class="button-default h45 fs20 ff-nt2 bg-orange001 text-left flex flex-center flex-space-between">
+                        <span class="margin-left-sm">FILTER</span>
+                        <span class="glyphicon glyphicon-chevron-down margin-right-default">
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-lg fs36 ff-nt2">
+                DTR
+            </div>
+            <div class="col-md-12">
+                <div id="table-dtr-container" class="col-md-12 no-padding margin-top-lg dynatable-container">
+                    <table id='table-dtr' class="table dyna-theme002">
+                        <thead>
+                            <tr class="header-1">
+                                <th class="fs17 text-center">ASSIGNED SHIFT</th>
+                                <th class="fs17 text-center">DATE</th>
+                                <th class="fs17 text-center" colspan="2">RDFID LOGS</th>
+                                <th class="fs17 text-center" colspan="2">APPROVED OFFICIAL BUSINESS</th>
+                                <th class="fs17 text-center" colspan="2">APPROVED OVERTIME</th>
+                                <th class="fs17 text-center" colspan="2">ACTUAL HOURS</th>
+                                <th class="fs17 text-center" colspan="2">REGULAR WORKING HOURS</th>
+                                <th class="fs17 text-center" colspan="2">NIGHT DIFF PREMIUM</th>
+                                <th class="fs17 text-center" colspan="2">REGULAR OVERTIME</th>
+                                <th class="fs17 text-center" colspan="2">OT NIGHT DIFFERENTIAL</th>
+                            </tr>
+                            <tr class="header-2">
+                                <th class="fs17 text-center" data-dynatable-column="assigned-shift-id">ID</th>
+                                <th class="fs17 text-center" data-dynatable-column="date"></th>
+                                <th class="fs17 text-center" data-dynatable-column="rdfid-logs-in">IN</th>
+                                <th class="fs17 text-center" data-dynatable-column="rdfid-logs-out">OUT</th>
+                                <th class="fs17 text-center" data-dynatable-column="approved-ob-in">IN</th>
+                                <th class="fs17 text-center" data-dynatable-column="approved-ob-out">OUT</th>
+                                <th class="fs17 text-center" data-dynatable-column="approved-ot-in">IN</th>
+                                <th class="fs17 text-center" data-dynatable-column="approved-ot-out">OUT</th>
+                                <th class="fs17 text-center" data-dynatable-column="actual-hours-in">IN</th>
+                                <th class="fs17 text-center" data-dynatable-column="actual-hours-out">OUT</th>
+                                <th class="fs17 text-center" data-dynatable-column="regular-working-hours-sys">SYSTEM</th>
+                                <th class="fs17 text-center" data-dynatable-column="regular-working-hours-user">USER</th>
+                                <th class="fs17 text-center" data-dynatable-column="night-diff-premium-sys">SYSTEM</th>
+                                <th class="fs17 text-center" data-dynatable-column="night-diff-premium-user">USER</th>
+                                <th class="fs17 text-center" data-dynatable-column="regular-ot-sys">SYSTEM</th>
+                                <th class="fs17 text-center" data-dynatable-column="regular-ot-user">USER</th>
+                                <th class="fs17 text-center" data-dynatable-column="ot-night-diff-sys">SYSTEM</th>
+                                <th class="fs17 text-center" data-dynatable-column="ot-night-diff-user">USER</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg flex flex-center">
+                <div class="col-md-4 no-padding">
+                    <div class="col-md-4 no-padding-left">
+                        <button class="button-default block">SUBMIT</button>
+                    </div>
+                    <div class="col-md-4 no-padding-right">
+                        <button class="button-default block">CLOSE</button>
+                    </div>
+                </div>
+                <div class="col-md-7 col-md-offset-1 fs13 ff-nt2">
+                    <div class="col-md-3 flex flex-center col-md-offset-2 h45 legend-total-basic">
+                        <div>
+                            <div class="margin-bottom-sm">TOTAL BASIC</div>
+                            <div>73 HR</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 flex flex-center h45 legend-total-ot">
+                        <div>
+                            <div class="margin-bottom-sm">TOTAL OT</div>
+                            <div>23 HR</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 flex flex-center h45 legend-total-undertime">
+                        <div>
+                            <div class="margin-bottom-sm">TOTAL UNDERTIME</div>
+                            <div>23 HR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+            </div>
+        </div>
+        <div class="tab-container hidden"  tab-index="2">
+           
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('click', '.tab', function () {
+        if (!$(this).hasClass("selected")) {
+            $('.tab').removeClass('selected');
+            $(this).addClass('selected');
+            showTabContainer($(this).attr('tab-index'));
+        }
+    });
+
+    function showTabContainer(index) {
+        $('.tab-container').addClass('hidden');
+        $('.tab-container[tab-index=' + index + ']').removeClass('hidden');
+    }
+    //var ancSlideIndex = ancSlides.length;
+    //ancShowSlides(ancSlideIndex);
+
+    //function ancPlusSlides(n) {
+    //    ancShowSlides(ancSlideIndex += n);
+    //}
+
+    //function ancShowSlides(n) {
+    //    var i;
+
+    //    if (n == ancSlides.length) { $('.announcement-right-button').addClass("hidden"); }
+    //    else { $('.announcement-right-button').removeClass("hidden"); }
+
+    //    if (n == 1) { $('.announcement-left-button').addClass("hidden"); }
+    //    else { $('.announcement-left-button').removeClass("hidden"); }
+
+
+    //    for (i = 0; i < ancSlides.length; i++) {
+    //        ancSlides[i].style.display = "none";
+    //        ancSlides2[i].style.display = "none";
+    //    }
+    //    ancSlides[ancSlideIndex - 1].style.display = "flex";
+    //    ancSlides2[ancSlideIndex - 1].style.display = "flex";
+    //}
+
+    var recordsDTR = [{
+        "assigned-shift-id" : "MORNING",
+        "date": "24/04/17",
+        "rdfid-logs-in": "06:43",
+        "rdfid-logs-out": "23:25",
+        "approved-ob-in": "",
+        "approved-ob-out": "",
+        "approved-ot-in": "",
+        "approved-ot-out": "",
+        "actual-hours-in": "06:43",
+        "actual-hours-out": "23:25",
+        "regular-working-hours-sys": "08:00",
+        "regular-working-hours-user": "8:00",
+        "night-diff-premium-sys": "",
+        "night-diff-premium-user": "",
+        "regular-ot-sys": "",
+        "regular-ot-user": "",
+        "ot-night-diff-sys": "",
+        "ot-night-diff-user": ""
+    }, {
+        "assigned-shift-id": "MORNING",
+        "date": "24/04/17",
+        "rdfid-logs-in": "06:43",
+        "rdfid-logs-out": "23:25",
+        "approved-ob-in": "",
+        "approved-ob-out": "",
+        "approved-ot-in": "",
+        "approved-ot-out": "",
+        "actual-hours-in": "06:43",
+        "actual-hours-out": "23:25",
+        "regular-working-hours-sys": "08:00",
+        "regular-working-hours-user": "8:00",
+        "night-diff-premium-sys": "",
+        "night-diff-premium-user": "",
+        "regular-ot-sys": "",
+        "regular-ot-user": "",
+        "ot-night-diff-sys": "",
+        "ot-night-diff-user": ""
+    }, {
+        "assigned-shift-id": "MORNING",
+        "date": "24/04/17",
+        "rdfid-logs-in": "06:43",
+        "rdfid-logs-out": "23:25",
+        "approved-ob-in": "",
+        "approved-ob-out": "",
+        "approved-ot-in": "",
+        "approved-ot-out": "",
+        "actual-hours-in": "06:43",
+        "actual-hours-out": "23:25",
+        "regular-working-hours-sys": "08:00",
+        "regular-working-hours-user": "8:00",
+        "night-diff-premium-sys": "",
+        "night-diff-premium-user": "",
+        "regular-ot-sys": "",
+        "regular-ot-user": "",
+        "ot-night-diff-sys": "",
+        "ot-night-diff-user": ""
+    }, {
+        "assigned-shift-id": "MORNING",
+        "date": "24/04/17",
+        "rdfid-logs-in": "06:43",
+        "rdfid-logs-out": "23:25",
+        "approved-ob-in": "",
+        "approved-ob-out": "",
+        "approved-ot-in": "",
+        "approved-ot-out": "",
+        "actual-hours-in": "06:43",
+        "actual-hours-out": "23:25",
+        "regular-working-hours-sys": "08:00",
+        "regular-working-hours-user": "8:00",
+        "night-diff-premium-sys": "",
+        "night-diff-premium-user": "",
+        "regular-ot-sys": "",
+        "regular-ot-user": "",
+        "ot-night-diff-sys": "",
+        "ot-night-diff-user": ""
+    }];
+
+    $('#table-dtr').dynatable({
+        table: {
+            headRowSelector:'thead tr.header-2',
+            defaultColumnIdStyle: 'underscore',
+            copyHeaderClass: true
+        },
+        dataset: {
+            records: recordsDTR
+        },
+        features: {
+            paginate: false,
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        }
+    });
+
+    const ps = new PerfectScrollbar('#table-dtr-container', {});
+
+
+    $(window).resize(function () {
+        window.setTimeout(function () {
+            ps.update();
+        }, 200);
+    });
+</script>

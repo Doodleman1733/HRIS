@@ -1,0 +1,426 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.DashboardLayoutAddViewModel
+@{
+    ViewBag.Title = "Dashboard Layout";
+}
+@Scripts.Render("~/bundles/jquery-ui")
+
+
+@using (Html.BeginForm("Add", "Division", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "dLayoutFrm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 title">
+        Dashboard Layout
+    </div>
+<div class="body-content" style="display:block;">
+    <div class="col-md-12">
+        <div class="col-md-3 margin-top-lg pull-right">
+            <div class="col-md-12 no-padding margin-right-default margin-bottom-default">
+                <input type="button" id="s-widgets" value="Save Layout" class="bg-blue002 button-default block h38 fs20 ff-nt2" />
+            </div>
+        </div>
+        <div class="col-md-3 margin-top-lg pull-right">
+            <div class="col-md-12 no-padding margin-right-default margin-bottom-default">
+                <input type="button" value="Widgets" class="bg-green002 button-default block h38 fs20 ff-nt2" data-toggle="modal" data-target="#mymodal" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" id="widget-container">
+    </div>
+</div>
+<div class="modal" id="mymodal" tabindex="-1" role="dialog" data-backdrop="false">
+    <div class="modal-dialog body-container" style="margin:0 auto;">
+        <div class="col-md-12 modal-content body-content" style="margin-top:10px;display:block;">
+            <div class="modal-header col-md-12">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title">Widgets</h4>
+            </div>
+            <div class="modal-body col-md-12">
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="calendar" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Calendar</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_Calendar.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="activity-feeds" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Activity Feeds</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_ActivityFeeds.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="accrued-overtime" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Accrued Overtime</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_AccruedOvertime.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button"  data-target="announcements" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Announcements</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_Announcements.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="company-news" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label>Company News</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_CompanyNews.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="quote" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Quote</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_Quote.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="todays-login" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Today's Login</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_TodaysLogin.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="yesterdays-login" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label>Yesterday's Login</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_YesterdaysLogin.cshtml")
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom-default">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <button type="button" data-target="weather" class="widget-add btn bg-green002 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;">Add</button>
+                                <label> Weather</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("~/Views/DashboardLayout/_Weather.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer col-md-12">
+                <button type="button" class="btn bg-orange001 button-default h38 fs20 ff-nt2" style="display:inline-block;line-height:1;" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<script>
+
+    $('#s-widgets').on('click', function (e) {
+        bootbox.confirm({
+            size: "small",
+            message: "Add Division?",
+            closeButton: false,
+            buttons: {
+                cancel: {
+                    label: "NO",
+                    className: "bg-orange001 text-white"
+                },
+                confirm: {
+                    label: "YES",
+                    className: "bg-green002 text-white"
+                }
+
+            },
+            className: "fs17 ff-nt2",
+            callback: function (result) {
+                if (result) {
+                    var submit = submitForm();
+                    $.ajax({
+                        url: "@Url.Content("~/DashboardLayout/Add")",
+                        method: 'post',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ data: submit }),
+                        success: function (results) {
+                            if (!results) {
+                                bootbox.alert({
+                                    size: "small",
+                                    message: "Error!",
+                                    closeButton: false,
+                                    className: "fs17 ff-nt2",
+                                    buttons: {
+                                        ok:
+                                        {
+                                            className: "bg-green002 text-white"
+                                        }
+                                    }
+
+                                });
+                            }
+                            else {
+                                bootbox.alert({
+                                    size: "small",
+                                    message: "Successfully Saved!",
+                                    closeButton: false,
+                                    className: "fs17 ff-nt2",
+                                    buttons: {
+                                        ok:
+                                        {
+                                            className: "bg-green002 text-white"
+                                        }
+                                    },
+                                    callback: function (sresult) {
+                                        window.location.href = '@Url.Content("~/DashboardLayout/Index")';
+
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.widget-add', function () {
+        var _this = $(this);
+        _this.text("Remove");
+        _this.removeClass('widget-add bg-green002').addClass('widget-remove bg-orange001');
+        var app = $("#mymodal [data-id=" + _this.data("target") + "]").clone().css('cursor', 'all-scroll').draggable({ cursor: "all-scroll", snap: false });
+        app.appendTo('#widget-container');
+    });
+
+    $(document).on('click', '.widget-remove', function () {
+        var _this = $(this);
+        _this.text("Add");
+        _this.removeClass('widget-remove bg-orange001').addClass('widget-add bg-green002');
+        $('#widget-container [data-id=' + _this.data("target") + ']').remove();
+    });
+
+    $('#mymodal').on('shown.bs.modal', function () {
+        $("#calendar").fullCalendar('render');
+    });
+
+    $('#calendar').fullCalendar({
+        fixedWeekCount: false,
+        showNonCurrentDates: true,
+        //aspectRatio: 1.33,
+        contentHeight: 240,
+        dayNamesShort: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+        titleFormat: 'MMMM',
+        themeSystem: 'bootstrap3',
+        header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        }
+    });
+
+    doubleDigitDays();
+
+    $('.fc-prev-button').click(function () {
+        doubleDigitDays();
+    });
+
+    $('.fc-next-button').click(function () {
+        doubleDigitDays();
+    });
+
+    //prepend 0 on single digit days
+    function doubleDigitDays() {
+        $('.fc-day-number').each(function () {
+            var $this = $(this);
+            if ($this.text().length == 1) {
+                $this.text('0' + $this.text());
+            }
+        });
+    };
+
+    const ps = new PerfectScrollbar('#activity-feed-body', {
+        wheelSpeed: .25,
+        maxScrollbarLength: 250,
+        scrollXMarginOffset: 5
+    });
+
+    $(window).resize(function () {
+        window.setTimeout(function () {
+            ps.update();
+        }, 200);
+    });
+
+
+    var liSlides = $('.log-in-slides').find(".log-in-item");
+    var liSlideIndex = liSlides.length;
+
+    $('.log-in-left-button').click(function () {
+        liPlusSlides(-1);
+    });
+
+    $('.log-in-right-button').click(function () {
+        liPlusSlides(1);
+    });
+
+
+    liShowSlides(liSlideIndex);
+
+    window.setTimeout(function () {
+        liSlides.css('transition', '.7s');
+    }, 1);
+
+    function liPlusSlides(n) {
+      liShowSlides(liSlideIndex += n);
+    }
+
+
+
+    function liShowSlides(n) {
+        var i;
+        //if (n > slides.length) { slideIndex = n - 1 }
+        //if (n < 1) { slideIndex = n + 1 }
+        if (n == liSlides.length) { $('.log-in-right-button').addClass("hidden"); }
+        else { $('.log-in-right-button').removeClass("hidden"); }
+
+        if (n == 1) { $('.log-in-left-button').addClass("hidden"); }
+        else { $('.log-in-left-button').removeClass("hidden"); }
+
+
+        for (i = 0; i < liSlides.length; i++) {
+            liSlides[i].style.right = (((n - 1) * 100) + '%');
+        }
+    }
+
+    function submitForm() {
+
+        var dashboardlayout = {};
+        var loc = [];
+        $('#widget-container .d-widg').each(function (i, e) {
+            loc.push({ widget_id: $(e).data('id'), positiontop: parseInt($(e).position().top), positionleft: parseInt($(e).position().left) });
+        });
+        dashboardlayout["layout_id"] = "A2103";
+        dashboardlayout["name1"] = "A2103";
+        dashboardlayout["description"] = "A2103";
+        dashboardlayout["access_type"] = true;
+        dashboardlayout["DashboardWidgetSetup"] = loc;
+        return dashboardlayout;
+    }
+
+    var cnSlides = $('.company-news').find(".company-news-body");
+    var cnSlideIndex = cnSlides.length;
+
+    $('.company-news-left-button').click(function () {
+        cnPlusSlides(-1);
+    });
+
+    $('.company-news-right-button').click(function () {
+        cnPlusSlides(1);
+    });
+
+
+    cnShowSlides(cnSlideIndex);
+
+    function cnPlusSlides(n) {
+        cnShowSlides(cnSlideIndex += n);
+    }
+
+    function cnShowSlides(n) {
+        var i;
+
+        if (n == cnSlides.length) { $('.company-news-right-button').addClass("hidden"); }
+        else { $('.company-news-right-button').removeClass("hidden"); }
+
+        if (n == 1) { $('.company-news-left-button').addClass("hidden"); }
+        else { $('.company-news-left-button').removeClass("hidden"); }
+
+
+        for (i = 0; i < cnSlides.length; i++) {
+            cnSlides[i].style.display = "none";
+        }
+        cnSlides[cnSlideIndex - 1].style.display = "flex";
+    }
+
+
+
+    $('.announcement-left-button').click(function () {
+        ancPlusSlides(-1);
+    });
+
+    $('.announcement-right-button').click(function () {
+        ancPlusSlides(1);
+    });
+
+    var ancSlides = $('.announcement').find(".announcement-body");
+    var ancSlides2 = $('.announcement').find(".announcement-footer");
+
+    var ancSlideIndex = ancSlides.length;
+    ancShowSlides(ancSlideIndex);
+
+    function ancPlusSlides(n) {
+        ancShowSlides(ancSlideIndex += n);
+    }
+
+    function ancShowSlides(n) {
+        var i;
+
+        if (n == ancSlides.length) { $('.announcement-right-button').addClass("hidden"); }
+        else { $('.announcement-right-button').removeClass("hidden"); }
+
+        if (n == 1) { $('.announcement-left-button').addClass("hidden"); }
+        else { $('.announcement-left-button').removeClass("hidden"); }
+
+
+        for (i = 0; i < ancSlides.length; i++) {
+            ancSlides[i].style.display = "none";
+            ancSlides2[i].style.display = "none";
+        }
+        ancSlides[ancSlideIndex - 1].style.display = "flex";
+        ancSlides2[ancSlideIndex - 1].style.display = "flex";
+    }
+
+</script>

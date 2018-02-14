@@ -1,0 +1,186 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model EmployeeClassIndexViewModel
+@{
+    ViewBag.Title = "Employee Class";
+}
+@Styles.Render("~/Content/selectize")
+
+    <div class="col-md-12 title">
+        EMPLOYEE CLASS
+    </div>
+
+    <div class="body-content">
+        <div class="col-md-12 margin-top-default">
+            <div class="col-md-12 margin-top-lg margin-bottom-lg">
+                <div class="col-md-6">
+                    <div class="col-md-12 no-padding margin-bottom-default">
+                        <div class="col-md-4 no-padding fs20 ff-nt2 flex flex-left h45">
+                            @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Company" })
+                            @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding margin-bottom-default">
+                        <div class="col-md-4 no-padding fs20 ff-nt2 flex flex-left h55">
+                            @Html.LabelFor(model => model.class_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.class_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Employee Class ID" })
+                            @Html.ValidationMessageFor(model => model.class_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-4 no-padding pull-right margin-right-default">
+                                <button class="button-default block bg-orange001 h38 fs20 ff-nt2" id="search">SEARCH</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 no-padding h55 flex flex-center pull-right ">
+                    @Html.Action("ButtonLinks", "Layout")
+                </div>
+            </div>
+
+
+
+            <div class="margin-bottom-lg col-md-12" id="table">
+                <div class="col-md-12 fs17">
+                    <table class="table dyna-theme001 d-table tableBodyScroll2" id="division-table">
+                        <thead>
+                            <tr>
+                                <th width="30%" data-dynatable-column="comp_id">COMPANY ID</th>
+                                <th width="30%" data-dynatable-column="class_id">EMPLOYEE CLASS ID</th>
+                                <th width="30%" data-dynatable-column="name1">EMPLOYEE CLASS NAME</th>
+                                <th width="10%"  data-dynatable-column="active">ACTIVE</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+    var dtable;
+
+    var settings = {
+        features: {
+            paginate: true,
+            sort: true,
+            pushState: true,
+            search: false,
+            recordCount: true,
+            perPageSelect: false
+        },
+        dataset: {
+            records: [],
+            perPageDefault: 10,
+            perPageOptions: [10, 20, 50, 100, 200, 500, 1000]
+        },
+        writers: {
+            _cellWriter: customCellWriter
+        }
+    };
+
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents();
+    });
+
+    function initializeEvents() {
+
+        $("#search").on('click', function (e) {
+            e.preventDefault();
+            var id = $("#comp_id");
+            var classid = $("#class_id");
+            if ($('#division-table').is(':visible')) {
+                if (classid.val().length) {
+                    dtable.queries.add('class_id', classid.val());
+                } else {
+                    dtable.queries.remove('class_id');
+                }
+                if (id.val().length) {
+                    dtable.queries.add('comp_id', id.val());
+                } else {
+                    dtable.queries.remove('comp_id');
+                }
+                dtable.queries.add('ajax', 'yes');
+                dtable.settings.dataset.ajax = true;
+                dtable.settings.dataset.ajaxUrl = "@Url.Content("~/EmployeeClass/SearchResult")";
+                dtable.settings.dataset.ajaxOnLoad = false;
+                dtable.process();
+            }
+        });
+
+    }
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            }
+        });
+
+        dtable = $(".d-table").bind('dynatable:init', function (e, dynatable) {
+
+        }).dynatable(settings).data('dynatable');
+
+
+      
+
+    }
+
+    function customCellWriter(column, record) {
+        var html = column.attributeWriter(record),
+            td = '<td class="text-left">';
+
+        if (column.id == "comp_id") {
+            td = '<td width=30%>';
+        }
+        else if (column.id == "class_id") {
+            td = '<td width=30%>';
+        }
+        else if (column.id == "name1") {
+            td = '<td width=30%>';
+        }
+        else if (column.id == "active") {
+            td = '<td width=10%>';
+            if (html == true) {
+                html = '<span class="margin-left-lg glyphicon glyphicon-ok-circle text-green001 fs20" />';
+            }
+            else {
+                html = " ";
+            }
+        }
+        return td + html + '</td>';
+    };
+
+
+</script>

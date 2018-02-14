@@ -1,0 +1,285 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model DocumentNumberUpdateViewModel
+
+@{
+    ViewBag.Title = "DocumentNumber/Update";
+}
+<div class="col-md-12 title">
+    UPDATE DOCUMENT
+</div>
+
+@using (Html.BeginForm("Update", "DocumentNumber", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "docFrm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="body-content">
+        <div class="col-md-12 no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding flex flex-center margin-bottom-lg">
+                <div class="col-md-5">
+                    <div class="col-md-12 margin-top-default">
+                        <div class="col-md-12 margin-top-default">
+                            <div class="no-padding col-md-12 fs20 ff-nt2">
+                                @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                            </div>
+                            <div class="col-md-12 no-padding">
+                               @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "",  @data_selected = Model.comp_id ,@disabled = true})
+                                @Html.HiddenFor(model => model.comp_id, new { @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 margin-top-default">
+                            <div class="no-padding col-md-12 fs20 ff-nt2">
+                                @Html.LabelFor(model => model.doc_id, new { @class = "" })
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                @Html.TextBoxFor(model => model.doc_id, new { @maxlength = "5", @class = "input-default h45 fs20 block", @disabled = true })
+                                @Html.HiddenFor(model => model.doc_id, new { @readonly = true })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 margin-top-default">
+                            <div class="no-padding col-md-12 fs20 ff-nt2">
+                                @Html.LabelFor(model => model.name1, new { @class = "" })
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-top-default">
+                            <div class="no-padding col-md-12 fs20 ff-nt2">
+                                Range Period
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <div class="no-padding col-md-5">
+                                    @Html.TextBoxFor(model => model.rangefrom, new { @class = "min input-default h45 fs20 block", @placeholder = "Range From" })
+                                    @Html.ValidationMessageFor(model => model.rangefrom, "", new { @class = "fs15 text-danger" })
+                                </div>
+                                <div class="col-md-1 h45 fs20 flex flex-center">
+                                    to
+                                </div>
+                                <div class="no-padding col-md-6">
+                                    @Html.TextBoxFor(model => model.rangeto, new { @class = "max input-default h45 fs20 block", @placeholder = "Range To", @data_linked = "rangefrom", @data_val_linked = "* Must be greater than 'From'" })
+                                    @Html.ValidationMessageFor(model => model.rangeto, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="no-padding col-md-12 fs20 ff-nt2 margin-top-default">
+                                Increment
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <div class="no-padding col-md-12 ">
+                                    @Html.TextBoxFor(model => model.increment, new { @class = "input-default h45 fs20 block", @placeholder = "increment" })
+                                    @Html.ValidationMessageFor(model => model.increment, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="no-padding col-md-12 fs20 ff-nt2 margin-top-default">
+                                Value Period
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <div class="no-padding col-md-6">
+                                    @Html.TextBoxFor(model => model.startvalue, new { @class = "input-default h45 fs20 block", @placeholder = "Start Value" })
+                                    @Html.ValidationMessageFor(model => model.startvalue, "", new { @class = "fs15 text-danger" })
+                                </div>
+                                <div class="no-padding-right col-md-6 ">
+                                    @Html.TextBoxFor(model => model.currentvalue, new { @class = "input-default h45 fs20 block", @placeholder = "Current Value" })
+                                    @Html.ValidationMessageFor(model => model.currentvalue, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="no-padding col-md-12 margin-top-default">
+                                <div class="col-md-12 no-padding fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.module, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.DropDownListFor(model => model.module, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Module", @data_selected = Model.upModules, @multiple = "multiple" })
+                                    @Html.ValidationMessageFor(model => model.module, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-7 pull-right margin-top-lg margin-right-default flex flex-center">
+                        <div class="col-md-5 no-padding pull-right margin-right-sm">
+                            <input type="button" value="UPDATE" id="submit" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                        </div>
+                        <div class="no-padding col-md-7">
+                            <input type="button" value="CANCEL" data-target="@Url.Content("~/DocumentNumber/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+
+         $module = $('#module').selectize({
+            valueField: 'module_id',
+            labelField: 'sdisplay',
+            searchField: ['sdisplay'],
+            sortField: [{ field: 'sdisplay', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/getModules")',
+                        method: 'get',
+                        success: function (results) {
+                            console.log(results);
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function (data) {
+                this.setValue($($($(this.$control[0])[0]).closest('.col-md-12')).find('select').data('selected'), 'silent');
+            }
+
+        });
+        module = $module[0].selectize;
+    }
+
+    function initializeEvents() {
+        $('#submit').on('click', function (e) {
+            var _this = $('#docFrm');
+            if (_this.valid()) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Add Document Number?",
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        if (result) {
+                            var model = submitForm();
+                            $.ajax({
+                                url: "@Url.Content("~/DocumentNumber/Update")",
+                                method: 'post',
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ data: model }),
+                                success: function (results) {
+                                    if (results) {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Successfully Saved!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            },
+                                            callback: function (result) {
+                                                window.location.href = '@Url.Content("~/DocumentNumber/Index")';
+                                            }
+                                        });
+                                       
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Error",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            }
+
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function submitForm() {
+        var serial = $('#docFrm').serializeArray();
+        documents = {};
+        for (var x in serial) {
+            documents[serial[x].name] = serial[x].value;
+        }
+        documents["module"] = [];
+        var x = document.getElementById('module');
+        for (var i = 0; i < x.options.length; i++) {
+            if (x.options[i].selected == true) {
+                modules = {};
+                modules["module_id"] = x.options[i].value;
+                documents["module"].push(modules);
+            }
+        }
+        return documents;
+    }
+</script>

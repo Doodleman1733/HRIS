@@ -1,0 +1,662 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.CompanyAddViewModel
+@{
+        ViewBag.Title = "Company/Add";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Add", "Company", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "CompanyFrm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 title">
+        ADD COMPANY
+    </div>
+
+    <div class="body-content" id="parent">
+        <div id="step-1">
+            <div class="col-md-6 left-container no-padding">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-5 ">
+                        <div class="col-md-12 no-padding fs20 ff-nt2">
+                            @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                        </div>
+                        @Html.TextBoxFor(model => model.comp_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "fs15 text-danger" })
+                    </div>
+                    <div class="col-md-7 no-padding-left">
+                        <div class="col-md-12 no-padding fs20 ff-nt2">
+                            @Html.LabelFor(model => model.name1, new { @class = "" })
+                        </div>
+                        @Html.TextBoxFor(model => model.name1, new { @maxlength = "100", @class = "input-default h45 fs20 block", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-default floatingLabel">
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        Company Address
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.streetaddress, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Street" })
+                            @Html.ValidationMessageFor(model => model.streetaddress, "", new { @class = "fs15 text-danger" })
+                        </div>
+                        <div class="col-md-6 no-padding-left ">
+                            @Html.TextBoxFor(model => model.city, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "City" })
+                            @Html.ValidationMessageFor(model => model.city, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 no-padding ">
+                        <div class="col-md-6 margin-top-default">
+                            @Html.TextBoxFor(model => model.province, new { @maxlength = "1000", @class = "input-default h45 fs20 block", @placeholder = "Province" })
+                            @Html.ValidationMessageFor(model => model.province, "", new { @class = "fs15 text-danger" })
+                        </div>
+                        <div class="col-md-6 no-padding-left margin-top-default">
+                            @Html.TextBoxFor(model => model.country, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Country" })
+                            @Html.ValidationMessageFor(model => model.country, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-6 ">
+                            <div class="col-md-12 no-padding fs20 ff-nt2">
+                                @Html.LabelFor(model => model.sss, new { @class = "" })
+                            </div>
+                            @Html.TextBoxFor(model => model.sss, new { @maxlength = "50", @class = "input-default h45 fs20 block" })
+                            @Html.ValidationMessageFor(model => model.sss, "", new { @class = "fs15 text-danger" })
+                        </div>
+                        <div class="col-md-6 no-padding-left">
+                            <div class="col-md-12 no-padding fs20 ff-nt2">
+                                @Html.LabelFor(model => model.philhealth, new { @class = "" })
+                            </div>
+                            @Html.TextBoxFor(model => model.philhealth, new { @maxlength = "50", @class = "input-default h45 fs20 block" })
+                            @Html.ValidationMessageFor(model => model.philhealth, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding margin-top-default">
+                        <div class="col-md-6 ">
+                            <div class="col-md-12 no-padding fs20 ff-nt2">
+                                @Html.LabelFor(model => model.pagibig, new { @class = "" })
+                            </div>
+                            @Html.TextBoxFor(model => model.pagibig, new { @maxlength = "50", @class = "input-default h45 fs20 block" })
+                            @Html.ValidationMessageFor(model => model.pagibig, "", new { @class = "fs15 text-danger" })
+                        </div>
+                        <div class="col-md-6 no-padding-left">
+                            <div class="col-md-12 no-padding fs20 ff-nt2">
+                                @Html.LabelFor(model => model.tin, new { @class = "" })
+                            </div>
+                            @Html.TextBoxFor(model => model.tin, new { @maxlength = "50", @class = "input-default h45 fs20 block" })
+                            @Html.ValidationMessageFor(model => model.tin, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 margin-top-default margin-bottom-lg">
+                    <div class="col-md-12 fs20 ff-nt2">
+                        @Html.LabelFor(model => model.addinfo, new { @class = "" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.addinfo, new { @maxlength = "250", @class = "input-default fs20 block",  @rows = 5 })
+                        @Html.ValidationMessageFor(model => model.addinfo, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 no-padding" style="height:100%">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">CONTACT DETAILS</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        Contact Persons
+                    </div>
+                    <div class="col-md-12 margin-top-default">
+                        <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                            1.
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.TextBoxFor(model => model.contactperson1, new { @maxlength = "100", @class = "input-default h45 fs20 block" })
+                            @Html.ValidationMessageFor(model => model.contactperson1, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-default">
+                        <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                            2.
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.TextBoxFor(model => model.contactperson2, new { @maxlength = "100", @class = "input-default h45 fs20 block" })
+                            @Html.ValidationMessageFor(model => model.contactperson2, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default">
+                        <div class="col-md-12  fs20 ff-nt2 margin-bottom-sm no-padding">
+                            @Html.LabelFor(model => model.phone1, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding-right">
+                            <div class="col-md-12 no-padding">
+                                @Html.TextBoxFor(model => model.phone1, new { @maxlength = "15", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.phone1, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12  fs20 ff-nt2 margin-bottom-sm no-padding margin-top-default">
+                            @Html.LabelFor(model => model.phone2, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding-right">
+                            <div class="col-md-12 no-padding">
+                                @Html.TextBoxFor(model => model.phone2, new { @maxlength = "15", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.phone2, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-default margin-bottom-default floatingLabel">
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        Emails
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12 no-padding-right">
+                            @Html.TextBoxFor(model => model.email1, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Email 1" })
+                            @Html.ValidationMessageFor(model => model.email1, "", new { @class = "fs15 text-danger" })
+                        </div>
+                        <div class="col-md-12 margin-top-default no-padding-right">
+                            @Html.TextBoxFor(model => model.email2, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Email 2" })
+                            @Html.ValidationMessageFor(model => model.email2, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 pull-right margin-top-lg margin-right-default flex flex-center no-padding-right">
+                        <div class="no-padding col-md-5 margin-right-sm margin-top-lg">
+                            <a role="button" id="next" class="h38 fs20 button-default block" data-target="step-2" data-parent="step-1" href="javascript:void(0);">
+                                NEXT
+                            </a>
+                        </div>
+                        <div class="no-padding col-md-7 margin-top-lg">
+                            <a type="button" href='@Url.Content("~/Company")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CANCEL</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="step-2">
+            <div class="col-md-6 left-container no-padding">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">COMPANY SETTINGS</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12  fs20 ff-nt2">
+                        Fiscal year starts by the month of
+                    </div>
+                    <div class="col-md-12">
+                        @Html.DropDownListFor(model => model.fiscalyearmonth, Enumerable.Empty<SelectListItem>(), "", new { @class = "" })
+                        @Html.ValidationMessageFor(model => model.fiscalyearmonth, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-12 margin-top-default">
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        Default restday/s
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3 fs16">
+                            @Html.CheckBoxFor(model => model.rdsunday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdsunday)
+                        </div>
+                        <div class="col-md-3 fs16 ">
+                            @Html.CheckBoxFor(model => model.rdmonday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdmonday)
+                        </div>
+                        <div class="col-md-3 fs16 ">
+                            @Html.CheckBoxFor(model => model.rdtuesday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdtuesday)
+                        </div>
+                        <div class="col-md-3 fs16">
+                            @Html.CheckBoxFor(model => model.rdwednesday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdwednesday)
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="col-md-3 fs16">
+                            @Html.CheckBoxFor(model => model.rdthursday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdthursday)
+                        </div>
+                        <div class="col-md-3  fs16">
+                            @Html.CheckBoxFor(model => model.rdfriday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdfriday)
+                        </div>
+                        <div class="col-md-3 fs16">
+                            @Html.CheckBoxFor(model => model.rdsaturday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                            @Html.LabelFor(model => model.rdsaturday)
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-6 fs17 ff-nt2 h45">
+                        Acceptable time in margin <br> (in minutes)
+                    </div>
+                    <div class="col-md-4 no-padding margin-left-default">
+                        @Html.TextBoxFor(model => model.timeinmargin, new { @class = "input-default h45 fs17 block min-1" })
+                        @Html.ValidationMessageFor(model => model.timeinmargin, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-6 ff-nt2 fs17 h45">
+                        Default shift round down <br> (in minutes)
+                    </div>
+                    <div class="col-md-4 no-padding margin-left-default">
+                        @Html.TextBoxFor(model => model.shiftrounddown, new { @class = "input-default h45 fs17 block min" })
+                        @Html.ValidationMessageFor(model => model.shiftrounddown, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-6 fs17 ff-nt2 h45">
+                        Default overtime round down <br> (in minutes)
+                    </div>
+                    <div class="col-md-4 no-padding margin-left-default">
+                        @Html.TextBoxFor(model => model.otrounddown, new { @class = "input-default h45 fs17 block min" })
+                        @Html.ValidationMessageFor(model => model.otrounddown, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-6 fs17 ff-nt2">
+                        Night differential period covers from
+                    </div>
+
+                    <div class="col-md-2 no-padding margin-left-default">
+                        @Html.TextBoxFor(model => model.nightdifffrom, new { @class = "input-default time h45 fs17 block" })
+                        @Html.ValidationMessageFor(model => model.nightdifffrom, "", new { @class = "fs15 text-danger" })
+                    </div>
+                    <div class="col-md-1 no-padding fs17  h45 flex flex-center">
+                        To
+                    </div>
+                    <div class="col-md-2 no-padding">
+                        @Html.TextBoxFor(model => model.nightdiffto, new { @class = "input-default h45 time fs17 block" })
+                        @Html.ValidationMessageFor(model => model.nightdiffto, "", new { @class = "fs15 text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-6 fs17 h45 ff-nt2 flex flex-left">
+                        Maximum allowable hours in a day
+                    </div>
+                    <div class="col-md-4 no-padding margin-left-default">
+                        @Html.TextBoxFor(model => model.maximumworkhours, new { @class = "input-default fs17 hour h45 block" })
+                        @Html.ValidationMessageFor(model => model.maximumworkhours, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-6 ">
+                        @Html.LabelFor(model => model.cutoffconsideration, new { @class = "fs17 h45 ff-nt2" })
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        <div class="col-md-1 no-padding margin-left-default">
+                            @Html.RadioButtonFor(model => model.cutoffconsideration, "A", new { @data_val_required = "* Select Cut-off consideration" })
+                        </div>
+                        <div class="col-md-10 no-padding">
+                            Start of every shift, eg 8:00 am
+                        </div>
+                    </div>
+                    <div class="col-md-6 no-padding margin-top-sm margin-bottom-lg">
+                        <div class="col-md-1 no-padding margin-left-default">
+                            @Html.RadioButtonFor(model => model.cutoffconsideration, "B", new { @data_val_required = "* Select Cut-off consideration" })
+                        </div>
+                        <div class="col-md-10 no-padding">
+                            Start of the day, ie 12 midnight
+                        </div>
+                        <div class="col-md-11 no-padding margin-left-default">
+                            @Html.ValidationMessageFor(model => model.cutoffconsideration, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 no-padding" style="height:100%">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 fs20 ff-nt2">
+                        Cut-off Period
+                    </div>
+                    <div class="col-md-12 fs15">
+                        <span class="fs15 text-danger field-validation-error" data-valmsg-for="atLeastOne" data-valmsg-replace="true"><span for="atLeastOne" id="atLeastOne" class=""></span></span>
+                    </div>
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12 fs17 ff-nt2">
+                           @Html.CheckBoxFor(model => model.monthly, htmlAttributes: new { @class = "atLeastOne" })
+                            @Html.LabelFor(model => model.monthly)
+                        </div>
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-5 fs17 h45 flex flex-center">
+                                Payroll cut-off every
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.monthlycutoff, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @disabled = true, @data_val_required = "* Required" })
+                                @Html.ValidationMessageFor(model => model.monthlycutoff, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12  fs17 ff-nt2">
+                            @Html.CheckBoxFor(model => model.semimonthly, htmlAttributes: new { @class = "atLeastOne" })
+                            @Html.LabelFor(model => model.semimonthly)
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-12 margin-top-default">
+                                <div class="col-md-5 fs17 h45 flex flex-center">
+                                    Payroll cut-off every
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.semicutofffrom, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @disabled = true, @data_val_required = "* Required" })
+                                    @Html.ValidationMessageFor(model => model.semicutofffrom, "", new { @class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default disabled">
+                                <div class="col-md-5 fs17 h45 flex flex-center">
+                                    Next payroll cut-off
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.semicutoffto, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @disabled = true, @data_val_required = "* Required" })
+                                    @Html.ValidationMessageFor(model => model.semicutoffto, "", new { @class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12 fs17 ff-nt2">
+                            @Html.CheckBoxFor(model => model.weekly, htmlAttributes: new { @class = "atLeastOne" })
+                            @Html.LabelFor(model => model.weekly)
+                        </div>
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-4 fs17 h45 flex flex-right no-padding">
+                                Payroll cut-off every
+                            </div>
+                            <div class="col-md-5">
+                                @Html.DropDownListFor(model => model.weeklycutoff, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @disabled=true, @data_val_required = "* Required" })
+                                @Html.ValidationMessageFor(model => model.weeklycutoff, "", new { @class = "text-danger"})
+                            </div>
+                            <div class="col-md-3 no-padding fs17 h45 flex flex-left">
+                                of the week.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12 fs17 ff-nt2">
+                            @Html.CheckBoxFor(model => model.daily, htmlAttributes: new { @class = "atLeastOne" })
+                            @Html.LabelFor(model => model.daily)
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-3 no-padding pull-right margin-right-default ">
+                            <input type="submit" value="SAVE" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                        </div>
+
+                        <div class="col-md-3 no-padding margin-left-sm margin-right-sm pull-right">
+                            <a type="button" href='@Url.Content("~/Company")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CANCEL</a>
+                        </div>
+                        <div class="col-md-2 no-padding pull-right">
+                            <a role="button" id="back" class="h38 fs20 button-default block" data-target="#step-1" data-parent="step-2">
+                                BACK
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+        $(document).ready(function () {
+            initializeUI();
+            initializeEvents()
+        });
+
+        function initializeUI() {
+
+            $('[data-val-required]:not([type=checkbox],[type=radio])').each(function (i, e) {
+                $('label[for=' + $(e).attr('id') + ']').addClass('req');
+            });
+
+            $('#fiscalyearmonth').selectize({
+                valueField: 'id',
+                labelField: 'name',
+                searchField: ['name'],
+                dropdownParent: 'body',
+                sortField: [{ field: 'id', direction: 'asc' }],
+                options: [{ id: 1, name: 'January' },
+                            { id: 2, name: 'February' },
+                            { id: 3, name: 'March' },
+                            { id: 4, name: 'April' },
+                            { id: 5, name: 'May' },
+                            { id: 6, name: 'June' },
+                            { id: 7, name: 'July' },
+                            { id: 8, name: 'August' },
+                            { id: 9, name: 'September' },
+                            { id: 10, name: 'October' },
+                            { id: 11, name: 'November' },
+                            { id: 12, name: 'December' }],
+                onBlur: function () {
+                    $(this.$input[0]).valid();
+                }
+            });
+
+            monthly = $('#monthlycutoff').selectize({
+                valueField: 'id',
+                labelField: 'value',
+                searchField: ['value'],
+                dropdownParent: 'body',
+                sortField: [{ field: 'id', direction: 'asc' }],
+                options: generateDates(1, 31),
+                onBlur: function () {
+                    $(this.$input[0]).valid();
+                }
+            });
+
+            semiFrom = $('#semicutofffrom').selectize({
+                valueField: 'id',
+                labelField: 'value',
+                searchField: ['value'],
+                dropdownParent: 'body',
+                sortField: [{ field: 'id', direction: 'asc' }],
+                options: generateDates(1, 15),
+                onBlur: function () {
+                    $(this.$input[0]).valid();
+                }
+            });
+
+            semiTo = $('#semicutoffto').selectize({
+                valueField: 'id',
+                labelField: 'value',
+                searchField: ['value'],
+                dropdownParent: 'body',
+                sortField: [{ field: 'id', direction: 'asc' }],
+                options: generateDates(16, 31),
+                onBlur: function () {
+                    $(this.$input[0]).valid();
+                }
+            });
+
+            weekly = $('#weeklycutoff').selectize({
+                valueField: 'id',
+                labelField: 'name',
+                searchField: ['name'],
+                dropdownParent: 'body',
+                options: [{ id: '1', name: 'Monday' },
+                            { id: '2', name: 'Tuesday' },
+                            { id: '3', name: 'Wednesday' },
+                            { id: '4', name: 'Thursday' },
+                            { id: '5', name: 'Friday' },
+                            { id: '6', name: 'Saturday' },
+                            { id: '7', name: 'Sunday' }],
+                onBlur: function () {
+                    $(this.$input[0]).valid();
+                }
+            });
+
+            $('#CompanyFrm').find('input[type=text]').val('');
+
+            $(".min").autoNumeric('init', {
+                aSep: '',
+                vMin: '0',
+                vMax: '60',
+                wEmpty: 'zero',
+                lZero: 'deny',
+                mDec: 0,
+            });
+
+            $('.min-1').autoNumeric('init', {
+                aSep: '',
+                vMin: '0',
+                vMax: '300',
+                wEmpty: 'zero',
+                lZero: 'deny',
+                mDec: 0,
+            });
+
+            $(".hour").autoNumeric('init', {
+                aSep: '',
+                vMin: '0',
+                vMax: '24',
+                wEmpty: 'zero',
+                lZero: 'deny',
+                mDec: 0,
+            });
+        }
+
+        function initializeEvents() {
+
+            $(document).on('click', '#monthly', function () {
+                _this = $(this);
+                if ($(this).is(':checked')) {
+                    monthly[0].selectize.enable();
+                    
+                } else {
+                    monthly[0].selectize.disable();
+                    monthly[0].selectize.clear();
+                    $('[data-valmsg-for=monthlycutoff]').html('');
+                }
+            });
+
+            $(document).on('click', '#semimonthly', function () {
+                _this = $(this);
+                if ($(this).is(':checked')) {
+                    semiFrom[0].selectize.enable();
+                    semiTo[0].selectize.enable();
+                } else {
+                    semiFrom[0].selectize.disable();
+                    semiFrom[0].selectize.clear();
+                    semiTo[0].selectize.disable();
+                    semiTo[0].selectize.clear();
+                    $('[data-valmsg-for=semicutoffto]').html('');
+                    $('[data-valmsg-for=semicutofffrom]').html('');
+                }
+            });
+
+            $(document).on('click', '#weekly', function () {
+                _this = $(this);
+                if ($(this).is(':checked')) {
+                    weekly[0].selectize.enable();
+                } else {
+                    weekly[0].selectize.disable();
+                    weekly[0].selectize.clear();
+                    $('[data-valmsg-for=weeklycutoff').html('');
+                }
+            });
+
+            userForm = new FormPrompt({
+                form: $("#CompanyFrm"),
+                message: 'Add Company?'
+            });
+
+            userForm.run();
+
+            $('#next').on('click', function () {
+                var _this = $(this);
+                var parent = $(this).data('parent');
+                var target = $('#' + parent).nextAll('div:not(.hidden):first').attr('id');
+                if ($('#CompanyFrm').valid()) {
+                    $('#' + parent).slideUp(10, function () {
+                        $('#' + target).slideDown(10, function () {
+                            $('html, body').animate({
+                                scrollTop: 100
+                            }, 0);
+                        });
+                    });
+                }
+            });
+
+            $("#back").on('click', function () {
+                var _this = $(this);
+                var parent = $(this).data('parent');
+                var target = $('#' + parent).prevAll('div:not(.hidden):first').attr('id');
+
+                $('#' + parent).slideUp(10, function () {
+                    $('#' + target).slideDown(10, function () {
+                        $('html, body').animate({
+                            scrollTop: 100
+                        }, 0);
+                    });
+                });
+
+            });
+        }
+
+        function generateDates(from, to) {
+
+            dates = [];
+
+            for (var i = from; i < to + 1; i++) {
+                var val = "";
+                if (i == 1 || i == 21 || i == 31) {
+                    val = i.toString() + "st";
+                }
+                else if (i == 2 || i == 22) {
+                    val = i.toString() + "nd";
+                }
+                else if (i == 3 || i == 23) {
+                    val = i.toString() + "rd";
+                }
+                else {
+                    val = i.toString() + 'th';
+                }
+                dates.push({ id: i, value: val });
+            }
+
+            return dates;
+        }
+
+</script>
+

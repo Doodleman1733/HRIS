@@ -1,0 +1,128 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.RoleUpdateViewModel
+
+@{
+    ViewBag.Title = "Role/Update";
+}
+<div class="col-md-12 title">
+     UPDATE ROLE
+</div>
+
+@using (Html.BeginForm("Update", "Roles", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "rolFrm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="body-content">
+        <div class="col-md-12 no-padding">
+            
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 no-padding flex flex-center margin-bottom-lg">
+                    <div class="col-md-5">
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                  @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @disabled = true, @data_selected = Model.comp_id })
+                                    @Html.HiddenFor(model => model.comp_id, new { @readonly = true })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.role_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.TextBoxFor(model => model.role_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                                    @Html.HiddenFor(model => model.role_id, new { @readonly = true })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h45 fs20 block" })
+                                    @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.description, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                   @Html.TextAreaFor(model => model.description, new { @maxlength = "100", @class = "input-default fs20 block", @rows = 5 })
+                                @Html.ValidationMessageFor(model => model.description, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7 pull-right margin-top-lg margin-right-default flex flex-center">
+                            <div class="col-md-5 no-padding pull-right margin-right-sm">
+                                <input type="submit" value="UPDATE" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                            </div>
+                            <div class="no-padding col-md-7">
+                                <input type="button" value="CANCEL" data-target="@Url.Content("~/Roles/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+        </div>
+    </div>
+
+   
+}
+<script>
+   
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+    }
+
+    function initializeEvents() {
+
+        userForm = new FormPrompt({
+            form: $("#rolFrm"),
+            message: 'Update Role?'
+        });
+
+        userForm.run();
+    }
+</script>

@@ -1,0 +1,140 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model WorkflowIndexViewModel
+@{
+    ViewBag.Title = "Workflow";
+}
+
+<div class="col-md-12 title">
+    WORKFLOW
+</div>
+
+<div class="body-content">
+    <div class="col-md-12 margin-top-default">
+        <div class="col-md-12 margin-top-lg margin-bottom-lg">
+            <div class="col-md-6">
+                <div class="col-md-12 margin-bottom-default no-padding">
+                    <div class="col-md-3 no-padding fs20 ff-nt2 flex flex-left h45">
+                        @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.comp_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Company ID" })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-bottom-default no-padding">
+                    <div class="col-md-3 no-padding fs20 ff-nt2 flex flex-left h45">
+                        @Html.LabelFor(model => model.wflw_id, new { @class = "" })
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.wflw_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Workflow ID" })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-bottom-default no-padding">
+                    <div class="col-md-3 no-padding fs20 ff-nt2 flex flex-left h45">
+                        @Html.LabelFor(model => model.module_id, new { @class = "" })
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.module_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Module ID" })
+                    </div>
+                </div>
+               
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-12 no-padding margin-top-default">
+                        <div class="col-md-4 no-padding pull-right margin-right-default">
+                            <button class="button-default block bg-orange001 h38 fs20 ff-nt2" id="search">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 no-padding h55 flex flex-center pull-right ">
+                @Html.Action("ButtonLinks", "Layout")
+            </div>
+        </div>
+
+
+        <div class="margin-bottom-lg col-md-12" id="table">
+            <div class="col-md-12 fs17">
+                <table class="table dyna-theme001 d-table tableBodyScroll2" id="location-table">
+                    <thead>
+                        <tr>
+                            <th data-dynatable-column="comp_id">COMPANY ID</th>
+                            <th data-dynatable-column="wflw_id">WORKFLOW ID</th>
+                            <th data-dynatable-column="name1">NAME</th>
+                            <th data-dynatable-column="module_id">MODULE</th>
+                            <th data-dynatable-column="active">ACTIVE</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var dtable;
+
+    var settings = {
+        features: {
+            paginate: true,
+            sort: true,
+            pushState: true,
+            search: false,
+            recordCount: true,
+            perPageSelect: false
+        },
+        dataset: {
+            records: [],
+            perPageDefault: 10,
+            perPageOptions: [10, 20, 50, 100, 200, 500, 1000]
+        }
+    };
+
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents();
+    });
+
+    function initializeUI() {
+        dtable = $(".d-table").bind('dynatable:init', function (e, dynatable) {
+        }).dynatable(settings).data('dynatable');
+    }
+
+    function initializeEvents() {
+
+        $("#search").on('click', function (e) {
+            e.preventDefault();
+            var comp_id = $("#comp_id");
+            var module_id = $("#module_id");
+            var wflw_id = $("#wflw_id");
+            
+            if ($('#location-table').is(':visible')) {
+                if (comp_id.val().length) {
+                    dtable.queries.add('comp_id', comp_id.val());
+                } else {
+                    dtable.queries.remove('comp_id');
+                }
+                if (wflw_id.val().length) {
+                    dtable.queries.add('wflw_id', wflw_id.val());
+                } else {
+                    dtable.queries.remove('wflw_id');
+                }
+                if (module_id.val().length) {
+                    dtable.queries.add('module_id', module_id.val());
+                } else {
+                    dtable.queries.remove('module_id');
+                }
+                dtable.queries.add('ajax', 'yes');
+                dtable.settings.dataset.ajax = true;
+                dtable.settings.dataset.ajaxUrl = "@Url.Content("~/Workflow/SearchResult")";
+                dtable.settings.dataset.ajaxOnLoad = false;
+                dtable.process();
+            }
+        });
+
+    }
+
+
+</script>

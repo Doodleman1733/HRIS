@@ -1,0 +1,1063 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.DivisionAddViewModel
+@{
+    ViewBag.Title = "Division/Add";
+}
+@using (Html.BeginForm("Add", "Division", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "divFrm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 title">
+        ADD DIVISION
+    </div>
+
+    <div class="body-content">
+        <div class="col-md-5 left-container no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <div class="col-md-12 fs20 ff-nt2 ">
+                    @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.comp_id, @class = "", @placeholder = "Select Company" })
+                    @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.div_id, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextBoxFor(model => model.div_id, new { @maxlength = "20", @class = "input-default h62 fs20 block", @placeholder = "Enter Division ID" })
+                    @Html.ValidationMessageFor(model => model.div_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h62 fs20 block", @placeholder = "Enter Division Name" })
+                    @Html.ValidationMessageFor(model => model.name1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg margin-bottom-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.description, new { @class = "" })
+                </div>
+                <div class="col-md-12  margin-top-sm">
+                    @Html.TextAreaFor(model => model.description, new { @maxlength = "100", @class = "input-default fs20 block",  @rows = 7 })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">ADD DEPARTMENT</span>
+                </div>
+            </div>
+            <div class="col-md-12 no-padding" id="department">
+                <div class="col-md-6">
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12 fs20 ff-nt2 ">
+                            Department ID
+                        </div>
+                        <div class="col-md-12 margin-top-sm">
+                            @Html.TextBoxFor(model => model.dept_id, new { @maxlength = "20", @class = "input-default h38 fs20 block", @placeholder = "Enter Department ID" })
+                            @Html.ValidationMessageFor(model => model.dept_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-sm">
+                        <div class="col-md-12 fs20 ff-nt2">
+                            Department Name
+                        </div>
+                        <div class="col-md-12 margin-top-sm">
+                            @Html.TextBoxFor(model => model.dept_name1, new { @maxlength = "50", @class = "input-default h38 fs20 block", @placeholder = "Enter Department Name" })
+                            @Html.ValidationMessageFor(model => model.dept_name1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 margin-top-lg ">
+                    <div class="col-md-12 ff-nt2 fs20 no-padding-left">
+                        Additional Information
+                    </div>
+                    <div class="col-md-12 no-padding-left">
+                        @Html.TextAreaFor(model => model.dept_description, new { @maxlength = "100", @class = "input-default fs20 block",  @rows = 4 })
+                        @Html.ValidationMessageFor(model => model.dept_description, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-8 no-padding margin-top-default  pull-right">
+                            <div class="col-md-6">
+                                <button type="button" class="bg-green002 button-default block h38 fs20 ff-nt2" id="department-add" disabled="disabled">Add</button>
+                            </div>
+                            <div class="col-md-6 no-padding-left">
+                                <button type="button" class="bg-green002 button-default block h38 fs20 ff-nt2" id="department-save" disabled="disabled">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default" style="height:200px">
+                <table class="table dyna-theme005 tableBodyScroll" id="department-table">
+                    <thead>
+                        <tr>
+                            <th data-dynatable-column="dept_id">DEPARTMENT ID</th>
+                            <th data-dynatable-column="dept_name1">DEPARTMENT NAME</th>
+                            <th data-dynatable-column="dept_description">DESCRIPTION</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2 margin-top-lg">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">ADD SECTION</span>
+                </div>
+            </div>
+            <div class="col-md-12 no-padding" id="section">
+
+                <div class="col-md-6">
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12 fs20 ff-nt2 ">
+                            Section ID
+                        </div>
+                        <div class="col-md-12 margin-top-sm">
+                            @Html.TextBoxFor(model => model.sect_id, new { @maxlength = "20", @class = "input-default h38 fs20 block", @placeholder = "Enter Section ID" })
+                            @Html.ValidationMessageFor(model => model.sect_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-sm">
+                        <div class="col-md-12 fs20 ff-nt2">
+                            Section Name
+                        </div>
+                        <div class="col-md-12 margin-top-sm">
+                            @Html.TextBoxFor(model => model.sect_name1, new { @maxlength = "50", @class = "input-default h38 fs20 block", @placeholder = "Enter Section Name" })
+                            @Html.ValidationMessageFor(model => model.sect_name1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 margin-top-lg ">
+                    <div class="col-md-12 ff-nt2 fs20 no-padding-left">
+                        Additional Information
+                    </div>
+                    <div class="col-md-12 no-padding-left">
+                        @Html.TextAreaFor(model => model.sect_description, new { @maxlength = "100", @class = "input-default fs20 block", @rows = 4 })
+                        @Html.ValidationMessageFor(model => model.sect_description, "", new { @class = "text-danger" })
+                    </div>
+                    
+                     <div class="col-md-12 no-padding">
+                        <div class="col-md-8 no-padding margin-top-default  pull-right">
+                            <div class="col-md-6">
+                                <button type="button" class="bg-green002 button-default block h38 fs20 ff-nt2" id="section-add" disabled="disabled">Add</button>
+                            </div>
+                            <div class="col-md-6 no-padding-left">
+                                <button type="button" class="bg-green002 button-default block h38 fs20 ff-nt2" id="section-save" disabled="disabled">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default" style="height:200px">
+                <table class="table dyna-theme005 tableBodyScroll" id="section-table">
+                    <thead>
+                        <tr>
+                            <th data-dynatable-column="sect_id">SECTION ID</th>
+                            <th data-dynatable-column="sect_name1">SECTION NAME</th>
+                            <th data-dynatable-column="sect_description">DESCRIPTION</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12 margin-top-lg no-padding margin-bottom-lg">
+                <div class="col-md-6 pull-right no-padding">
+                    <div class="col-md-5 no-padding margin-right-sm">
+                        <input type="button" value="SAVE" id="submit" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                    </div>
+                    <div class="col-md-5 no-padding margin-right-default">
+                        <a type="button" href='@Url.Content("~/Division")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CANCEL</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onChange: function () {
+                $('#div_id').removeData('previousValue');
+                $('#divFrm').validate().element(':input[name="div_id"]');;
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+    }
+
+    function initializeEvents() {
+
+        $(document).on('click', '#department-table tr .glyphicon-edit', function (e) {
+            var active = $('#department-table tbody tr.edit');
+            var _this = $(this);
+            var edit = $('#department-table .edit').not(_this.closest('tr')).length;
+            $('#dept_validation').remove();
+            $('#name_validation').remove();
+            if (edit) {
+                if (!validateDeptid() && !validateDeptname()) {
+                    if (!CheckChanges(active)) {
+                        bootbox.confirm({
+                            size: "small",
+                            message: "Save changes?",
+                            closeButton: false,
+                            buttons: {
+                                cancel: {
+                                    label: "NO",
+                                    className: "bg-orange001 text-white"
+                                },
+                                confirm: {
+                                    label: "YES",
+                                    className: "bg-green002 text-white"
+                                }
+
+                            },
+                            className: "fs17 ff-nt2",
+                            callback: function (result) {
+                                if (result) {
+                                    saveDepartment();
+                                    departmentFields(_this);
+                                    showDepartmentSections();
+                                } else {
+                                    departmentFields(_this);
+                                    $('#department-table tbody tr').not(_this).removeClass('edit');
+                                    _this.closest('tr').addClass('edit');
+                                    showDepartmentSections();
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        departmentFields(_this);
+                        showDepartmentSections();
+                    }
+                }
+            }
+            else {
+                showDepartmentSections();
+                departmentFields(_this);
+            }
+        });
+
+        $('#department-table tbody').on('click', 'tr', function (e) {
+            if ($(e.target).hasClass('glyphicon-edit')) {
+                return;
+            }
+            var active = $('#department-table tbody tr.edit');
+            var _this = $(this);
+            var click = $('#department-table .edit').not(_this.closest('tr')).length;
+            if (click) {
+                if (!validateDeptid() && !validateDeptname()) {
+                    if (!CheckChanges(active)) {
+                        bootbox.confirm({
+                            size: "small",
+                            message: "Save changes?",
+                            closeButton: false,
+                            buttons: {
+                                cancel: {
+                                    label: "NO",
+                                    className: "bg-orange001 text-white"
+                                },
+                                confirm: {
+                                    label: "YES",
+                                    className: "bg-green002 text-white"
+                                }
+
+                            },
+                            className: "fs17 ff-nt2",
+                            callback: function (result) {
+                                if (result) {
+                                    saveDepartment();
+                                    _this.addClass('active');
+                                    $('#department :input').val('');
+                                    $('#department-table tbody tr').not(_this).removeClass('active').removeClass("edit");
+                                } else {
+                                    $('#department-table tr').not(_this.closest('tr')).closest('tr').removeClass("edit").removeClass('active');
+                                    _this.addClass('active');
+                                    $('#department-save').attr('disabled', 'disabled');
+                                    $('#department :input').val('');
+                                }
+                            }
+                        })
+                    }
+                    else {
+                        $('#department-table tr').not(_this.closest('tr')).closest('tr').removeClass("edit").removeClass('active');
+                        _this.addClass('active');
+                        $('#department-save').attr('disabled', 'disabled');
+                        $('#department :input').val('');
+                        $('#department-table tbody tr').not(_this).removeClass('active');
+                    }
+                }
+            }
+            else {
+                _this.addClass('active');
+                $('#department-table tbody tr').not(_this).removeClass('active');
+            }
+            showDepartmentSections();
+        });
+
+        $('#dept_id').on('input', function () {
+                validateDeptid();
+        });
+
+        $('#dept_name1').on('input', function () {
+                validateDeptname();
+        });
+
+        $('#department-add').click(function () {
+            $('#department-table tbody tr').removeClass('active')
+            if ($("#dept_id").valid() == true) {
+                if (!validateDeptid()) {
+                    var deptname = $('#dept_name1').val();
+                    if (deptname != "") {
+                        validateDeptname();
+                        var tr = $("<tr/>");
+                        tr.append(
+                               '<td class="deptid cls" value="' + $('#dept_id').val() + '">' + $('#dept_id').val() + '</td>' +
+                               '<td class="deptname1" value="' + $('#dept_name1').val() + '">' + $('#dept_name1').val() + '</td>' +
+                               '<td class="deptdesc" value="' + $('#dept_description').val() + '">' + $('#dept_description').val() + '</td>' +
+                               '<td><span id="editDepartment" role="button" class="margin-left-lg glyphicon glyphicon-edit text-green001"></span><span id="removeDepartment" role="button" class="margin-left-lg glyphicon glyphicon-trash text-pink001"></span></td>' +
+                               '<td style="display:none" id="td_departmentflow"><ul id="departmentflow"></ul></td>'
+                           )
+                        $('#department-table tbody').append(tr[0]);
+                        $('#department-add').attr('disabled', 'disabled');
+                        $('#department :input').val('');
+                    }
+                    else {
+                        validateDeptname();
+                    }
+                }
+                else {
+                    $("#dept_id").focus();
+                }
+            }
+            else {
+                $("#dept_id").focus();
+            }
+            showDepartmentSections();
+        });
+
+        $('#department-save').click(function () {
+            var deptname = $('#dept_name1').val();
+            if (deptname != "") {
+                saveDepartment();
+            }
+            else {
+                validateDeptname();
+            }
+        });
+
+        $(document).on('click', '#section-table tr .glyphicon-edit', function (e) {
+            var _this = $(this);
+            var active = $('#section-table tbody tr.edit');
+            var edit = $('#section-table .edit').not(_this.closest('tr')).length;
+            $('#sect_validation').remove();
+            $('#sname_validation').remove();
+            if (edit) {
+                if (!validateSectid() && !validateSectname()) {
+                    if (!CheckChangess(active)) {
+                        bootbox.confirm({
+                            size: "small",
+                            message: "Save changes?",
+                            closeButton: false,
+                            buttons: {
+                                cancel: {
+                                    label: "NO",
+                                    className: "bg-orange001 text-white"
+                                },
+                                confirm: {
+                                    label: "YES",
+                                    className: "bg-green002 text-white"
+                                }
+
+                            },
+                            className: "fs17 ff-nt2",
+                            callback: function (result) {
+                                if (result) {
+                                    saveSection();
+                                    sectionFields(_this);
+                                } else {
+                                    $('#section-table tbody tr').not(_this).removeClass('edit');
+                                    _this.closest('tr').addClass('edit');
+                                    sectionFields(_this);
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        sectionFields(_this);
+                    }
+                }
+            }
+            else {
+                sectionFields(_this);
+            }
+        });
+
+        $('#section-table tbody').on('click', 'tr', function (e) {
+            if ($(e.target).hasClass('glyphicon-edit')) {
+                return;
+            }
+            var _this = $(this);
+            var click = $('#section-table .edit').not(_this.closest('tr')).length;
+            var active = $('#section-table tbody tr.edit');
+            if (click) {
+                if (!validateSectid() && !validateSectname()) {
+                    if (!CheckChangess(active)) {
+                        $('#sect_validation').remove();
+                        bootbox.confirm({
+                            size: "small",
+                            message: "Save changes?",
+                            buttons: {
+                                cancel: {
+                                    label: "NO",
+                                    className: "bg-orange001 text-white"
+                                },
+                                confirm: {
+                                    label: "YES",
+                                    className: "bg-green002 text-white"
+                                }
+
+                            },
+                            callback: function (result) {
+                                if (result) {
+                                    saveSection();
+                                    _this.addClass('active');
+                                    $('#section :input').val('');
+                                    $('#section-table tbody tr').not(_this).removeClass('active').removeClass("edit");
+                                } else {
+                                    $('#section-table tr').not(_this.closest('tr')).closest('tr').removeClass("edit").removeClass('active');
+                                    _this.addClass('active');
+                                    $('#section-save').attr('disabled', 'disabled');
+                                    $('#section :input').val('');
+                                }
+                            }
+                        })
+                    }
+                    else {
+                        _this.addClass('active');
+                        $('#section-table tbody tr').not(_this).removeClass('edit').removeClass('active');;
+                        $('#section :input').val('');
+                    }
+                }
+            }
+            else {
+                _this.addClass('active');
+                $('#section-table tbody tr').not(_this).removeClass('edit').removeClass('active');;
+            }
+        });
+
+        $('#section-add').click(function () {
+            $('#section-table tbody tr').removeClass('active');
+            if ($('#department-table tbody tr').length == 0) {
+                bootbox.alert({
+                    size: "small",
+                    message: 'Please Add Department.',
+                    closeButton: false,
+                    className: "fs17 ff-nt2",
+                    buttons: {
+                        ok:
+                        {
+                            className: "bg-green002 text-white"
+                        }
+                    }
+                });
+            }
+            else if ($('#department-table tbody tr.active').length == 0) {
+                bootbox.alert({
+                    size: "small",
+                    message: 'Please Select Department.',
+                    closeButton: false,
+                    className: "fs17 ff-nt2",
+                    buttons: {
+                        ok:
+                        {
+                            className: "bg-green002 text-white"
+                        }
+                    }
+                });
+            }
+            else {
+                var selectedLine = $('#department-table tbody tr.active');
+                if (selectedLine.length == 1) {
+                    if ($("#sect_id").valid() == true) {
+                        if (!validateSectid()) {
+                            if (!validateSectname()) {
+                                var tr = $("<tr/>");
+                                tr.append(
+                                       '<td class="sect_id cls" value="' + $('#sect_id').val() + '">' + $('#sect_id').val() + '</td>' +
+                                       '<td class="sect_name1" value="' + $('#sect_name1').val() + '">' + $('#sect_name1').val() + '</td>' +
+                                       '<td class="sect_description" value="' + $('#sept_description').val() + '">' + $('#sect_description').val() + '</td>' +
+                                       '<td><span id="editSection" role="button" class="margin-left-lg glyphicon glyphicon-edit text-green001"></span><span id="removeSection" role="button" class="margin-left-lg glyphicon glyphicon-trash text-pink001"></span></td>' +
+                                       '<td style="display:none" id="td_sectionflow"><ul id="sectionflow2"></ul></td>'
+                                    );
+                                $('#section-table tbody').append(tr[0]);
+                                saveDepartmentSections();
+                                $('#section-add').attr('disabled', 'disabled');
+                                $('#section :input').val('');
+                            }
+                            else {
+                                validateSectname();
+                            }
+                        }
+                        else {
+                            $("#sect_id").focus();
+                        }
+                    }
+                    else {
+                        $("#sect_id").focus();
+                    }
+                }
+            }
+        });
+
+        $('#section-save').click(function () {
+            var sectname = $('#sect_name1').val();
+            if (sectname != "") {
+                saveSection();
+            }
+            else {
+                validateSectname();
+            }
+        });
+        
+        $('#sect_id').on('input', function () {
+                validateSectid();
+        });
+
+        $('#sect_name1').on('input', function () {
+            validateSectname();
+        });
+
+        $(document).on('click', '#removeDepartment', function () {
+            var _this = $(this).closest('tr');
+            bootbox.confirm({
+                size: "small",
+                message: "Remove Department?",
+                closeButton: false,
+                buttons: {
+                    cancel: {
+                        label: "NO",
+                        className: "bg-orange001 text-white"
+                    },
+                    confirm: {
+                        label: "YES",
+                        className: "bg-green002 text-white"
+                    }
+
+                },
+                className: "fs17 ff-nt2",
+                callback: function (result) {
+                    if (result) {
+                        _this.remove();
+                        showDepartmentSections();
+                    }
+                        
+                }
+
+            });
+        });
+
+        $(document).on('click', '#removeSection', function () {
+            var _this = $(this).closest('tr');
+            bootbox.confirm({
+                size: "small",
+                message: "Remove Section?",
+                closeButton: false,
+                buttons: {
+                    cancel: {
+                        label: "NO",
+                        className: "bg-orange001 text-white"
+                    },
+                    confirm: {
+                        label: "YES",
+                        className: "bg-green002 text-white"
+                    }
+
+                },
+                className: "fs17 ff-nt2",
+                callback: function (result) {
+                    if (result) {
+                        var name = _this.closest('tr').find('.sect_id.cls').text();
+                        $('#department-table tbody tr.active #departmentflow li').each(function (index, elem) {
+                            var depid = $(elem).find('input.sect_id').val();
+                            if (depid == name) {
+                                elem.closest('li').remove();
+                                _this.remove();
+                                return false;
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $('#submit').on('click', function (e) {
+            var _this = $('#divFrm');
+            if (_this.valid()) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Add Division?",
+                    closeButton: false,
+                    buttons:{
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        if (result) {
+                            var data = submitForm();
+                            $.ajax({
+                                url: "@Url.Content("~/Division/Add")",
+                                method: 'post',
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ data: data }),
+                                success: function (results) {
+                                    if (!results) {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Error!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            }
+
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Successfully Saved!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            },
+                                            callback: function (sresult) {
+                                                    window.location.href = '@Url.Content("~/Division/Index")';
+                                                
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+            else {
+                $(_this).find('.input-validation-error:first').focus();
+            }
+        });
+    }
+
+    function validateDeptid() {
+        var flag = false;
+        var id = $('#dept_id').val();
+        var depname = $('#dept_name1').val();
+        $('#dept_validation').remove();
+        $("#department-table tbody tr:not(.edit)").each(function (index, elem) {
+            var depid = $(elem).find('td.deptid.cls').text();
+            if (depid != "") {
+                if (depid == id) {
+                    $('#dept_id').after('<span class="text-danger field-validation-error" id="dept_validation" data-valmsg-replace="true"><span for="dept_id" class="">* Duplicate Department ID</span></span>');
+                    $('#dept_id').focus();
+                    flag = true;
+                }
+            }
+        }).promise().done(function () {
+            if (flag) {
+                flag = true;
+            }
+            else if (id == "" && depname != "") {
+                $('#department-add').attr('disabled', 'disabled');
+                $('#department-save').attr('disabled', 'disabled');
+                $('#dept_id').after('<span class="text-danger field-validation-error" id="dept_validation" data-valmsg-replace="true"><span for="dept_id" class="">* Department ID is Required</span></span>');
+                $('#dept_id').focus();
+                flag = true;
+            }
+            else {
+                var click = $('#department-table .edit').length;
+                if (click) {
+                    if (id == "") {
+                        $('#department-add').attr('disabled', 'disabled');
+                        $('#department-save').attr('disabled', 'disabled');
+                        $('#dept_id').after('<span class="text-danger field-validation-error" id="dept_validation" data-valmsg-replace="true"><span for="dept_id" class="">* Department ID is Required</span></span>');
+                        flag = true;
+                    }
+                    else {
+                        $('#department-save').removeAttr('disabled');
+                        flag = false;
+                    }
+                }
+                else {
+                    $('#dept_validation').remove();
+                    $('#department-add').removeAttr('disabled');
+                    if (id == "") {
+                        $('#department-add').attr('disabled',true);
+                    }
+                    flag = false;
+                }
+            }
+        });
+        var check = $('#department-save').is(":disabled");
+        if (!check) {
+            $('#department-add').attr('disabled', 'disabled');
+        }
+        return flag;
+    }
+
+    function validateDeptname() {
+        var flag = false;
+        $('#name_validation').remove();
+        var depname = $('#dept_name1').val();
+        var depid = $('#dept_id').val();
+        if (depid != "") {
+            if (depname == "") {
+                $('#dept_name1').after('<span class="text-danger field-validation-error" id="name_validation" data-valmsg-replace="true"><span for="dept_name1" class="">* Plese fill up Department Name</span></span>');
+                $('#dept_name1').focus();
+                flag = true;
+            }
+            else {
+                $('#name_validation').remove();
+                flag = false;
+            }
+        } else {
+            $('#name_validation').remove();
+        }
+        
+        return flag;
+    }
+
+    function validateSectid() {
+        var flag = false;
+        var id = $('#sect_id').val();
+        var secname = $('#sect_name1').val();
+        $('#sect_validation').remove();
+        $("#section-table tbody tr:not(.edit)").each(function (index, elem) {
+            var duplicate = 0;
+            var errors;
+            var depid = $(elem).find('td.sect_id.cls').text();
+            if (depid != "") {
+                if (depid == id) {
+                    $('#sect_id').after('<span class="text-danger field-validation-error" id="sect_validation" data-valmsg-replace="true"><span for="sect_id" class="">* Duplicate Section ID</span></span>');
+                    $('#sect_id').focus();
+                    flag = true;
+                }
+            }
+        }).promise().done(function () {
+            if (flag) {
+                flag = true;
+            }
+            else if (id == "" && secname != "") {
+                $('#section-add').attr('disabled', 'disabled');
+                $('#section-save').attr('disabled', 'disabled');
+                $('#sect_id').after('<span class="text-danger field-validation-error" id="sect_validation" data-valmsg-replace="true"><span for="sect_id" class="">* Section ID is Required</span></span>');
+                $('#sect_id').focus();
+                flag = true;
+            }
+            else {
+                var click = $('#section-table .edit').length;
+                if (click) {
+                    if (id == "") {
+                        $('#section-add').attr('disabled', 'disabled');
+                        $('#section-save').attr('disabled', 'disabled');
+                        $('#sect_id').after('<span class="text-danger field-validation-error" id="sect_validation" data-valmsg-replace="true"><span for="sect_id" class="">* Section ID is Required</span></span>');
+                        flag = true;
+                    }
+                    else {
+                        $('#section-save').removeAttr('disabled');
+                        flag = false;
+                    }
+                }
+                   
+                else {
+                    $('#sect_validation').remove();
+                    $('#section-add').removeAttr('disabled');
+                    if (id == "") {
+                        $('#section-add').attr('disabled',true);
+                    }
+                    flag = false;
+                }
+            }
+        });
+        var check = $('#section-save').is(":disabled");
+        if (!check) {
+            $('#section-add').attr('disabled', 'disabled');
+        }
+        return flag;
+    }
+
+    function validateSectname() {
+        var flag = false;
+        $('#sname_validation').remove();
+        var depname = $('#sect_name1').val();
+        var depid = $('#sect_id').val();
+        if (depid != "") {
+            if (depname == "") {
+                $('#sect_name1').after('<span class="text-danger field-validation-error" id="sname_validation" data-valmsg-replace="true"><span for="sect_name1" class="">* Plese fill up Section Name</span></span>');
+                $('#sect_name1').focus();
+                flag = true;
+            }
+            else {
+                $('#sname_validation').remove();
+                flag = false;
+            }
+        } else {
+            $('#sname_validation').remove();
+        }
+
+        return flag;
+    }
+
+    function saveDepartmentSections() {
+        var selectedStatus = $('#department-table tbody tr.active');
+        selectedStatus.find('#departmentflow').html('');
+        $('#section-table tbody tr').each(function (index, elem) {
+            var sect_id = $(elem).find('td').eq(0).text();
+            var sect_name1 = $(elem).find('td').eq(1).text();
+            var sect_description = $(elem).find('td').eq(2).text();
+            var li = $("<li/>");
+            li.append(
+                '<input type="hidden" class="sect_id" value="' + sect_id + '" />' +
+                '<input type="hidden" class="sect_name1" value="' + sect_name1 + '" />' +
+                '<input type="hidden" class="sect_description" value="' + sect_description + '" />'
+                )
+            selectedStatus.find('#departmentflow').append(li[0]);
+        });
+    }
+
+    function showDepartmentSections() {
+        $('#section-table tbody').html('');
+        $('#department-table tbody tr.active #departmentflow li').each(function (index, elem) {
+            var tr = $("<tr/>");
+            tr.append(
+                    '<td class="sect_id cls" value="' + $(elem).find('.sect_id').val() + '">' + $(elem).find('.sect_id').val() + '</td>' +
+                    '<td class="sect_name1" value="' + $(elem).find('.sect_name1').val() + '">' + $(elem).find('.sect_name1').val() + '</td>' +
+                    '<td class="sect_description" value="' + $(elem).find('.sect_description').val() + '">' + $(elem).find('.sect_description').val() + '</td>' +
+                    '<td><span id="editSection" role="button" class="margin-left-lg glyphicon glyphicon-edit text-green001"></span><span id="removeSection" role="button" class="margin-left-lg glyphicon glyphicon-trash text-pink001"></span></td>'
+                );
+            $('#section-table tbody').append(tr[0]);
+        });
+    }
+
+    function saveDepartment() {
+        var edit = $('#department-table tbody tr.edit');
+        var sect = $('#section-table tbody tr').length;
+        if (!validateDeptid()) {
+            var tr = $("<tr/>");
+            tr.append(
+                   '<td class="deptid cls" value="' + $('#dept_id').val() + '">' + $('#dept_id').val() + '</td>' +
+                   '<td class="deptname1" value="' + $('#dept_name1').val() + '">' + $('#dept_name1').val() + '</td>' +
+                   '<td class="deptdesc" value="' + $('#dept_description').val() + '">' + $('#dept_description').val() + '</td>' +
+                   '<td><span id="editDepartment" role="button" class="margin-left-lg glyphicon glyphicon-edit text-green001"></span><span id="removeDepartment" role="button" class="margin-left-lg glyphicon glyphicon-trash text-pink001"></span></td>' +
+                   '<td style="display:none" id="td_departmentflow"><ul id="departmentflow"></ul></td>'
+                ).addClass("active");
+            edit.before(tr[0]);
+            edit.remove();
+            $('#department-add').attr('disabled', 'disabled');
+            $('#department-save').attr('disabled', 'disabled');
+            $('#department :input').val('');
+        }
+        $('#department-table .clicked').removeClass('clicked');
+        saveDepartmentSections();
+    }
+
+    function saveSection() {
+        var edit = $('#section-table tbody tr.active');
+        if (!validateSectid()) {
+            var tr = $("<tr/>");
+            tr.append(
+                   '<td class="sect_id cls" value="' + $('#sect_id').val() + '">' + $('#sect_id').val() + '</td>' +
+                   '<td class="sect_name1" value="' + $('#sect_name1').val() + '">' + $('#sect_name1').val() + '</td>' +
+                   '<td class="sect_description" value="' + $('#dept_description').val() + '">' + $('#sect_description').val() + '</td>' +
+                   '<td><span id="editSection" role="button" class="margin-left-lg glyphicon glyphicon-edit text-green001"></span><span id="removeSection" role="button" class="margin-left-lg glyphicon glyphicon-trash text-pink001"></span></td>' +
+                   '<td style="display:none" id="td_sectionflow"><ul id="sectionmentflow"></ul></td>'
+                ).addClass("active");
+            edit.before(tr[0]);
+            edit.remove();
+            $('#section-table .clicked').removeClass('clicked');
+            $('#section-add').attr('disabled', 'disabled');
+            $('#section-save').attr('disabled', 'disabled');
+            $('#section :input').val('');
+        }
+        saveDepartmentSections();
+    }
+
+    function departmentFields(_this) {
+        _this.closest('tr').addClass('active');
+        $('#department-table tr').not(_this.closest('tr')).removeClass('active');
+        $('#department-table tr').not(_this.closest('tr')).closest('tr').removeClass("edit");
+        $('#department-save').removeAttr('disabled');
+        $('#department-add').attr('disabled', 'disabled');
+        _this.closest('tr').addClass("edit");
+        _this.addClass("clicked");
+        var deptid = _this.closest('tr').find('td.deptid.cls').text();
+        var deptname1 = _this.closest('tr').find('td.deptname1').text();
+        var deptdesc = _this.closest('tr').find('td.deptdesc').text();
+        $("#dept_id").val(deptid);
+        $("#dept_name1").val(deptname1);
+        $("#dept_description").val(deptdesc);
+    }
+
+    function sectionFields(_this) {
+        _this.closest('tr').addClass('active');
+        $('#section-table tr').not(_this.closest('tr')).removeClass('active');
+        $('#section-table tr').not(_this.closest('tr')).closest('tr').removeClass("edit");
+        $('#section-save').removeAttr('disabled');
+        $('#section-add').attr('disabled', 'disabled');
+        _this.closest('tr').addClass("edit");
+        _this.addClass("clicked");
+        var sectid = _this.closest('tr').find('td.sect_id.cls').text();
+        var sectname1 = _this.closest('tr').find('td.sect_name1').text();
+        var sectdesc = _this.closest('tr').find('td.sect_description').text();
+        $("#sect_id").val(sectid);
+        $("#sect_name1").val(sectname1);
+        $("#sect_description").val(sectdesc);
+    }
+
+    function CheckChanges(_this) {
+        var flag = false;
+        var deptid = _this.closest('tr').find('td.deptid.cls').text();
+        var deptname1 = _this.closest('tr').find('td.deptname1').text();
+        var deptdesc = _this.closest('tr').find('td.deptdesc').text();
+        var id = $('#dept_id').val();
+        var name = $('#dept_name1').val()
+        var description = $('#dept_description').val()
+        if (deptid == id && deptname1 == name && deptdesc == description) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    function CheckChangess(_this) {
+        var flag = false;
+        var deptid = _this.closest('tr').find('td.sect_id.cls').text();
+        var deptname1 = _this.closest('tr').find('td.sect_name1').text();
+        var deptdesc = _this.closest('tr').find('td.sect_description').text();
+        var id = $('#sect_id').val();
+        var name = $('#sect_name1').val()
+        var description = $('#sect_description').val()
+        if (deptid == id && deptname1 == name && deptdesc == description) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    function submitForm() {
+        var comp_id = $('#comp_id').val();
+        var div_id = $('#div_id').val();
+        var divname1 = $('#name1').val();
+        var div_decription = $('#description').val();
+        division = {};
+        division["comp_id"] = comp_id;
+        division["div_id"] = div_id;
+        division["name1"] = divname1;
+        division["description"] = div_decription;
+        division["departments"] = [];
+        $('#department-table tbody tr').each(function (index, elem) {
+            departments = {};
+            departments["comp_id"] = comp_id;
+            departments["div_id"] = div_id;
+            departments["dept_id"] = $(elem).find('.deptid.cls').text();
+            departments["name1"] = $(elem).find('.deptname1').text();
+            departments["description"] = $(elem).find('.deptdesc').text();
+            departments["sections"] = [];
+
+            $(elem).find('ul#departmentflow li').each(function (flow_index, flow_elem) {
+                sections = {};
+                sections["comp_id"] = comp_id;
+                sections["div_id"] = div_id;
+                sections["dept_id"] = $(elem).find('.deptid.cls').text();
+                sections["sect_id"] = $(flow_elem).find('input.sect_id').val();
+                sections["name1"] = $(flow_elem).find('input.sect_name1').val();
+                sections["description"] = $(flow_elem).find('input.sect_description').val();
+                departments["sections"].push(sections);
+
+            });
+            division["departments"].push(departments);
+
+        });
+        return division;
+    }
+</script>

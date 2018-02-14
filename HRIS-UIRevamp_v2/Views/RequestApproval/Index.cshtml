@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Request";
+}
+
+<div class="col-md-12 title">
+    REQUEST
+</div>
+<div class="body-content">
+    <div class="col-md-4 margin-bottom-lg">
+        <div class="margin-top-default"></div>
+        <div class="col-md-12 fs20 ff-nt2 margin-top-lg margin-bottom-default">
+            GO TO THIS DATE:
+        </div>
+        <div class="col-md-12 margin-bottom-default relative">
+            <input class="input-default h62 fs20 block" type="text" placeholder="Overtime" />
+            <div class="input-right badge badge-circle bg-orange001">
+                <div class="margin-sm glyphicon glyphicon-chevron-right fs12"></div>
+            </div>
+        </div>
+        <div class="col-md-12 margin-bottom-lg margin-top-lg" onclick="location.href='@Url.Action("Index", "Request")'">
+            <a class="block button-default h62 text-nowrap">
+                <span class="glyphicon glyphicon-plus-circle fs20"></span>
+                <span class="fs26 margin-left-sm">FILE A REQUEST</span>
+            </a>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-stop text-pink001 fs50"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">On Leave</span>
+            </div>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-stop text-orange002 fs50"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">Regular Holidays</span>
+            </div>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-stop text-green001 fs50"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">Special Holidays</span>
+            </div>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-stop text-blue005 fs50"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">Rest Days</span>
+            </div>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-time text-blue003 fs40"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">Request Filed</span>
+            </div>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-remove-circle text-pink001 fs40"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">Attendance Conflict</span>
+            </div>
+        </div>
+        <div class="col-md-12 flex flex-center margin-top-default">
+            <div class="col-md-4 text-center">
+                <span class="glyphicon glyphicon-ok-circle text-green001 fs40"></span>
+            </div>
+            <div class="col-md-8 no-padding-right">
+                <span class="fs20">Approved</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="margin-top-sm"></div>
+        <div class="col-md-12 margin-top-lg">
+            <div id='calendar'></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#calendar').fullCalendar({
+        fixedWeekCount: false,
+        showNonCurrentDates: true,
+        aspectRatio: 1.63,
+        dayNamesShort: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+        titleFormat: 'MMMM',
+        themeSystem: 'bootstrap3',
+        header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        }
+
+    });
+
+    doubleDigitDays();
+    renderActivities();
+
+    $('.fc-prev-button').click(function () {
+        doubleDigitDays();
+        renderActivities();
+    });
+
+    $('.fc-next-button').click(function () {
+        doubleDigitDays();
+        renderActivities();
+    });
+
+    //prepend 0 on single digit days
+    function doubleDigitDays() {
+        $('.fc-day-number').each(function () {
+            var $this = $(this);
+            if ($this.text().length == 1) {
+                $this.text('0' + $this.text());
+            }
+        });
+    };
+
+    function renderActivities() {
+        var activities = [{ 'date': '2017-08-02', 'type': 'on-leave' }, { 'date': '2017-08-05', 'type': 'rest-day' }, { 'date': '2017-08-06', 'type': 'attendance-conflict' }, { 'date': '2017-08-10', 'type': 'request-filed' },
+                { 'date': '2017-08-11', 'type': 'request-filed' }, { 'date': '2017-08-17', 'type': 'on-leave' }, { 'date': '2017-08-18', 'type': 'approved' }, { 'date': '2017-08-19', 'type': 'rest-day' },
+                { 'date': '2017-08-20', 'type': 'regular-holiday' }, { 'date': '2017-08-21', 'type': 'special-holiday' }, { 'date': '2017-08-27', 'type': 'rest-day' }];
+
+        for (var x in activities) {
+            if (activities[x].type == 'on-leave' || activities[x].type == 'regular-holiday' || activities[x].type == 'special-holiday' || activities[x].type == 'rest-day') {
+                $('.fc-bg td[data-date="' + activities[x].date + '"]').addClass(activities[x].type);
+            }
+            else {
+                $('.fc-bg td[data-date="' + activities[x].date + '"]').addClass('has-legend');
+                $('td[data-date="' + activities[x].date + '"] .fc-day-number').css('color', '#808080');
+
+                if (activities[x].type == 'request-filed') {
+                    $('.fc-bg td[data-date="' + activities[x].date + '"]').append('<span class="glyphicon glyphicon-time text-blue003"></span>');
+                }
+                else if (activities[x].type == 'attendance-conflict') {
+                    $('.fc-bg td[data-date="' + activities[x].date + '"]').append('<span class="glyphicon glyphicon-remove-circle text-pink001"></span>');
+                }
+                else if (activities[x].type == 'approved') {
+                    $('.fc-bg td[data-date="' + activities[x].date + '"]').append('<span class="glyphicon glyphicon-ok-circle text-green001"></span>');
+                }
+            }
+        }
+    };
+</script>

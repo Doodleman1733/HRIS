@@ -1,0 +1,163 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model DocumentNumberUpdateViewModel
+@{
+    ViewBag.Title = "DocumentNumber/View";
+}
+<div class="col-md-12 title">
+    VIEW DOCUMENT
+</div>
+
+<div class="body-content">
+    <div class="col-md-12 no-padding">
+
+        <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+            <div class="tab selected flex flex-left">
+                <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+            </div>
+        </div>
+
+        <div class="col-md-12 no-padding flex flex-center margin-bottom-lg">
+            <div class="col-md-5">
+                <div class="col-md-12 margin-top-default">
+                    <div class="col-md-12 margin-top-default">
+                        <div class="no-padding col-md-12 fs20 ff-nt2">
+                            @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Company", @data_selected = Model.comp_id, @disabled = true })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default">
+                        <div class="no-padding col-md-12 fs20 ff-nt2">
+                            @Html.LabelFor(model => model.doc_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            @Html.TextBoxFor(model => model.doc_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default">
+                        <div class="no-padding col-md-12 fs20 ff-nt2">
+                            @Html.LabelFor(model => model.name1, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            @Html.TextBoxFor(model => model.name1, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default">
+                        <div class="no-padding col-md-12 fs20 ff-nt2">
+                            Range Period
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="no-padding col-md-6">
+                                @Html.TextBoxFor(model => model.rangefrom, new { @maxlength = "100", @class = "input-default h45 fs20 block", @disabled = true })
+                            </div>
+                            <div class="no-padding-right col-md-6 ">
+                                @Html.TextBoxFor(model => model.rangeto, new { @maxlength = "100", @class = "input-default h45 fs20 block", @disabled = true })
+                            </div>
+                        </div>
+
+                        <div class="no-padding col-md-12 fs20 ff-nt2 margin-top-default">
+                            Increment
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="no-padding col-md-12 ">
+                                @Html.TextBoxFor(model => model.increment, new { @maxlength = "50", @class = "input-default h45 fs20 block", @disabled = true })
+                            </div>
+                        </div>
+
+                        <div class="no-padding col-md-12 fs20 ff-nt2 margin-top-default">
+                            Value Period
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="no-padding col-md-6">
+                                @Html.TextBoxFor(model => model.startvalue, new { @maxlength = "100", @class = "input-default h45 fs20 block", @disabled = true })
+                            </div>
+                            <div class="no-padding-right col-md-6 ">
+                                @Html.TextBoxFor(model => model.currentvalue, new { @maxlength = "100", @class = "input-default h45 fs20 block", @disabled = true })
+                            </div>
+                        </div>
+
+                        <div class="no-padding col-md-12 margin-top-default">
+                            <div class="col-md-12 no-padding fs20 ff-nt2">
+                                @Html.LabelFor(model => model.module, new { @class = "" })
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                @Html.DropDownListFor(m => m.module, Enumerable.Empty<SelectListItem>(), "", new { @multiple = "multiple", @class = "", @data_selected = Model.upModules, @disabled = true })
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 pull-right margin-top-lg">
+                            <div class="no-padding col-md-12">
+                                <a type="button" href='@Url.Content("~/DocumentNumber")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CLOSE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        initializeUI();
+    });
+
+    function initializeUI() {
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+
+        $mod = $('#module').selectize({
+             valueField: 'module_id',
+            labelField: 'sdisplay',
+            searchField: ['sdisplay'],
+            sortField: [{ field: 'sdisplay', direction: 'asc' }],
+            dropdownParent: 'body',
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/getModules")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onLoad: function (data) {
+                this.setValue($($($(this.$control[0])[0]).closest('.col-md-12')).find('select').data('selected'), 'silent');
+            }
+        });
+        mod = $mod[0].selectize;
+    }
+</script>

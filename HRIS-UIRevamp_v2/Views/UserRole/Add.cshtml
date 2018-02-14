@@ -1,0 +1,309 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model UserRoleAddViewModel
+@{
+    ViewBag.Title = "User Role/Add";
+}
+@using (Html.BeginForm("Add", "UserRole", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "roleFrm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 title">
+        ADD USER ROLE
+    </div>
+    <div class="body-content">
+        <div class="col-md-6 left-container no-padding">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">ROLE INFORMATION</span>
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.c_role_id, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextBoxFor(model => model.c_role_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Role ID" })
+                    @Html.ValidationMessageFor(model => model.c_role_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Enter Role Name" })
+                    @Html.ValidationMessageFor(model => model.name1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-default margin-bottom-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.description, new { @class = "" })
+                </div>
+                <div class="col-md-12  margin-top-sm">
+                    @Html.TextAreaFor(model => model.description, new { @maxlength = "200", @class = "input-default fs20 block", @rows = 5 })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 left-container no-padding">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">MODULES</span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="table-roles-container" class="col-md-12 no-padding margin-top-default dynatable-container">
+                    <table id='table-roles' class="table dyna-theme001 tableBodyScroll3">
+                        <thead>
+                            <tr class="header-1">
+                                <th width="9.2%" class="fs17 text-center"><input type="checkbox" class="select-all pull-left"> MODULE</th>
+                                <th width="9.2%" class="fs17 text-center">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var module in Model.modules)
+                                {
+                                    <tr>
+                                        <td>
+                                            <label><input type="checkbox" class="parent cb" value="@module.module_id"> @module.ldisplay</label>
+                                        </td>
+                                        <td>
+                                            @{
+                                                foreach (var act in module.moduleActions)
+                                                {
+                                                    <label class="margin-left-lg"><input type="checkbox" class="child cb" data-module="@module.module_id" value="@act.action_id"> @act.ldisplay</label>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-lg margin-bottom-lg">
+                <div class="col-md-10 pull-right no-padding">
+                    <div class="col-md-6 no-padding margin-right-sm margin-left-lg">
+                        <input type="button" value="GENERATE PROFILE" data-toggle="modal" data-target="#mymodal" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <a type="button" href='@Url.Content("~/UserRole")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CANCEL</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="mymodal" tabindex="-1" role="dialog" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="col-md-12 no-padding modal-content body-content">
+                <div class="modal-body no-padding reset">
+                    <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                        <div class="tab selected flex flex-left">
+                            <span class="margin-left-lg fs26">PROFILE INFORMATION</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-default">
+                        <div class="col-md-12 fs20 ff-nt2">
+                            @Html.LabelFor(model => model.profile.profile_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 margin-top-sm">
+                            @Html.TextBoxFor(model => model.profile.profile_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Profile ID" })
+                            @Html.ValidationMessageFor(model => model.profile.profile_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-default">
+                        <div class="col-md-12 fs20 ff-nt2">
+                            @Html.LabelFor(model => model.profile.name1, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 margin-top-sm">
+                            @Html.TextBoxFor(model => model.profile.name1, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Enter Profile Name" })
+                            @Html.ValidationMessageFor(model => model.profile.name1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-default margin-bottom-lg">
+                        <div class="col-md-12 fs20 ff-nt2">
+                            @Html.LabelFor(model => model.profile.description, new { @class = "" })
+                        </div>
+                        <div class="col-md-12  margin-top-sm">
+                            @Html.TextAreaFor(model => model.profile.description, new { @maxlength = "200", @class = "input-default fs20 block", @rows = 5 })
+                            @Html.ValidationMessageFor(model => model.profile.description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div id="table-profiles-container" class="col-md-12 no-padding margin-top-default dynatable-container">
+                            <table id='table-profiles' class="table dyna-theme001 tableBodyScroll3">
+                                <thead>
+                                    <tr class="header-1">
+                                        <th width="9.2%" class="fs17 text-center">MODULE</th>
+                                        <th width="9.2%" class="fs17 text-center">AUTHORIZATION</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-6 margin-top-lg no-padding pull-right">
+                            <div class="col-md-5 no-padding margin-right-sm margin-bottom-lg">
+                                <input type="button" id="submit" value="SUBMIT" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                            </div>
+                            <div class="col-md-4 no-padding margin-right-default margin-bottom-lg">
+                                <input type="button" value="CLOSE" class="bg-orange001 button-default block h38 fs20 ff-nt2" data-dismiss="modal" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+        $(document).ready(function () {
+            initializeUI();
+            initializeEvents()
+        });
+        
+        function parentCheck(_this) {
+            var tr = _this.closest('tr');
+            if (_this.prop('checked')) {
+                tr.find('input[type=checkbox].child').prop({ 'checked': true, 'disabled': false });
+            } else {
+                tr.find('input[type=checkbox].child').prop({ 'checked': false, 'disabled': true });
+            }
+        }
+
+        function initializeEvents() {
+
+            $('#mymodal').on('show.bs.modal', function (e) {
+                var data = getModules();
+                var forAppend = "";
+                $('#table-profiles tbody').html('');
+                for (var i in data) {
+                    var tr = "<tr>";
+                    tr += "<td>" + data[i].value + "</td>"
+                    tr += "<td></td>"
+                    tr += "</tr>";
+                    forAppend += tr;
+                }
+                $('#table-profiles tbody').append(forAppend);
+            });
+
+            $('.select-all').click(function () {
+                var _this = $(this);
+                if (_this.prop('checked')) {
+                    $('.cb').prop('checked', true);
+                } else {
+                    $('.cb').prop('checked', false);
+                }
+                parentCheck($('input[type=checkbox].parent'));
+            });
+
+            $('input[type=checkbox].parent').click(function () {
+                parentCheck($(this));
+            });
+
+            $('#submit').on('click', function (e) {
+                var _this = $('#roleFrm');
+                if (_this.valid()) {
+                    bootbox.confirm({
+                        size: "small",
+                        message: "Add User Role?",
+                        closeButton: false,
+                        buttons:{
+                            cancel: {
+                                label: "NO",
+                                className: "bg-orange001 text-white"
+                            },
+                            confirm: {
+                                label: "YES",
+                                className: "bg-green002 text-white"
+                            }
+
+                        },
+                        className: "fs17 ff-nt2",
+                        callback: function (result) {
+                            if (result) {
+                                var data = JSON.stringify({ data: getFormData() });
+                                $.ajax({
+                                    url: '@Url.Content("~/UserRole/Add")',
+                                    method: 'post',
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify({ data: data }),
+                                    success: function (results) {
+                                    if (!results) {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Error!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            }
+
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Successfully Saved!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            },
+                                            callback: function (sresult) {
+                                                window.location.href = '@Url.Content("~/UserRole/Index")';
+
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    });
+                }
+                else {
+                    $(_this).find('.input-validation-error:first').focus();
+                }
+            });
+        }
+        
+        function getModules() {
+            var data = [];
+            $('#table-roles .parent:checked').each(function (i, e) {
+                data.push({ name: 'module_ids[' + i + ']', value: $(e).val() });
+            });
+            return data;
+        }
+
+        function getFormData() {
+
+            var data = $('#roleFrm').serializeArray();
+
+            data.push.apply(data, getModules());
+
+            $('#table-roles .child:checked').each(function (i, e) {
+                data.push({ name: 'moduleActions_ids[' + i + '].module_id', value: $(e).data('module') });
+                data.push({ name: 'moduleActions_ids[' + i + '].action_id', value: $(e).val() });
+            });
+            
+            return data;
+        }
+
+        function initializeUI() {
+            $('input[type=checkbox].child').prop('disabled', true);
+        }
+
+</script>

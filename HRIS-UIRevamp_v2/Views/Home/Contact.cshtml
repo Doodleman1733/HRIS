@@ -1,0 +1,427 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="col-md-12 title">
+    CONTACT DETAILS
+</div>
+
+
+<div class="body-content">
+
+    <div class="col-md-5 no-padding left-container">
+        <div class="tabs-default margin-bottom-lg ff-nt2">
+            <button class="tab selected text-left">
+                <span class="margin-left-lg fs26">REQUEST TYPE</span>
+            </button>
+        </div>
+
+        <div class="col-md-12 margin-top-sm">
+            <div class="col-md-12 margin-bottom-default relative">
+                <input class="input-default h62 fs20 block" type="text" placeholder="Overtime" />
+                <div class="input-right badge badge-circle bg-orange001">
+                    <div class="glyphicon glyphicon-chevron-right fs12"></div>
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding margin-top-default">
+                <div class="col-md-6 relative">
+                    <input id="date" class="input-default h62 fs20 block" type="text" placeholder="Date" />
+                    <div id="datepicker" class="input-right glyphicon fs26 glyphicon-calendar text-orange001">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <input id="day" class="input-default h62 fs20 block" type="text" placeholder="Day" />
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <span class="fs15">Shift: 8:00 AM - 5:00 PM</span>
+            </div>
+
+            <div class="col-md-12 no-padding margin-top-lg">
+                <div class="col-md-6 flex flex-center">
+                    <div class="col-md-7 text-center">
+                        <span>FROM</span>
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <input class="input-default h62 fs13 block" type="text" placeholder="6:00 PM" />
+                    </div>
+                </div>
+                <div class="col-md-6 flex flex-center">
+                    <div class="col-md-7 text-center">
+                        <span>TO</span>
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <input class="input-default h62 fs13 block" type="text" placeholder="1:00 AM" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-lg relative">
+                <input class="input-default h62 fs20 block" type="text" placeholder="Purpose" />
+                <div class="input-right badge badge-circle bg-orange001">
+                    <div class="glyphicon glyphicon-chevron-down fs12"></div>
+                </div>
+            </div>
+            <div class="col-md-12 margin-top-lg">
+                <textarea class="input-default fs20 block" type="text" placeholder="Notes" rows="7"></textarea>
+            </div>
+
+            <div class="col-md-6 pull-right margin-top-lg">
+                <button class="h38 fs20 button-default block">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-7 no-padding">
+        <div class="col-md-12 flex flex-center margin-bottom-lg margin-top-default">
+            <div class="col-md-5 border-right-orange">
+                <div class="margin-bottom-sm">
+                    Employee Name
+                </div>
+                <div class="fs36 ff-nt2">
+                    MARK LAWRENCE MACUTAY
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="col-md-12 no-padding margin-bottom-default margin-top-sm">
+                    <div class="col-md-6 no-padding ff-nt2">
+                        POSITION:
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        MR Engineer
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding margin-bottom-default">
+                    <div class="col-md-6 no-padding ff-nt2">
+                        PROJECT:
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        Frabelle de Salcedo
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding margin-bottom-default">
+                    <div class="col-md-6 no-padding ff-nt2">
+                        SHIFT:
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        8:00 AM - 5:00 PM
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding margin-bottom-default">
+                    <div class="col-md-6 no-padding ff-nt2">
+                        BASIC HOURS
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        8.00
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding margin-bottom-sm">
+                    <div class="col-md-6 no-padding ff-nt2">
+                        OT HOURS
+                    </div>
+                    <div class="col-md-6 no-padding">
+                        4.00
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12 no-padding margin-bottom-lg">
+                    <div class="col-md-12 no-padding ff-nt2">
+                        IMMEDIATE SUPERVISOR
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        Boyett Delos Santos
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding margin-top-lg">
+                    <div class="col-md-12 no-padding ff-nt2">
+                        REMARKS
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        leave, but with logs
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-default h71 margin-bottom-lg ff-nt2">
+            <button class="tab selected text-left">
+                <span class="margin-left-lg fs20">MY LOGS</span>
+            </button>
+        </div>
+
+        <div class="margin-bottom-lg col-md-12">
+            <div class="col-md-12">
+                <table id='table-my-logs' class="table table-hover dyna-theme001">
+                    <thead>
+                        <tr>
+                            <th class="fs17" data-dynatable-column="time">TIME</th>
+                            <th class="fs17" data-dynatable-column="type">TYPE</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="tabs-default h71 margin-bottom-lg ff-nt2">
+            <button class="tab selected text-left">
+                <span class="margin-left-lg fs20">MY REQUESTS</span>
+            </button>
+        </div>
+
+        <div class="margin-bottom-default col-md-12">
+            <table id='table-my-requests' class="table table-hover dyna-theme001 tableBodyScroll">
+                <thead>
+                    <tr>
+                        <th class="fs17" data-dynatable-column="time">TIME</th>
+                        <th class="fs17" data-dynatable-column="type">TYPE</th>
+                        <th class="fs17" data-dynatable-column="status">STATUS</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var recordsMyLogs = [{
+        "time": "7:30 AM",
+        "type": "BIOMETRICS"
+    }, {
+        "time": "7:30 AM",
+        "type": "BIOMETRICS"
+    }];
+
+    $('#table-my-logs').dynatable({
+        table: {
+            defaultColumnIdStyle: 'underscore',
+            copyHeaderClass: true
+        },
+        dataset: {
+            records: recordsMyLogs
+        },
+        features: {
+            paginate: false,
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        }
+    });
+
+    var recordsMyRequests = [{
+        "time": "12:00 PM To 05:00 PM",
+        "type": "OB",
+        "status": "<span style='display: inherit; min-width: 145px'>PENDING <span class='fs20 text-blue003 glyphicon glyphicon-time pull-right'></span></span>"
+    }, {
+        "time": "06:00 PM To 10:00 PM",
+        "type": "OT",
+        "status": "<span style='display: inherit; min-width: 145px'>APPROVED <span class='fs20 text-green001 glyphicon glyphicon-ok-circle pull-right'></span></span>"
+    }, {
+        "time": "08:00 AM To 05:00 PM",
+        "type": "OT",
+        "status": "<span style='display: inherit; min-width: 145px'>APPROVED <span class='fs20 text-green001 glyphicon glyphicon-ok-circle pull-right'></span></span>"
+    }, {
+        "time": "08:00 AM To 05:00 PM",
+        "type": "OT",
+        "status": "<span style='display: inherit; min-width: 145px'>APPROVED <span class='fs20 text-green001 glyphicon glyphicon-ok-circle pull-right'></span></span>"
+    }, {
+        "time": "08:00 AM To 05:00 PM",
+        "type": "OT",
+        "status": "<span style='display: inherit; min-width: 145px'>APPROVED <span class='fs20 text-green001 glyphicon glyphicon-ok-circle pull-right'></span></span>"
+    }, {
+        "time": "08:00 AM To 05:00 PM",
+        "type": "OT",
+        "status": "<span style='display: inherit; min-width: 145px'>APPROVED <span class='fs20 text-green001 glyphicon glyphicon-ok-circle pull-right'></span></span>"
+    }, {
+        "time": "08:00 AM To 05:00 PM",
+        "type": "OT",
+        "status": "<span style='display: inherit; min-width: 145px'>APPROVED <span class='fs20 text-green001 glyphicon glyphicon-ok-circle pull-right'></span></span>"
+    }];
+
+    $('#table-my-requests').dynatable({
+        table: {
+            defaultColumnIdStyle: 'underscore',
+            copyHeaderClass: true
+        },
+        dataset: {
+            records: recordsMyRequests
+        },
+        features: {
+            paginate: false,
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        }
+    });
+
+    $('#datepicker').daterangepicker({
+        "singleDatePicker": true,
+        "autoUpdateInput": false,
+        "opens": "left",
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
+
+    $('#datepicker').on('apply.daterangepicker', function (ev, picker) {
+        $('#date').val(picker.startDate.format('DD/MM/YYYY'));
+        $('#day').val(picker.startDate.format('dddd'));
+    });
+
+  
+</script>
+
+@*<div class="body-content">
+       <div class="col-md-12 margin-top-default">
+
+            <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm margin-top-default">
+                GENERAL INFORMATION:
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-4 ">
+                    <div class="col-md-12 no-padding fs20 ff-nt2">
+                        Company ID
+                    </div>
+                    <input class="input-default h45 fs20 block" type="text"/>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-12 no-padding fs20 ff-nt2">
+                        Company Name
+                    </div>
+                    <input class="input-default h45 fs20 block" type="text"/>
+                </div>
+            </div>
+
+           <div class="col-md-12 margin-top-default" id="address">
+               <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                   Company Address
+               </div>
+                <div class="col-md-3">
+
+                    <input class="input-default h45 fs20 block" type="text" placeholder="Street"/>
+                </div>
+               <div class="col-md-3 no-padding-left ">
+
+                   <input class="input-default h45 fs20 block" type="text" placeholder="City" />
+               </div>
+               <div class="col-md-3 no-padding-left ">
+
+                   <input class="input-default h45 fs20 block" type="text" placeholder="Province"/>
+               </div>
+               <div class="col-md-3 no-padding-left ">
+
+                   <input class="input-default h45 fs20 block" type="text" placeholder="Country" />
+               </div>
+            </div>
+
+           <div class="col-md-12 margin-top-lg">
+               <div class="col-md-3 ">
+                   <div class="col-md-12 no-padding fs20 ff-nt2">
+                      SSS
+                   </div>
+                   <input class="input-default h45 fs20 block" type="text" />
+               </div>
+               <div class="col-md-3">
+                   <div class="col-md-12 no-padding fs20 ff-nt2">
+                       Philhealth
+                   </div>
+                   <input class="input-default h45 fs20 block" type="text" />
+               </div>
+               <div class="col-md-3 ">
+                   <div class="col-md-12 no-padding fs20 ff-nt2">
+                       Pag-Ibig
+                   </div>
+                   <input class="input-default h45 fs20 block" type="text" />
+               </div>
+               <div class="col-md-3">
+                   <div class="col-md-12 no-padding fs20 ff-nt2">
+                       Tin
+                   </div>
+                   <input class="input-default h45 fs20 block" type="text" />
+               </div>
+           </div>
+
+           <div class="col-md-12 fs20 ff-nt2 margin-top-lg">
+               CONTACT DETAILS:
+           </div>
+
+           <div class="col-md-12 margin-top-default">
+               <div class="col-md-6">
+                   <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                       Contact Persons
+                   </div>
+                   <div class="col-md-12 margin-top-default">
+                       <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                          1.
+                       </div>
+                       <div class="col-md-11 no-padding">
+                            <input class="input-default h45 fs20 block" type="text"/>
+                       </div>
+                   </div>
+                   <div class="col-md-12 margin-top-default">
+                       <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                           2.
+                       </div>
+                       <div class="col-md-11 no-padding">
+                           <input class="input-default h45 fs20 block" type="text" />
+                       </div>
+                   </div>
+                </div>
+
+               <div class="col-md-6">
+                   <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                       Phone Numbers
+                   </div>
+                   <div class="col-md-12 margin-top-default">
+                       <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                           1.
+                       </div>
+                       <div class="col-md-11 no-padding">
+                           <input class="input-default h45 fs20 block" type="text" />
+                       </div>
+                   </div>
+                   <div class="col-md-12 margin-top-default">
+                       <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                           2.
+                       </div>
+                       <div class="col-md-11 no-padding">
+                           <input class="input-default h45 fs20 block" type="text" />
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <div class="col-md-12 margin-top-default" id="emails">
+               <div class="col-md-12">
+                   <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                       Emails
+                   </div>
+                   <div class="col-md-12">
+                       <div class="col-md-6">
+                           <input class="input-default h45 fs20 block" type="text" placeholder="Email 1" />
+                       </div>
+                       <div class="col-md-6">
+                          <input class="input-default h45 fs20 block" type="text" placeholder="Email 2"/>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+
+           <div class="col-md-12 fs20 ff-nt2 margin-top-lg">
+               ADDITIONAL INFO:
+           </div>
+
+           <div class="col-md-12 margin-top-default margin-bottom-lg">
+               <div class="col-md-6">
+                 <textarea class="input-default fs20 block" type="text" placeholder="Notes" rows="5"></textarea>
+               </div>
+           </div>
+
+       </div>
+    </div>*@

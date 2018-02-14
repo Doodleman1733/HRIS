@@ -1,0 +1,278 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model CalendarUpdateViewModel
+@{
+    ViewBag.Title = "Activities/Update";
+}
+<div class="col-md-12 title">
+    UPDATE ACTIVITIES
+</div>
+
+@using (Html.BeginForm("Edit", "Calendar", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "calFrm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="body-content">
+        <div class="col-md-6 no-padding left-container">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.name1, new { @maxlength = "100", @class = "input-default h55 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default margin-bottom-lg">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    @Html.LabelFor(model => model.description, new { @class = "" })
+                </div>
+                <div class="col-md-12 no-padding margin-bottom-lg">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.description, new { @maxlength = "200", @class = "input-default fs20 block", @rows = 7 })
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">DATES</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-bottom-default margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    @Html.LabelFor(model => model.eventPeriod, new { @class = "" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.eventPeriod, "", new { @class = "input-default h55 fs20 block" })
+                    <div id="datepicker" class="input-right glyphicon fs26 glyphicon-calendar text-orange001">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    @Html.ValidationMessageFor(model => model.eventPeriod, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-bottom-lg">
+                <div class="col-md-12 fs20 no-padding">
+                    <div class="col-md-1">
+                        @Html.CheckBoxFor(model => model.regholiday, new { @class = "" })
+                    </div>
+                    <div class="col-md-8 ff-nt2 margin-bottom-sm">
+                        @Html.LabelFor(model => model.regholiday, new { @class = "" })
+                        @Html.ValidationMessageFor(model => model.regholiday, "", new { @class = "fs15 text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 fs20 no-padding">
+                    <div class="col-md-1">
+                        @Html.CheckBoxFor(model => model.specholiday, new { @class = "" })
+                    </div>
+                    <div class="col-md-8 ff-nt2 margin-bottom-sm">
+                        @Html.LabelFor(model => model.specholiday, new { @class = "" })
+                        @Html.ValidationMessageFor(model => model.specholiday, "", new { @class = "fs15 text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">COMPANIES</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-bottom-lg margin-top-default">
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-8 margin-bottom-sm">
+                        @Html.DropDownListFor(m => m.companies, Enumerable.Empty<SelectListItem>(), "", new { @multiple = "multiple", @class = "", @data_selected = Model.upCompanies, @placeholder = "Select Companies" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 margin-top-default margin-bottom-lg">
+                <div class="col-md-6 pull-right margin-right-default flex flex-center no-padding-right">
+                    <div class="col-md-5 no-padding pull-right margin-right-sm">
+                        <input type="button" value="UPDATE" id="submit" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                    </div>
+                    <div class="no-padding col-md-7">
+                        <input type="button" value="CANCEL" data-target="@Url.Content("~/Calendar/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+        $('#eventPeriod').daterangepicker({
+            "singleDatePicker": false,
+            autoApply: true,
+            parentEl: $('#content'),
+            locale: {
+                format: 'MMMM DD, YYYY'
+            }
+        });
+
+        $comp = $('#companies').selectize({
+            valueField: 'comp_id',
+            labelField: 'name1',
+            searchField: ['name1'],
+            dropdownParent: 'body',
+            sortField: [{ field: 'name1', direction: 'asc' }],
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllCompanies")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onLoad: function (data) {
+                this.setValue($($($(this.$control[0])[0]).closest('.col-md-8')).find('select').data('selected'), 'silent');
+            }
+        });
+        comp = $comp[0].selectize;
+    }
+
+    function initializeEvents() {
+
+        $('#datepicker').on('click', function () {
+            $('#eventPeriod').click();
+        });
+
+        $('#datepicker').on('apply.daterangepicker', function (ev, picker) {
+            $('#eventPeriod').val(picker.startDate.format('MMMM DD, YYYY') + ' - ' + picker.endDate.format('MMMM DD, YYYY'));
+        });
+
+        $('#submit').on('click', function (e) {
+            var _this = $('#calFrm');
+            if (_this.valid()) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Update Activity?",
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        if (result) {
+                            var data = submitForm();
+                            $.ajax({
+                                url: "@Url.Content("~/Calendar/Edit")",
+                                method: 'post',
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ data: data }),
+                                success: function (results) {
+                                    if (!results) {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Error!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            }
+
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Successfully Saved!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            },
+                                            callback: function (result) {
+                                                window.location.href = '@Url.Content("~/Calendar/Index")';
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    function submitForm() {
+        var cal_id = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.cal_id));
+        var name1 = $('#name1').val();
+        var description = $('#description').val();
+        var regholiday = $('#regholiday').is(':checked');
+        var specholiday = $('#specholiday').is(':checked');
+        var eventPeriod = $('#eventPeriod').val();
+        var endtime = $('#endtime').val();
+        calendar = {};
+        calendar["cal_id"] = cal_id;
+        calendar["name1"] = name1;
+        calendar["description"] = description;
+        calendar["regholiday"] = regholiday;
+        calendar["specholiday"] = specholiday;
+        calendar["eventPeriod"] = eventPeriod;
+        calendar["companies"] = [];
+        var x = document.getElementById('companies');
+        for (var i = 0; i < x.options.length; i++) {
+            if (x.options[i].selected == true) {
+                company = {};
+                company["comp_id"] = x.options[i].value;
+                calendar["companies"].push(company);
+            }
+        }
+        return calendar;
+    }
+
+</script>

@@ -1,0 +1,154 @@
+﻿
+<div class="sidebar-header">
+    <div id="logo-container" class="col-md-12">
+        <img id="logo" src="~/images/logo.png" alt="logo" />
+    </div>
+    <span class="header-arrow glyphicon glyphicon-chevron-right"></span>
+</div>
+
+<span class="sidebar-button" onclick="location.href='@Url.Action("Index","Dashboard")'">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/DASHBOARD.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        DASHBOARD
+    </span>
+</span>
+<span class="sidebar-button" onclick="location.href='@Url.Action("Index","Home")'">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/MY-DTR.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        MY DTR
+    </span>
+</span>
+<span class="sidebar-button" onclick="location.href='@Url.Action("Index","Request")'">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/REQUEST.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        REQUEST
+    </span>
+</span>
+<span class="sidebar-button" onclick="location.href='@Url.Action("Index","RequestApproval")'">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/REQUEST-APPROVAL.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        REQUEST APPROVAL
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/REPORT.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        REPORT
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/ORGANIZATION-CHART.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        ORGANIZATION CHART
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/PERFORMANCE.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        PERFORMANCE
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/TASKS.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        TASKS
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/TRAINING.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        TRAINING
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/PAYROLL.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        PAYROLL
+    </span>
+</span>
+<span class="sidebar-button">
+    <span class="col-md-12 sidebar-button-icon">
+        <img src="~/images/EXPENSES.png">
+    </span>
+    <span class="col-md-8 sidebar-button-text hidden">
+        EXPENSES
+    </span>
+</span>
+
+
+<div class="sidebar-footer">
+    <div id="photo-container">
+        <img class="profile-photo" src="~/images/sample.jpg" alt="profile-photo" />
+    </div>
+    <div id="profile" class="hidden col-md-7 no-padding">
+        <div class="col-md-12 ff-nt2 fs20">
+            JOHN DOE
+        </div>
+        <div class="col-md-12 fs13 margin-top-sm">
+            EZLIFE SOLUTIONS
+        </div>
+    </div>
+    <span class="footer-arrow glyphicon glyphicon-chevron-right"></span>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.header-arrow, .footer-arrow', function () {
+            $('.sidebar').toggleClass('col-md-1 col-md-3');
+            $('.sidebar-button-icon').toggleClass('col-md-12 col-md-4');
+
+            var $logo = $('#logo');
+            if ($logo.attr('src').indexOf('logo2') > -1) {
+                $logo.attr('src', '/images/logo.png');
+            }
+            else {
+                $logo.attr('src', '/images/logo2.png');
+            }
+
+            $('.header-arrow, .footer-arrow').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
+            //$('#photo-container').toggleClass('col-md-4');
+            $('.profile-photo').toggleClass('expand');
+            $('#profile').toggleClass('hidden');
+            $('.sidebar-button-text').toggleClass('hidden');
+            $('.body-container').toggleClass('col-md-12');
+            $('.sidebar').toggleClass('expand');
+            //$('#divider').toggleClass('hidden');
+            //$('.body-container').css('width', $('.container-main').width() + $('.sidebar').width());
+
+
+            //$(window).trigger("resize");
+        });
+        $(document).on('click', '.sidebar-button', function () {
+            if (!$(this).hasClass("selected")) {
+                $('.sidebar-button').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+
+    });
+
+</script>

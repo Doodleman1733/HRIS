@@ -1,0 +1,11 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.DepartmentIndexViewModel
+@{
+    ViewBag.Title = "Dashboard Layout";
+}
+
+@using (Html.BeginForm("Index", "DashboardLayout", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "deptForm" }))
+{
+    <div class="col-md-12 title">
+        Dashboard Layout
+    </div>
+}

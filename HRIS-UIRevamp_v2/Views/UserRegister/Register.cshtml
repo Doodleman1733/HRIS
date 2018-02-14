@@ -1,0 +1,127 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.RegisterViewModel
+@{
+        ViewBag.Title = "Register";
+        Layout = "~/Views/Shared/_Carousel.cshtml";
+}
+
+<div class="col-md-6 no-padding">
+
+    <div class="tabs-default ff-nt2">
+        <div class="tab selected flex flex-left">
+            <span class="margin-left-lg fs34">REGISTER</span>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Register", "Register", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "userFrm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div id="register" style="height:480px;overflow-y:scroll">
+
+            <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm margin-top-default">
+                Basic Info:
+            </div>
+
+            <div class="col-md-12 margin-bottom-default no-padding-top">
+                @Html.TextBoxFor(model => model.user_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Username", @autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "fs15 text-danger" })
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div class="col-md-6 margin-bottom-default no-padding-right">
+                    @Html.TextBoxFor(model => model.c_Password, new { @maxlength = "20", @class = "input-default h45 fs20 block", @type = "password", @placeholder = "Password", @onCopy = "return false", @onPaste = "return false" })
+                    @Html.ValidationMessageFor(model => model.c_Password, "", new { @class = "fs15 text-danger" })
+                </div>
+                <div class="col-md-6 margin-bottom-default">
+                    @Html.TextBoxFor(model => model.ConfirmPassword, new { @maxlength = "20", @class = "input-default h45 fs20 block", @type = "password", @placeholder = "Verify Password", @onCopy = "return false", @onPaste = "return false" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                General Info:
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div class="col-md-4 margin-bottom-default no-padding-right">
+                    @Html.TextBoxFor(model => model.fname, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Firstname", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.fname, "", new { @class = "fs15 text-danger" })
+                </div>
+
+                <div class="col-md-3 margin-bottom-default no-padding-right">
+                    @Html.TextBoxFor(model => model.mname, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Middlename", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.mname, "", new { @class = "fs15 text-danger" })
+                </div>
+
+                <div class="col-md-3 margin-bottom-default no-padding-right">
+                    @Html.TextBoxFor(model => model.lname, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Lastname", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.lname, "", new { @class = "fs15 text-danger" })
+                </div>
+
+                <div class="col-md-2 margin-bottom-default">
+                    @Html.TextBoxFor(model => model.suffix, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Suffix", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.suffix, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                Email Address:
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div class="col-md-6 margin-bottom-default">
+                    @Html.TextBoxFor(model => model.email1, new { @class = "input-default h45 fs20 block", @placeholder = "Email 1", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.email1, "", new { @class = "fs15 text-danger" })
+                </div>
+                <div class="col-md-6 margin-bottom-default">
+                    @Html.TextBoxFor(model => model.email2, new { @class = "input-default h45 fs20 block", @placeholder = "Email 2", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.email2, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                Phone Numbers:
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div class="col-md-6 margin-bottom-default">
+                    @Html.TextBoxFor(model => model.phone1, new {@class = "contact input-default h45 fs20 block", @placeholder = "Phone Number 1", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.phone1, "", new { @class = "fs15 text-danger" })
+                </div>
+                <div class="col-md-6 margin-bottom-lg">
+                    @Html.TextBoxFor(model => model.phone2, new { @class = "contact input-default h45 fs20 block", @placeholder = "Phone Number 2", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.phone2, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding flex flex-end margin-bottom-default">
+                <div class="col-md-3 margin-bottom-default no-padding margin-right-sm">
+                    <a href="@Url.Action("Index", "Login")" type="button" class="button-default bg-orange001 block h38 fs16 ff-nt2">CANCEL</a>
+                </div>
+                <div class="col-md-3 margin-bottom-default no-padding margin-right-default">
+                    <input type="submit" value="REGISTER" class="button-default block h38 fs16 ff-nt2" />
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<script>
+    $('#register').floatinglabel({
+        animationIn: { top: '-5px', opacity: '1' },
+        animationOut: { top: '0', opacity: '0' },
+
+        labelClass: 'floating-label',
+        pinClass: 'pin',
+
+        delayIn: 300,
+        delayOut: 300,
+        easingIn: false,
+        easingOut: false
+    });
+</script>
+

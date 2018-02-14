@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="@Url.Content("~/images/monocrete.ico")" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/dynatable")
+    @Styles.Render("~/Content/fullcalendar")
+    @Styles.Render("~/Content/daterange")
+    @Styles.Render("~/Content/selectize")
+    @Styles.Render("~/Content/perfectscrollbar")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/fullcalendar")
+    @Scripts.Render("~/bundles/perfectscroll")
+    @Scripts.Render("~/bundles/daterangepicker")
+    @Scripts.Render("~/bundles/floatinglabel")
+    @Scripts.Render("~/bundles/dynatable")
+    @Scripts.Render("~/bundles/selectize")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/autoNumeric.js")
+    @Scripts.Render("~/Scripts/timemask.js")
+    @Scripts.Render("~/bundles/shared")
+</head>
+
+<body>
+    <div class="container-main">
+        <div class="title-bg">
+            <div class="col-md-5 no-padding pull-right bg-gradient">
+                @*<img class="bg-image" src="~/images/sample2.jpg" />*@
+                <div class="bg-image"></div>
+            </div>
+        </div>
+        <div id="sidebar" class="sidebar col-md-1 no-padding">
+            @Html.Action("Sidebar", "Layout")
+        </div>
+        <div class="body-container col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script>
+        //Allow Enter Key on Text Areas Only
+        $(document).on("keypress", ":input:not(textarea)", function (event) {
+            return event.keyCode != 13;
+        });
+        //Disable Enter Key
+        //$(document).keypress(
+        //     function (event) {
+        //         if (event.which == '13') {
+        //             event.preventDefault();
+        //         }
+        //});
+        $(window).resize(function () {
+            $('.body-container').css('width', $('.container-main').width() - $('.sidebar').width());
+        });
+        $(window).load(function () {
+            //$('.body-container').css('width', $('.container-main').width() - $('.sidebar').width());
+            $(window).trigger("resize");
+        });
+
+        $.validator.setDefaults({
+            ignore: ':hidden:not([class~=selectized]),:hidden > .selectized, .selectize-control .selectize-input input',
+            onkeyup: function () {
+                var originalKeyUp = $.validator.defaults.onkeyup;
+                var customKeyUp = function (element, event) {
+                    if ($("[data-val-remote-url]")[0] === element) {
+                        return false;
+                    }
+                    else {
+                        return originalKeyUp.call(this, element, event);
+                    }
+                }
+                return customKeyUp;
+            },
+            onfocusout: function (element) {
+                $(element).valid();
+            },
+            onkeyup: function (element, event) {
+                if (event.which === 9 && this.elementValue(element) === "" || $(element).is('[data-val-length-max]')) {
+                    return;
+                } else if (element.name in this.submitted || element === this.lastElement) {
+                    this.element(element);
+                }
+            }
+        });
+
+        if ($.validator) {
+            //get the reference to the original function into a local variable
+            var _getLength = $.validator.prototype.getLength;
+
+            //overwrite existing getLength of validator
+            $.validator.prototype.getLength = function (value, element) {
+
+                //double count line breaks for textareas only
+                if (element.nodeName.toLowerCase() === 'textarea') {
+
+                    //Counts all the newline characters (\r = return for macs, \r\n for Windows, \n for Linux/unix)
+                    var newLineCharacterRegexMatch = /\r?\n|\r/g;
+
+                    //use [element.value] rather than [value] since I found that the value passed in does cut off leading and trailing line breaks.
+                    if (element.value) {
+
+                        //count newline characters
+                        var regexResult = element.value.match(newLineCharacterRegexMatch);
+                        var newLineCount = regexResult ? regexResult.length : 0;
+
+                        //replace newline characters with nothing
+                        var replacedValue = element.value.replace(newLineCharacterRegexMatch, "");
+
+                        //return the length of text without newline characters + doubled newline character count
+                        return replacedValue.length + (newLineCount * 2);
+                    } else {
+                        return 0;
+                    }
+                }
+                //call the original function reference with apply
+                return _getLength.apply(this, arguments);
+            };
+        }
+
+        function nullChecker(value) {
+            var string = "";
+            if (value != null) {
+                string = value;
+            }
+            return string;
+        }
+
+        if ('@ViewBag.Error' != "") {
+            bootbox.alert({
+                size: "small",
+                message: "@ViewBag.Error",
+                closeButton: false,
+                className: "fs20 ff-nt2 text-danger",
+                buttons: {
+                    ok:
+                    {
+                        className: "bg-green002 text-white"
+                    }
+                }
+
+            });
+        };
+
+        var form_original_data = $('form').serialize();
+
+        $(".checkChanges").on('click', function () {
+            var _this = $(this).data('target');
+            console.log($('form').serialize());
+            if ($('form').serialize() != form_original_data) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Exit without saving changes?",
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        if (result) {
+                            window.location.href = _this;
+                        }
+                    }
+                });
+            }
+            else {
+                window.location.href = _this;
+            }
+        });
+
+    </script>
+</body>
+</html>

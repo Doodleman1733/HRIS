@@ -1,0 +1,53 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.LoginViewModel
+@{
+        ViewBag.Title = "Login";
+        Layout = "~/Views/Shared/_Carousel.cshtml";
+}
+
+<div class="col-md-6 no-padding">
+    <div class="tabs-default margin-bottom-lg ff-nt2">
+        <div class="tab selected flex flex-left">
+            <span class="margin-left-lg fs34">LOGIN</span>
+        </div>
+    </div>
+    
+    @using (Html.BeginForm("Verify", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "LoginFrm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+            <div class="col-md-offset-2 col-md-8 fs20 ff-nt2 margin-top-lg no-padding">
+                @Html.LabelFor(model => model.user_id, htmlAttributes: new { @class = "" })
+
+            </div>
+
+            <div class="col-md-offset-2 col-md-8 margin-bottom-lg no-padding">
+                @Html.TextBoxFor(model => model.user_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "" , @autocomplete="off", @onCopy="return false", @onPaste="return false"})
+                @Html.ValidationMessageFor(model => model.user_id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-offset-2 col-md-8 fs20 ff-nt2 no-padding">
+                @Html.LabelFor(model => model.c_password, htmlAttributes: new { @class = "" })
+            </div>
+
+            <div class="col-md-offset-2 col-md-8 margin-bottom-default no-padding">
+                @Html.TextBoxFor(model => model.c_password, new { @maxlength = "20", @class = "input-default h45 fs20 block", @type = "password", @placeholder = "" , @onCopy = "return false", @onPaste = "return false" })
+                @Html.ValidationMessageFor(model => model.c_password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="pull-right col-md-6 fs20 margin-bottom-lg">
+                <a>Forgot my password?</a>
+            </div>
+
+            <div class="col-md-offset-7 col-md-3 margin-bottom-default">
+                <input type="submit" value="LOGIN" class="button-default block h38 fs16 ff-nt2" />
+            </div>
+
+            <div class="col-md-12 fs20 margin-bottom-default flex flex-center">
+                Not a member?<a href="@Url.Action("Index", "UserRegister")"> &nbsp; Register Now!</a>
+            </div>
+    }
+</div>
+<script>
+</script>
+

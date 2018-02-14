@@ -1,0 +1,223 @@
+﻿@model HRIS_UIRevamp_v2.ViewModel.DivisionViewModel
+@{
+    ViewBag.Title = "Division/View";
+}
+
+    <div class="col-md-12 title">
+        VIEW DIVISION
+    </div>
+
+    <div class="body-content">
+        <div class="col-md-5 left-container no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <div class="col-md-12 fs20 ff-nt2 ">
+                    @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                   @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.comp_id, @class = "", @disabled = true })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.div_id, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextBoxFor(model => model.div_id, new { @maxlength = "20", @class = "input-default h62 fs20 block", @disabled = true })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h62 fs20 block", @disabled = true })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-lg margin-bottom-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.description, new { @class = "" })
+                </div>
+                <div class="col-md-12  margin-top-sm">
+                    @Html.TextAreaFor(model => model.description, new { @maxlength = "250", @class = "input-default fs20 block", @disabled = true, @rows = 7 })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">DEPARTMENT/S</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default" style="height:200px">
+                <table class="table dyna-theme005 tableBodyScroll" id="department-table">
+                    <thead>
+                        <tr>
+                            <th width="25%" data-dynatable-column="dept_id">DEPARTMENT ID</th>
+                            <th width="25%" data-dynatable-column="dept_name1">DEPARTMENT NAME</th>
+                            <th width="25%" data-dynatable-column="dept_description">DESCRIPTION</th>
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2 margin-top-lg">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">SECTION/S</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default" style="height:200px">
+                <table class="table dyna-theme005 tableBodyScroll" id="section-table">
+                    <thead>
+                        <tr>
+                            <th data-dynatable-column="sect_id">SECTION ID</th>
+                            <th data-dynatable-column="sect_name1">SECTION NAME</th>
+                            <th data-dynatable-column="sect_description">DESCRIPTION</th>
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12 margin-top-lg no-padding">
+                <div class="col-md-4 pull-right margin-top-lg">
+                    <div class="col-md-12 margin-right-default margin-top-lg">
+                        <a type="button" href='@Url.Content("~/Division")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CLOSE</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+
+        departments();
+        loadSections();
+    }
+
+    function initializeEvents() {
+
+        $('#department-table tbody').on('click', 'tr', function (e) {
+            var _this = $(this);
+            $('#department-table tr').not(_this.closest('tr')).closest('tr').removeClass('active');
+            _this.addClass('active');
+            showDepartmentSections();
+        });
+
+        $('#section-table tbody').on('click', 'tr', function (e) {
+            var _this = $(this);
+            $('#section-table tr').not(_this.closest('tr')).closest('tr').removeClass('active');
+            _this.addClass('active');
+        });
+    }
+
+    function departments(){
+        var results = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.departments));
+        $('#department-table tbody').html('');
+        for(var i in results){
+            if(results[i].description == null){
+                results[i].description = '';
+            }
+            var tr = $("<tr/>");
+            tr.append(
+                    '<td class="deptid cls" value="'+results[i].dept_id+'">'+results[i].dept_id+'</td>' +
+                    '<td class="deptname1" value="'+results[i].name1+'">'+results[i].name1+'</td>' +
+                    '<td class="deptdesc" value="'+results[i].description+'">'+results[i].description+'</td>' +
+                    '<td style="display:none" id="td_departmentflow"><ul id="departmentflow"></ul></td>'
+                );
+            $('#department-table tbody').append(tr[0]);
+        }
+    }
+
+    function loadSections(){
+        var sections = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.sections));
+        $('#department-table tbody tr').each(function(index, elem){
+            var deptid = $(elem).find('td').eq(0).text();
+            for(var i in sections){
+                if(deptid == sections[i].dept_id){
+                    var li = $("<li/>");
+                    li.append(
+                               '<input type="hidden" class="sect_id" value="' + sections[i].sect_id + '" />' +
+                               '<input type="hidden" class="sect_name1" value="' + sections[i].name1 + '" />'+
+                               '<input type="hidden" class="sect_description" value="' + sections[i].description + '" />'
+                               )
+                    $(elem).find('ul#departmentflow').append(li[0]);
+                }
+            }
+        });
+    }
+
+    function showDepartmentSections() {
+        $('#section-table tbody').html('');
+        $('#department-table tbody tr.active #departmentflow li').each(function (index, elem) {
+            var tr = $("<tr/>");
+            tr.append(
+                    '<td class="sectid cls" value="' + $(elem).find('.sect_id').val() + '">' + $(elem).find('.sect_id').val() + '</td>' +
+                    '<td class="sect_name1" value="' + $(elem).find('.sect_name1').val() + '">' + $(elem).find('.sect_name1').val() + '</td>' +
+                    '<td class="sect_description" value="' + $(elem).find('.sect_description').val("") + '">' + $(elem).find('.sect_description').val() + '</td>'
+                    
+                );
+            $('#section-table tbody').append(tr[0]);
+        });
+    }
+
+</script>

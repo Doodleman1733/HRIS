@@ -1,0 +1,358 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model WFModel
+@{
+    ViewBag.Title = "Workflow/View";
+}
+<div class="col-md-12 title">
+    VIEW WORKFLOW
+</div>
+
+    <div class="body-content">
+        <div class="col-md-12 no-padding">
+
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 no-padding margin-bottom-lg">
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.comp_id, @class = "", @disabled=true })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.wflw_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.TextBoxFor(model => model.wflw_id, new { @maxlength = "20", @class = "input-default h45 fs20 block",@disabled=true })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default">
+                                <div class="col-md-12 no-padding">
+                                    @Html.CheckBoxFor(model => model.active, new { @class = "",@disabled=true })
+                                    @Html.LabelFor(model => model.active, new { @class = "fs20 ff-nt2" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-12 margin-top-default">
+                            <div class="col-md-12 margin-top-default">
+                                <div class="no-padding col-md-12 fs20 ff-nt2">
+                                    @Html.LabelFor(model => model.name1, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "20", @class = "input-default h45 fs20 block",@disabled=true })
+                                    @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-12 margin-top-default ">
+                                <div class="no-padding col-md-12 fs20 ff-nt2 margin-top-sm">
+                                    @Html.LabelFor(model => model.module_id, new { @class = "" })
+                                </div>
+                                <div class="col-md-12 no-padding">
+                                    @Html.DropDownListFor(model => model.module_id, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.module_id, @class = "", @disabled = true })
+                                    @Html.ValidationMessageFor(model => model.module_id, "", new { @class = "fs15 text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding tabs-default h45 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">WORKFLOW STATUS</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 flex flex-center">
+                <div class="col-md-12">
+                    <div id="workflowStatus" class="col-md-12 margin-top-default" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">ID</th>
+                                    <th class="fs17 text-center">STATUS</th>
+                                    <th class="fs17 text-center">STATUS(PAST TENSE)</th>
+                                    <th class="fs17 text-center">END POINT</th>
+                                    <th class="fs17 text-center">WITH REMARKS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center"> </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+           
+
+
+            <div class="col-md-12 no-padding tabs-default h45 ff-nt2 margin-top-default">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">WORKFLOW STATUS SETUP</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 ff-nt2 fs20 margin-top-default margin-left-default ">
+                FLOW SETUP
+            </div>
+            <div class="col-md-12 flex flex-center">
+                <div class="col-md-12">
+                    <div id="workFlowStatusFlow" class="col-md-12 margin-top-sm" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">SERIES</th>
+                                    <th class="fs17 text-center">STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 ff-nt2 fs20 margin-left-default margin-top-default">
+                USER SETUP
+            </div>
+            <div class="col-md-12 flex flex-center">
+
+                <div class="col-md-12">
+                    <div id="workFlowStatusUser" class="col-md-12 margin-top-sm" style="border-bottom:solid 1px;">
+                        <table class="table dyna-theme005 tableBodyScroll">
+                            <thead>
+                                <tr>
+                                    <th class="fs17 text-center">USER ID</th>
+                                    <th class="fs17 text-center">EDIT</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 no-padding">
+                <div class="col-md-2 pull-right  margin-top-default margin-bottom-lg">
+                    <div class="col-md-12 ">
+                        <a type="button" href='@Url.Content("~/Workflow")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CLOSE</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+
+        $('#module_id').selectize({
+            valueField: 'module_id',
+            labelField: 'sdisplay',
+            searchField: ['sdisplay'],
+            sortField: [{ field: 'sdisplay', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/getModules")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+
+        status();
+        loadStatusFlow();
+        loadStatusUser();
+    }
+
+    function initializeEvents() {
+        $('#workflowStatus tbody').on('click', 'tr', function (e) {
+            var _this = $(this);
+            $('#workflowStatus tr').not(_this.closest('tr')).closest('tr').removeClass('active');
+            _this.addClass('active');
+            showStatusFlow();
+            showStatusUser();
+        });
+
+
+    }
+
+    function status(){
+        var results = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.WorkflowStatus));
+        $('#workflowStatus tbody').html('');
+        for(var i in results){
+            var end, remarks;
+            if(results[i].endpoint == true){
+                end = '<span class=" glyphicon glyphicon-ok-circle text-green001 fs17"/>';
+            }
+            else{
+                end = '<span></span>';
+            }
+
+            if(results[i].withremarks == true){
+                remarks = '<span class=" glyphicon glyphicon-ok-circle text-green001 fs17"/>';
+            }
+            else{
+                remarks = '<span></span>';
+            }
+
+            var tr = $("<tr/>");
+            tr.append(
+                    '<td class="status_id" value="'+results[i].status_id+'">'+results[i].status_id+'</td>' +
+                    '<td class="status1" value="'+results[i].status1+'">'+results[i].status1+'</td>' +
+                    '<td class="status2" value="'+results[i].status2+'">'+results[i].status2+'</td>' +
+                    '<td class="endpoint" value="'+results[i].endpoint+'">'+end+'</td>' +
+                    '<td class="withremarks" value="'+results[i].withremarks+'">'+remarks+'</td>'+
+                    '<td style="display:none"><ul id="statusFlow"></ul></td>'+
+                     '<td style="display:none"><ul id="statusUser"></ul></td>'
+                );
+            $('#workflowStatus tbody').append(tr[0]);
+
+        }
+    }
+
+    function loadStatusFlow(){
+        var results = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.WFStatusFlow));
+
+        $('#workflowStatus tbody tr').each(function(index, elem){
+            var status_id = $(elem).find('td').eq(0).text();
+
+            for(var i in results){
+                if(status_id == results[i].status_id_from){
+                    var li = $("<li/>");
+                    li.append(
+                               '<input type="hidden" class="series" value="' + results[i].id + '" />' +
+                               '<input type="hidden" class="status_to" value="' + results[i].status_id_to + '" />'
+                               )
+                    $(elem).find('ul#statusFlow').append(li[0]);
+                }
+            }
+        });
+    }
+
+    function showStatusFlow() {
+        $('#workFlowStatusFlow tbody').html('');
+        $('#workflowStatus tbody tr.active #statusFlow li').each(function (index, elem) {
+            var status_id_toSave;
+            $('#workflowStatus tbody tr').each(function (indexFlow, elemFlow) {
+                if ($(elemFlow).find('.status_id').text() == $(elem).find('.status_to').val()) {
+                    status_id_toSave = $(elemFlow).find('.status1').text();
+                }
+            });
+            var tr = $("<tr/>");
+            tr.append(
+                    '<td class="" value="' + (parseInt(index + 1)) + '">' + (parseInt(index + 1)) + '</td>' +
+                    '<td class="" value="' + $(elem).find('.status_to').val() + '">' + status_id_toSave + '</td>'
+                );
+            $('#workFlowStatusFlow tbody').append(tr[0]);
+        });
+    }
+
+    function loadStatusUser(){
+        var results = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.WFStatusOwner));
+
+        $('#workflowStatus tbody tr').each(function(index, elem){
+            var status_id = $(elem).find('td').eq(0).text();
+
+            for(var i in results){
+                if(status_id == results[i].status_id){
+                    var li = $("<li/>");
+                    li.append(
+                               '<input type="hidden" class="user" value="' + results[i].user_id + '" />' +
+                               '<input type="hidden" class="edit" value="' + results[i].edit + '" />'
+                               )
+                    $(elem).find('ul#statusUser').append(li[0]);
+                }
+            }
+        });
+    }
+
+    function showStatusUser() {
+        $('#workFlowStatusUser tbody').html('');
+
+        $('#workflowStatus tbody tr.active #statusUser li').each(function (index, elem) {
+            var tr = $("<tr/>");
+            var edit;
+
+            if($(elem).find('.edit').val() == 'true'){
+                edit = '<span class=" glyphicon glyphicon-ok-circle text-green001 fs17"/>';
+            }
+            else{
+                edit = '<span></span>';
+            }
+
+            tr.append(
+                    '<td class="" value="' + $(elem).find('.user').val() + '">' + $(elem).find('.user').val() + '</td>' +
+                    '<td class="" value="' + $(elem).find('.edit').val() + '">' + edit + '</td>'
+                );
+            $('#workFlowStatusUser tbody').append(tr[0]);
+        });
+    }
+
+</script>

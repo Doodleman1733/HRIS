@@ -1,0 +1,219 @@
+@import 'colors';
+
+html,
+body {
+    //height: 100%;
+    //min-width: 1920px;
+    min-width: 1180px;
+   // min-height: 1201px;
+    background-color: $gray001;
+
+    font-family: 'Neutra Text 1';
+    font-size: .93em;
+    word-wrap: break-word;
+
+   /*&::-webkit-scrollbar {
+       width: 0px;
+   }*/
+}
+
+body {
+}
+
+body.freeze-scroll {
+      overflow: hidden;
+      height: 100%;
+}
+
+.container-main {
+    position: relative;
+    /*max-width: 1440px;*/
+    margin: auto;
+    min-height: 100%;
+    display: flex;
+    overflow-x: hidden;
+}
+
+.title-bg {
+    position: absolute;
+    height: 294px;
+    width: 100%;
+    background-color: $orange001;
+}
+
+.bg-image {
+    background: url(/images/sample2.jpg);
+    height: 294px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: .2;
+    box-shadow: inset 100px 0px 80px 0px #DBA632;
+}
+
+.body-container {
+    position: relative;
+    height: inherit;
+    //width: calc(100% - 375px);
+    width: 100%;
+    margin: 0px 15px 15px 15px;
+    overflow: auto;
+}
+
+.title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 294px;
+    /*line-height: 294px;*/
+    font-size: 7em;
+    font-family: "Neutra Text 2";
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.body-content {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin-top: 250px;
+    border-radius: 22px;
+    //min-height: 844px;
+    background-color: #FFF;
+    overflow: hidden;
+    color: $gray003;
+
+    &.not-default{
+        display:block;position:relative;
+    }
+    &.modal-content{
+        margin-top:unset!important;
+    }
+}
+
+.register_body-content {
+    display: flex;
+    width: 80%;
+    margin: 30px 100px 0 120px;
+    border-radius: 22px;
+    height: 580px;
+    background-color: white;
+    overflow: hidden;
+    color: $gray003;
+}
+
+.register_title-bg {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    background-color: $orange001;
+}
+
+.register_title {
+    left: 0;
+    top: 5px;
+    height: 60px;
+    /*line-height: 294px;*/
+    font-size: 5em;
+    font-family: "Neutra Text 2";
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    //max-width: 280px;
+}
+
+textarea {
+    resize: none;
+}
+
+
+.no-padding {
+    padding: 0px;
+}
+.no-padding-left {
+    padding-left: 0px;
+}
+.no-padding-right {
+    padding-right: 0px;
+}
+.no-padding-top {
+    padding-top: 0px;
+}
+
+.margin-sm {
+    margin: 5px;
+}
+
+
+.margin-top-lg {
+    margin-top: 30px;
+}
+
+
+.margin-top-default {
+    margin-top: 15px;
+}
+
+.margin-top-sm {
+    margin-top: 5px;
+}
+
+
+.margin-right-lg {
+    margin-right: 30px;
+}
+
+
+.margin-right-default {
+    margin-right: 15px;
+}
+
+
+.margin-right-sm {
+    margin-right: 5px;
+}
+
+
+.margin-bottom-lg {
+    margin-bottom: 30px;
+}
+
+
+.margin-bottom-default {
+    margin-bottom: 15px;
+}
+
+.margin-bottom-sm {
+    margin-bottom: 5px;
+}
+
+
+.margin-left-lg {
+    margin-left: 30px;
+}
+
+
+.margin-left-default {
+    margin-left: 15px;
+}
+
+
+.margin-left-sm {
+    margin-left: 5px;
+}

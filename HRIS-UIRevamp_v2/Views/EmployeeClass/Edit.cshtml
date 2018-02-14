@@ -1,0 +1,1588 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model EmployeeClassUpdateViewModel
+@{
+    ViewBag.Title = "Employee Class/Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@using (Html.BeginForm("Update", "Employee Class", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "empClassFrm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 title">
+        EMPLOYEE CLASS
+    </div>
+
+    <div class="body-content" id="parent">
+        <div id="step-1">
+            <div class="col-md-6 left-container no-padding" style="height:100%">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 fs20 ff-nt2 ">
+                        @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                    </div>
+                    <div class="col-md-12 margin-top-sm">
+                       @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @disabled=true, @data_selected = Model.comp_id })
+                        @Html.HiddenFor(model => model.comp_id, new { @readonly = true })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 fs20 ff-nt2">
+                        @Html.LabelFor(model => model.class_id, new { @class = "" })
+                    </div>
+                    <div class="col-md-12 margin-top-sm">
+                        @Html.TextBoxFor(model => model.class_id, new { @maxlength = "20", @class = "input-default h62 fs20 block", @disabled=true })
+                        @Html.HiddenFor(model => model.class_id, new { @readonly = true })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 fs20 ff-nt2">
+                        @Html.LabelFor(model => model.name1, new { @class = "" })
+                    </div>
+                    <div class="col-md-12 margin-top-sm">
+                        @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h62 fs20 block", @placeholder = "Enter Employee Class Name" })
+                        @Html.ValidationMessageFor(model => model.name1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-top-lg margin-bottom-lg">
+                    <div class="col-md-12 fs20 ff-nt2">
+                        @Html.LabelFor(model => model.description, new { @class = "" })
+                    </div>
+                    <div class="col-md-12  margin-top-sm">
+                        @Html.TextAreaFor(model => model.description, new { @maxlength = "100", @class = "input-default fs20 block",  @rows = 7 })
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-bottom-lg">
+                    <div class="col-md-12">
+                        @Html.CheckBoxFor(model => model.active, new { @class = "" })
+                        @Html.LabelFor(model => model.active, new { @class = "fs20 ff-nt2" })
+                        @Html.ValidationMessageFor(model => model.active, "", new { @class = "fs15 text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 no-padding">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">CLASS CONFIGURATION</span>
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12 fs20 ff-nt2">
+                        @Html.LabelFor(model => model.cutoffperiod)
+                        @Html.ValidationMessageFor(model => model.cutoffperiod, "", new { @class = "fs15 text-danger" })
+                    </div>
+                    <div class="col-md-11 margin-bottom-sm margin-left-lg input-default h55 flex flex-center bg-gray006">
+                        <div class="col-md-3 fs16 no-padding margin-left-lg">
+                            <label>@Html.RadioButtonFor(model => model.cutoffperiod, "A", new { @class = "" }) Monthly</label>
+                        </div>
+                        <div class="col-md-4 fs16 no-padding">
+                            <label>@Html.RadioButtonFor(model => model.cutoffperiod, "B", new { @class = "" }) Semi-monthly</label>
+
+                        </div>
+                        <div class="col-md-3 fs16 no-padding">
+                            <label>@Html.RadioButtonFor(model => model.cutoffperiod, "C", new { @class = "" }) Weekly</label>
+
+                        </div>
+                        <div class="col-md-2 fs16 no-padding">
+                            <label>@Html.RadioButtonFor(model => model.cutoffperiod, "D", new { @class = "" }) Daily</label>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-9 margin-top-sm margin-bottom-lg">
+
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        <div class="col-md-1 no-padding">
+                            @Html.CheckBoxFor(model => model.bypassshiftrules, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.LabelFor(model => model.bypassshiftrules)
+                        </div>
+                    </div>
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        <div class="col-md-1 no-padding">
+                            @Html.CheckBoxFor(model => model.allowovertime, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.LabelFor(model => model.allowovertime)
+                        </div>
+                    </div>
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        <div class="col-md-1 no-padding">
+                            @Html.CheckBoxFor(model => model.regholidaypaid, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.LabelFor(model => model.regholidaypaid)
+                        </div>
+                    </div>
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        <div class="col-md-1 no-padding">
+                            @Html.CheckBoxFor(model => model.specholidaypaid, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.LabelFor(model => model.specholidaypaid)
+                        </div>
+                    </div>
+                    <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                        <div class="col-md-1 no-padding">
+                            @Html.CheckBoxFor(model => model.regholidaypaidonrestday, htmlAttributes: new { @class = "ch_box", data_toggle = "checkbox-x", @value = "true", data_three_state = "false" })
+                        </div>
+                        <div class="col-md-11 no-padding">
+                            @Html.LabelFor(model => model.regholidaypaidonrestday)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">COMPANY CONFIGURATION</span>
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-lg">
+                    <div class="col-md-12  margin-bottom-lg">
+                        <div class="col-md-5 no-padding ff-nt2 fs17 h45">
+                            @Html.LabelFor(model => model.shiftinmargin)
+                        </div>
+                        <div class="col-md-3 no-padding margin-left-default">
+                            @Html.TextBoxFor(model => model.shiftinmargin, new { @class = "input-default h45 fs17 block min" })
+                            @Html.ValidationMessageFor(model => model.shiftinmargin, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12  margin-bottom-lg">
+                        <div class="col-md-5 no-padding ff-nt2 fs17 h45">
+                            @Html.LabelFor(model => model.shiftroundown)
+                        </div>
+                        <div class="col-md-3 no-padding margin-left-default">
+                            @Html.TextBoxFor(model => model.shiftroundown, new { @class = "input-default h45 fs17 block min" })
+                            @Html.ValidationMessageFor(model => model.shiftroundown, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-bottom-lg ">
+                        <div class="col-md-5 no-padding ff-nt2 fs17 h45">
+                            @Html.LabelFor(model => model.otrounddown)
+                        </div>
+                        <div class="col-md-3 no-padding margin-left-default">
+                            @Html.TextBoxFor(model => model.otrounddown, new { @class = "input-default h45 fs17 block min" })
+                            @Html.ValidationMessageFor(model => model.otrounddown, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-bottom-default">
+                        <div class="col-md-5 no-padding ff-nt2 fs17 h45">
+                            @Html.LabelFor(model => model.maximumallowablehours)
+                        </div>
+                        <div class="col-md-3 no-padding margin-left-default">
+                            @Html.TextBoxFor(model => model.maximumallowablehours, new { @class = "input-default h45 fs17 block min" })
+                            @Html.ValidationMessageFor(model => model.maximumallowablehours, "", new { @class = "fs15 text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 no-padding margin-bottom-lg">
+                    <div class="col-md-6 pull-right no-padding margin-top-lg">
+                        <div class="col-md-5 no-padding margin-right-sm">
+                            <a role="button" class="next h38 fs20 button-default block" data-target="step-2" data-parent="step-1" href="javascript:void(0);">
+                                NEXT
+                            </a>
+                        </div>
+                        <div class="col-md-5 no-padding margin-right-default">
+                            <input type="button" value="CANCEL" data-target="@Url.Content("~/EmployeeClass/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="step-2" class="collapse">
+            <div class="col-md-12 no-padding">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">SHIFT RULES</span>
+                    </div>
+                </div>
+
+                <div class=" margin-top-lg col-md-12">
+                    <div class="col-md-12 fs17">
+                        <div class="col-md-12">
+                            <table class="table dyna-theme007">
+                                <thead>
+                                    <tr>
+                                        <th width="13%">Days</th>
+                                        <th width="20%">Shift Name</th>
+                                        <th width="15%">Shift Time</th>
+                                        <th width="8%">Rest Day</th>
+                                        <th width="15%">Allow DTR Override</th>
+                                        <th width="15%">For minimum time of</th>
+                                        <th width="15%">Override DTR to</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">Monday</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shiftmonday, Enumerable.Empty<SelectListItem>(), "", new { @class = "dShifts", @data_selected = Model.shiftmonday, @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shiftmonday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdmonday, htmlAttributes: new { @class = "", data_control = "rdmonday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridemonday, htmlAttributes: new { @class = "", @data_child = "rdmonday", data_control = "ormonday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluemonday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "ormonday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluemonday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluemonday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "ormonday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluemonday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Tuesday</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shifttuesday, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.shifttuesday, @class = "dShifts", @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shifttuesday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdtuesday, htmlAttributes: new { @class = "", data_control = "rdtuesday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridetuesday, htmlAttributes: new { @class = "", @data_child = "rdtuesday", data_control = "ortuesday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluetuesday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "ortuesday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluetuesday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluetuesday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "ortuesday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluetuesday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Wednesday</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shiftwednesday, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.shiftwednesday, @class = "dShifts", @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shiftwednesday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdwednesday, htmlAttributes: new { @class = "", data_control = "rdwednesday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridewednesday, htmlAttributes: new { @class = "", @data_child = "rdwednesday", data_control = "orwednesday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluewednesday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orwednesday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluewednesday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluewednesday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orwednesday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluewednesday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Thursday</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shiftthursday, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.shiftthursday, @class = "dShifts", @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shiftthursday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdthursday, htmlAttributes: new { @class = "", data_control = "rdthursday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridethursday, htmlAttributes: new { @class = "", @data_child = "rdthursday", data_control = "orthursday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluethursday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orthursday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluethursday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluethursday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orthursday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluethursday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Friday</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shiftfriday, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.shiftfriday, @class = "dShifts", @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shiftfriday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdfriday, htmlAttributes: new { @class = "", data_control = "rdfriday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridefriday, htmlAttributes: new { @class = "", @data_child = "rdfriday", data_control = "orfriday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluefriday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orfriday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluefriday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluefriday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orfriday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluefriday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            Saturday
+                                        </td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shiftsaturday, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.shiftsaturday, @class = "dShifts", @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shiftsaturday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdsaturday, htmlAttributes: new { @class = "", data_control = "rdsaturday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridesaturday, htmlAttributes: new { @class = "", @data_child = "rdsaturday", data_control = "orsaturday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluesaturday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orsaturday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluesaturday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluesaturday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orsaturday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluesaturday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Sunday</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.shiftsunday, Enumerable.Empty<SelectListItem>(), "", new { @data_selected = Model.shiftsunday, @class = "dShifts", @placeholder = "Select Shift" })
+                                            @Html.ValidationMessageFor(model => model.shiftsunday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.rdsunday, htmlAttributes: new { @class = "", data_control = "rdsunday" })
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.CheckBoxFor(model => model.overridesunday, htmlAttributes: new { @class = "", @data_child = "rdsunday", data_control = "orsunday" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.minvaluesunday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orsunday" })
+                                            @Html.ValidationMessageFor(model => model.minvaluesunday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.intovaluesunday, new { @size = "4", @class = "form-control time", @disabled = true, @data_val = "true", @data_val_required = "* Required", @data_child = "orsunday" })
+                                            @Html.ValidationMessageFor(model => model.intovaluesunday, "", new { @class = "text-danger fs12" })
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-12 no-padding">
+
+                            <div class="col-md-6 margin-top-default">
+                                <div class="col-md-12 no-padding tabs-default h45 ff-nt2">
+                                    <div class="tab selected flex flex-left">
+                                        <span class="margin-left-lg fs17">COMPANY SHIFTS</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 no-padding shftrule_scroll" id="sf-rules-cont">
+                                    <div class="col-md-12" id="shift-configuration" role="tablist" aria-multiselectable="true">
+                                        <table class="per-shift" id="tableid">
+                                            <thead>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="srule col-md-12 no-padding collapse">
+                                    <div id="table-dtr-container" class="col-md-12 no-padding margin-top-default dynatable-container">
+                                        <table id="table_empclass" class="table dyna-theme008 tableBodyScroll4">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10.8%" class="text-center">ACTION</th>
+                                                    <th width="9.6%" class="text-center">LATE FROM</th>
+                                                    <th width="8.2%" class="text-center">LATE TO</th>
+                                                    <th width="13.2%" class="text-center">ALLOW COMPLETE SHIFT HOUR/S</th>
+                                                    <th width="12.6%" class="text-center">CONSIDER AS ABSENT</th>
+                                                    <th width="12.7%" class="text-center">CONSIDER AS HALFDAY</th>
+                                                    <th width="10.6%" class="text-center">MAX HOUR/S</th>
+                                                    <th width="10.6%" class="text-center">COUNT HOUR/S UNTIL END SHIFT</th>
+                                                    <th class="text-center">ALLOW OVERTIME</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="srule col-md-6 pull-right no-padding margin-bottom-lg margin-top-default collapse">
+                                    <div class="col-md-5 pull-right no-padding">
+                                        <input type="button" value="ADD" class="bg-green002 button-default block h38 fs17 ff-nt2" data-toggle="modal" data-target="#mymodal" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="srule col-md-6 margin-top-default margin-bottom-lg collapse" id="OTRulesfrm">
+                                <div class="col-md-12 no-padding tabs-default h45 ff-nt2">
+                                    <div class="tab selected flex flex-left">
+                                        <span class="margin-left-lg fs17">OVERTIME CONFIGURATION</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 no-padding margin-top-sm ot_des">
+                                    <div class="col-md-12 margin-top-lg no-padding">
+                                        <div class="col-md-4 no-padding h38 flex flex-left fs15 ff-nt2 margin-left-default">
+                                            @Html.LabelFor(model => model.minothours, new { @class = "" })
+                                        </div>
+                                        <div class="col-md-5 no-padding">
+                                            @Html.TextBoxFor(model => model.minothours, new { @class = "input-default h38 fs17 block int-24" })
+                                            @Html.ValidationMessageFor(model => model.minothours, "", new { @class = "text-danger fs13" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 margin-top-lg no-padding">
+                                        <div class="col-md-12  fs15 ff-nt2">
+                                            Overtime Break Rules
+                                        </div>
+                                        <div class="col-md-12">
+                                           @Html.ValidationMessageFor(model => model.otrule, "", new { @class = "text-danger fs13" })
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-12 no-padding" id="otvalidation">
+                                        <div class="col-md-12 margin-top-sm no-padding">
+                                            
+                                            <div class="col-md-12 otrules margin-top-sm">
+                                                <div class="col-md-2 fs15 flex flex-left h38 no-padding margin-left-default margin-right-default">
+                                                    @Html.RadioButtonFor(model => model.otrule, "A", new { @class = "otrule", @data_val = "true", @data_val_required = "* Select Overtime Break Rule" })
+                                                    Automatic
+                                                </div>
+
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.automin1, new { @class = "input-default int h38 fs15 block", @data_val = "true", @data_val_required = "* Required", @disabled = true })
+                                                    @Html.ValidationMessageFor(model => model.automin1, "", new { @class = "text-danger fs13" })
+                                                </div>
+
+                                                <div class="col-md-6 flex flex-left h38 fs15 no-padding">
+                                                    minute/s AFTER the shift.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 margin-top-lg no-padding">
+                                            <div class="col-md-12 otrules  margin-top-sm">
+                                                <div class="col-md-2 fs15 flex flex-left h38 no-padding margin-left-default  margin-right-default">
+                                                    @Html.RadioButtonFor(model => model.otrule, "B", new { @class = "otrule", @data_val = "true", @data_val_required = "* Select Overtime Break Rule" })
+                                                    Automatic
+                                                </div>
+
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.automin2, new { @class = "input-default h38 int fs15 block", @disabled = true, @data_val_required = "* Required" })
+                                                    @Html.ValidationMessageFor(model => model.automin2, "", new { @class = "text-danger fs13" })
+                                                </div>
+
+                                                <div class="col-md-3 flex flex-center text-center h38 fs15 no-padding  margin-right-sm">
+                                                    minute/s AFTER the first
+                                                </div>
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.autohours2, new { @class = "input-default h38 fs17 int block", @disabled = true, @data_val_required = "* Required" })
+                                                    @Html.ValidationMessageFor(model => model.autohours2, "", new { @class = "text-danger fs13" })
+                                                </div>
+                                                <div class="col-md-1 flex flex-left h38 fs15 no-padding">
+                                                    HOUR/s.
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 margin-top-lg no-padding">
+                                            <div class="col-md-12 otrules  margin-top-sm">
+                                                <div class="col-md-2 fs15 flex flex-left h38 no-padding margin-left-default margin-right-default">
+                                                    @Html.RadioButtonFor(model => model.otrule, "C", new { @class = "otrule", @data_val = "true", @data_val_required = "* Select Overtime Break Rule" })
+                                                    Automatic
+                                                </div>
+
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.automin3, new { @class = "input-default h38 fs15 int block", @disabled = true, @data_val_required = "* Required" })
+                                                    @Html.ValidationMessageFor(model => model.automin3, "", new { @class = "text-danger fs13" })
+                                                </div>
+
+                                                <div class="col-md-3 flex flex-center text-center h38 fs15 no-padding margin-right-sm">
+                                                    minute/s AFTER every
+                                                </div>
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.autohours3, new { @class = "input-default h38 fs15 int block", @disabled = true, @data_val_required = "* Required" })
+                                                    @Html.ValidationMessageFor(model => model.autohours3, "", new { @class = "text-danger fs13" })
+                                                </div>
+                                                <div class="col-md-1 flex flex-left h38 fs15 no-padding">
+                                                    HOUR/s.
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 margin-top-lg no-padding">
+                                            <div class="col-md-12 otrules  margin-top-sm">
+                                                <div class="col-md-3 fs15 flex flex-left h38 no-padding margin-left-default">
+                                                    @Html.RadioButtonFor(model => model.otrule, "D", new { @class = "otrule", @data_val = "true", @data_val_required = "* Select Overtime Break Rule"})
+                                                    Fix time from
+                                                </div>
+
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.fixtimefrom, new { @class = "input-default h38 fs15 time block", @disabled = true, @data_val = "true", @data_val_required = "* Required" })
+                                                    @Html.ValidationMessageFor(model => model.fixtimefrom, "", new { @class = "text-danger fs13" })
+                                                </div>
+
+                                                <div class="col-md-2 flex flex-center h38 fs15 no-padding">
+                                                    to
+                                                </div>
+                                                <div class="col-md-2 no-padding margin-right-sm">
+                                                    @Html.TextBoxFor(model => model.fixtimeto, new { @class = "input-default h38 fs15 time block", @disabled = true, @data_val = "true", @data_val_required = "* Required" })
+                                                    @Html.ValidationMessageFor(model => model.fixtimeto, "", new { @class = "text-danger fs13" })
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12  margin-top-lg margin-bottom-lg">
+                                            <div class="col-md-12 otrules no-padding">
+                                                <div class="col-md-12 fs15 no-padding margin-left-default">
+                                                    @Html.RadioButtonFor(model => model.otrule, "E", new { @class = "otrule", @data_val = "true", @data_val_required = "* Select Overtime Break Rule"})
+                                                    Do not consider breaks for overtime
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 pull-right no-padding margin-bottom-default">
+                                        <div class="col-md-5 pull-right margin-bottom-default">
+                                            <input type="button" value="SAVE" id="otrulesave" class="bg-green002 button-default block h38 fs17 ff-nt2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 margin-bottom-lg">
+                    <div class="col-md-4  pull-right">
+                        <div class="col-md-3 no-padding margin-right-sm">
+                            <a role="button" class="back h38 fs20 button-default bg-green002 block" data-target="step-1" data-parent="step-2" href="javascript:void(0);">
+                                BACK
+                            </a>
+                        </div>
+                        <div class="col-md-4 no-padding margin-right-sm">
+                            <input type="button" value="CANCEL" data-target="@Url.Content("~/EmployeeClass/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2" />
+                        </div>
+                        <div class="col-md-4 no-padding">
+                            <a role="button" class="next h38 fs20 button-default block" data-target="step-3" data-parent="step-2" href="javascript:void(0);">
+                                NEXT
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-3" class="collapse">
+
+            <div class="col-md-12 no-padding margin-bottom-lg">
+                <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                    <div class="tab selected flex flex-left">
+                        <span class="margin-left-lg fs26">CLASS MULTIPLIER</span>
+                    </div>
+                </div>
+
+                <div class="col-md-5 margin-left-lg margin-top-default">
+                    <div class="col-md-12 margin-top-lg margin-left-lg">
+                        <div class="col-md-12  margin-bottom-default">
+                            <div class="col-md-5 ff-nt2 fs20 h45 flex flex-left">
+                                @Html.LabelFor(model => model.regholidaymultiplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.regholidaymultiplier, new { @class = "dec-1-2 input-default h45 fs20" })
+                                @Html.ValidationMessageFor(model => model.regholidaymultiplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12  margin-bottom-default">
+                            <div class="col-md-5 ff-nt2 fs20 h45  flex flex-left">
+                                @Html.LabelFor(model => model.specholidaymultiplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.specholidaymultiplier, new { @class = "dec-1-2 input-default h45 fs20" })
+                                @Html.ValidationMessageFor(model => model.specholidaymultiplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-bottom-default ">
+                            <div class="col-md-5 ff-nt2 fs20 h45  flex flex-left">
+                                @Html.LabelFor(model => model.doubleholidaymulplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.doubleholidaymulplier, new { @class = "dec-1-2 input-default h45 fs20" })
+                                @Html.ValidationMessageFor(model => model.doubleholidaymulplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-bottom-default ">
+                            <div class="col-md-5 ff-nt2 fs20 h45  flex flex-left">
+                                @Html.LabelFor(model => model.restdaymultiplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.restdaymultiplier, new { @class = "dec-1-2 input-default h45 fs20 " })
+                                @Html.ValidationMessageFor(model => model.restdaymultiplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 margin-top-default">
+                    <div class="col-md-12 margin-top-lg">
+                        <div class="col-md-12 margin-bottom-default margin-left-lg ">
+                            <div class="col-md-6 ff-nt2 no-padding fs20 h45  flex flex-left">
+                                @Html.LabelFor(model => model.nonregotmultiplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.nonregotmultiplier, new { @class = "dec-1-2 input-default h45 fs20" })
+                                @Html.ValidationMessageFor(model => model.nonregotmultiplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-bottom-default  margin-left-lg">
+                            <div class="col-md-6 no-padding ff-nt2 fs20 h45  flex flex-left">
+                                @Html.LabelFor(model => model.regotmultiplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.regotmultiplier, new { @class = "dec-1-2 input-default h45 fs20" })
+                                @Html.ValidationMessageFor(model => model.regotmultiplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-bottom-default  margin-left-lg">
+                            <div class="col-md-6 no-padding ff-nt2 fs20 h45  lex flex-left">
+                                @Html.LabelFor(model => model.nightdiffmultiplier)
+                            </div>
+                            <div class="col-md-4 no-padding">
+                                @Html.TextBoxFor(model => model.nightdiffmultiplier, new { @class = "dec-1-2 input-default h45 fs20" })
+                                @Html.ValidationMessageFor(model => model.nightdiffmultiplier, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 no-padding margin-top-default margin-bottom-lg margin-right-lg">
+                            <div class="col-md-8 pull-right no-padding margin-bottom-lg  ">
+                                <div class="col-md-3 no-padding margin-right-sm">
+                                    <a role="button" class="back h38 fs20 button-default block" data-target="step-2" data-parent="step-3" href="javascript:void(0);">
+                                        BACK
+                                    </a>
+                                </div>
+                                <div class="col-md-4 no-padding margin-right-sm">
+                                    <input type="button" value="UPDATE" id="submit" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                                </div>
+                                <div class="col-md-4 no-padding">
+                                    <input type="button" value="CANCEL" data-target="@Url.Content("~/EmployeeClass/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal" id="mymodal" tabindex="-1" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="col-md-12 no-padding modal-content">
+            <div class="modal-body no-padding reset">
+                @using (Html.BeginForm("", "", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "shift-rule-form" }))
+                {
+
+                    <span role="button" class="glyphicon glyphicon-remove pull-right margin-right-default margin-top-default" data-dismiss="modal"></span>
+
+
+                    <div class="col-md-12 margin-top-default">
+                        <div class="col-md-2 no-padding h38 fs17 ff-nt2 flex flex-center">
+                            If late from
+                        </div>
+
+                        <div class="col-md-2 no-padding">
+                            <input type="text" name="latefrom" id="latefrom" size="1" class="min form-control h38 input-default int-99999" data-val="true" data-val-required="* Required" data-val-range="* The field must be between 1 and 99999." data-val-range-max="99999" data-val-range-min="1">
+                            <span class="text-danger field-validation-error" data-valmsg-for="latefrom" data-valmsg-replace="true"></span>
+                        </div>
+
+                        <div class="col-md-1 no-padding fs17 ff-nt2 h38 flex flex-center">
+                            to
+                        </div>
+                        <div class="col-md-2 no-padding">
+                            <input type="text" name="lateto" id="lateto" size="1" class="max form-control h38 input-default  int-99999" data-linked="latefrom" data-val-linked='* Must be greater than "Late by"' data-val="true" data-val-required="* Required" data-val-range="The field must be between 1 and 99999." data-val-range-max="99999" data-val-range-min="1">
+                            <span class="text-danger field-validation-error" data-valmsg-for="lateto" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="col-md-4 fs17 ff-nt2 h38 flex flex-center">
+                            MINUTE/S from start time.
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default margin-left-default">
+                        <div class="col-md-12 fs17">
+                            <input type="checkbox" id="autocomplete" name="allowtocomplete" data-on-text="Yes" data-off-text="No" data-target=".myradio" />&nbsp; Allow to complete SHIFT HOUR/S
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-left-lg" id="shiftrules">
+                        <div class="col-md-12 margin-top-lg margin-left-default">
+                            <span class="text-danger field-validation-error" data-valmsg-for="myradio" data-valmsg-replace="true"></span>
+                            <div class="col-md-12 fs17">
+                                <input type="radio" name="myradio" class="myradio" value="A" data-val="true" data-val-required="* Select Shift Rule" />&nbsp; Consider as ABSENT
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-top-default margin-left-default " id="maxhourinput">
+                            <div class="col-md-7 no-padding fs17 flex flex-center h45">
+                                <input type="radio" name="myradio" class="myradio" value="B" data-val="true" data-val-required="* Select Shift Rule" />&nbsp; Consider as HALFDAY&nbsp;-&nbsp; Max HOUR/s
+                            </div>
+                            <div class="col-md-2 no-padding">
+                                <input type="text" name="maxhours" size="1" id="maxhours" disabled class="input-default h45 int-24 fs17 block" data-val="true" data-val-required="* Required">
+                                <span class="text-danger field-validation-error" data-valmsg-for="maxhours" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-top-default margin-left-default">
+                            <div class="col-md-12 fs17">
+                                <input type="radio" name="myradio" class="myradio" value="C" data-val="true" data-val-required="* Select Shift Rule" />&nbsp; Count the HOUR/s until Shift End Time
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-lg margin-left-default margin-bottom-lg">
+                        <div class="col-md-12 fs17">
+                            <input type="checkbox" name="allowovertime" class="mycheckbox" />&nbsp; Allow OVERTIME?
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-6 margin-top-lg no-padding pull-right">
+                            <div class="col-md-5 no-padding margin-right-sm margin-bottom-lg">
+                                <input type="submit" id="add" value="ADD" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                            </div>
+                            <div class="col-md-4 no-padding margin-right-default margin-bottom-lg">
+                                <input type="button" value="CLOSE" class="bg-orange001 button-default block h38 fs20 ff-nt2" data-dismiss="modal" />
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var dShifts = [], shifts;
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onChange: function (value) {
+                setupCompanyDefaults(value);
+            },
+            onLoad: function (data) {
+                this.setValue($(this.$input[0]).data('selected'));
+            }
+        });
+
+        $('table').find('[data-control][data-child]').each( function () {
+            var _this = $(this);
+            if (_this.is(':checked')) {
+                $('[data-child=' + _this.data('control') + ']').attr('disabled', false);
+            }
+        });
+
+        $('.dShifts').each(function (index, elem) {
+            dShifts[$(elem).attr('id')] = $(elem).selectize({
+                valueField: 'sft_Id',
+                labelField: 'name1',
+                searchField: ['sft_Id'],
+                onChange: function (value) {
+                    if (!value.length) {
+                        $(this.$input[0]).closest('tr').find('td:eq(2)').text('');
+                        return;
+                    } else {
+                        for (var i in shifts) {
+                            if (shifts[i].sft_Id == value) {
+                                $(this.$input[0]).closest('tr').find('td:eq(2)').text(concat(shifts[i].starttime.Hours, 0, 2, false) + ':' + concat(shifts[i].starttime.Minutes, 0, 2, false) + ' - ' + concat(shifts[i].endtime.Hours, 0, 2, false) + ':' + concat(shifts[i].endtime.Minutes, 0, 2, false));
+                                break;
+                            }
+                        }
+                    }
+                },
+                onBlur: function () {
+                    $(this.$input[0]).valid();
+                },
+                onLoad: function () {
+                    this.setValue($(this.$input[0]).data('selected'), 'silent');
+                    for (var i in shifts) {
+                        if (shifts[i].sft_Id == $(this.$input[0]).data('selected')) {
+                            var sTime = (concat(shifts[i].starttime.Hours, 0, 2, false) + ':' + concat(shifts[i].starttime.Minutes, 0, 2, false) + ' - ' + concat(shifts[i].endtime.Hours, 0, 2, false) + ':' + concat(shifts[i].endtime.Minutes, 0, 2, false));
+                            $(this.$input[0]).closest('tr').find('td:eq(2)').text(sTime);
+                            return;
+                        }
+                    }
+                }
+            });
+        });
+
+        $('table').find('[data-control]:not([data-child])').each( function () {
+            var _this = $(this);
+            if (_this.is(':checked')) {
+                $('[data-child=' + _this.data('control') + ']').iCheck('uncheck');
+                $('[data-child=' + _this.data('control') + ']').iCheck('disable');
+            } else {
+                $('[data-child=' + _this.data('control') + ']').iCheck('enable');
+
+            }
+        });
+    }
+
+    function initializeEvents() {
+        $('#autocomplete').on('click', function () {
+            var target = $(this).data('target');
+            $('#maxhourinput').find('input[type=text]').attr('disabled', true).val('');
+            $('#shiftrules div').find('.field-validation-error span').remove();;
+            if ($(this).is(':checked')) {
+                $(target).attr('checked', false);
+                $(target).attr("disabled", true);
+            }
+            else {
+                $(target).removeAttr("disabled");
+            }
+        });
+
+        $('#shift-rule-form .myradio').change(function () {
+            _this = $(this);
+            $('#shift-rule-form .myradio').not(_this.closest('#maxhourinput')).closest('#shiftrules').find('input[type=text]').val('').attr('disabled', true);
+            $('#shift-rule-form .myradio').not(_this.closest('#maxhourinput')).closest('#shiftrules').find('.field-validation-error span').remove();
+            _this.closest('#maxhourinput').find('input[type=text]').attr('disabled', false);
+        });
+
+        $('#shift-rule-form').on('submit', function (e) {
+            var _this = $(this);
+            var data = _this.serializeArray();
+            var sft_Id = $('#sf-rules-cont').find('.highlight div.fs17').attr('id');
+            var selected = $('.per-shift[data-id="' + sft_Id + '"] ul[id="' + sft_Id + '"]');
+            e.preventDefault();
+            if (_this.valid()) {
+                var tr = $("<tr/>");
+                var li = $('<li>', { class: 'well' });
+                li.append(
+                            '<input type="hidden" class="comp_id" value="' + $('#comp_id').val() + '"/>' +
+                            '<input type="hidden" class="sft_Id" value="' + sft_Id + '"/>'
+                            );
+                tr.append(
+                '<td style="text-align: center; width:10.8%"><span id="remove" role="button" class="glyphicon glyphicon-trash text-pink001"></span></td>'
+                );
+                for (var x in data) {
+                    if (data[x].name == "allowtocomplete") {
+                        li.append(
+                         '<input type="hidden" class="allowtocomplete" value="true"/>' +
+                          '<input type="hidden" class="shiftrules" value=""/>' +
+                          '<input type="hidden" class="maxhours" value="0"/>'
+                         );
+                        tr.append(
+                            '<td style="text-align: center;width:13.2%;"><input type="hidden" class="' + data[x].name + '" value="true" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>' +
+                            '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                            '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001 "></span></td>' +
+                            '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                            '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                            );
+                    }
+                    else if (data[x].name == "latefrom") {
+                        li.append(
+                         '<input type="hidden" class="latefrom" value="' + data[x].value + '"/>'
+                         );
+                        tr.append(
+                            '<td class="' + data[x].name + '" value="' + data[x].value + '" style="text-align: center;width:9.6%;">' + data[x].value + '</td>'
+                            );
+                    }
+                    else if (data[x].name == "lateto") {
+                        li.append(
+                           '<input type="hidden" class="lateto" value="' + data[x].value + '"/>'
+                           );
+                        tr.append(
+                            '<td class="' + data[x].name + '" value="' + data[x].value + '" style="text-align: center;width:8.2%;">' + data[x].value + '</td>'
+                            );
+                    }
+                    else if (data[x].name == "allowovertime") {
+                        li.append(
+                            '<input type="hidden" class="allowovertime" value="true"/>'
+                            );
+                        tr.append(
+                            '<td style="text-align: center;"><input type="hidden" class="' + data[x].name + '" value="true" /><span class="glyphicon glyphicon-ok-circle text-green001"></span></td>'
+                            );
+                    }
+                    else if (data[x].value == "A") {
+                        li.append(
+                            '<input type="hidden" class="allowtocomplete" value="false"/>' +
+                            '<input type="hidden" class="shiftrules" value="' + data[x].value + '"/>' +
+                            '<input type="hidden" class="maxhours" value="0"/>'
+                        );
+                        tr.append(
+                             '<td style="text-align: center;width:13.2%;"><input type="hidden" class="" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:12.6%;"><input type="hidden" class="shiftrules" value="A" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>' +
+                             '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                            );
+                    }
+                    else if (data[x].value == "C") {
+                        li.append(
+                              '<input type="hidden" class="allowtocomplete" value="false"/>' +
+                              '<input type="hidden" class="shiftrules" value="' + data[x].value + '"/>' +
+                              '<input type="hidden" class="maxhours" value="0"/>'
+                        );
+                        tr.append(
+                             '<td style="text-align: center;width:13.2%;"><input type="hidden" class="allowtocomplete" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                             '<td style="text-align: center;width:10.6%;"><input type="hidden" class="shiftrules" value="C" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>'
+                            );
+                    }
+                    else if (data[x].value == "B") {
+                        li.append(
+                            '<input type="hidden" class="allowtocomplete" value="false"/>' +
+                            '<input type="hidden" class="shiftrules" value="' + data[x].value + '"/>'
+                        );
+                        tr.append(
+                            '<td style="text-align: center;width:13.2%;"><input type="hidden" class="allowtocomplete" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                            '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                            '<td style="text-align: center;width:12.7%;"><input type="hidden" class="shiftrules" value="B" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>'
+                            );
+                    }
+                    else if (data[x].name == "maxhours") {
+                        li.append(
+                           '<input type="hidden" class="maxhours" value="' + data[x].value + '"/>'
+                       );
+                        tr.append(
+                            '<td class="' + data[x].name + '" value="' + data[x].value + '" style="text-align: center;width:10.6%;">' + data[x].value + '</td>' +
+                            '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                            );
+                    }
+                }
+                var num = $('#shift-rule-form').find('.mycheckbox').is(':checked');
+                if (!num) {
+                    li.append(
+                         '<input type="hidden" class="allowovertime" value="false"/>'
+                         );
+                    tr.append(
+                    '<td style="text-align: center;"><input type="hidden" class="allowovertime" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                    );
+                }
+                selected.append(li[0]);
+                $('#table_empclass tbody').append(tr[0]);
+                _this[0].reset();
+                $('#maxhourinput').find('input[type=text]').attr('disabled', true).val('');
+                var check = $('#autocomplete').data('target');
+                $(check).removeAttr('disabled');
+            }
+        });
+
+        $(document).on('click', '#table_empclass .glyphicon-trash', function () {
+            var _this = $(this);
+            var index = $(_this).closest('td').parent()[0].sectionRowIndex;
+            bootbox.confirm({
+                size: "small",
+                message: "Remove Shift Rule?",
+                closeButton: false,
+                buttons: {
+                    cancel: {
+                        label: "NO",
+                        className: "bg-orange001 text-white"
+                    },
+                    confirm: {
+                        label: "YES",
+                        className: "bg-green002 text-white"
+                    }
+
+                },
+                className: "fs17 ff-nt2",
+                callback: function (result) {
+                    if (result) {
+
+                        _this.parents('tr').remove();
+                        removeRule(index);
+                    }
+                }
+            });
+
+        });
+
+
+        $('[data-control]:not([data-child])').on('click', function () {
+            var _this = $(this);
+            if (_this.is(':checked')) {
+                $('[data-child=' + _this.data('control') + ']').iCheck('uncheck');
+                $('[data-child=' + _this.data('control') + ']').iCheck('disable');
+                var __this = $('[data-child=' + _this.data('control') + ']');
+                $('[data-child=' + __this.data('control') + ']').val('').attr({ 'disabled': true });
+                $('[data-child=' + __this.data('control') + ']').each(function (i, e) {
+                    $('[data-valmsg-for=' + $(e).attr('id') + ']').html('');
+
+                });
+            } else {
+                $('[data-child=' + _this.data('control') + ']').iCheck('enable');
+            }
+        });
+
+        $('[data-control][data-child]').on('change', function () {
+            var _this = $(this);
+            if (_this.is(':checked')) {
+                $('[data-child=' + _this.data('control') + ']').attr('disabled', false);
+            } else {
+                $('[data-child=' + _this.data('control') + ']').val("").attr({ 'disabled': true });
+                $('[data-child=' + _this.data('control') + ']').each(function (i, e) {
+                    $('[data-valmsg-for=' + $(e).attr('id') + ']').html('');
+                });
+
+            }
+        });
+
+        $('#allowovertime').on('click', function (event, state) {
+            var _this = $(this);
+            if (_this.is(':checked')) {
+                $('#step-2  input[type=radio],#minothours').attr('disabled', false);
+            } else {
+                $('#step-2 input[type=text]').val('').attr('disabled', true);
+                $('#step-2 input[type=radio]').attr({ 'disabled': true, 'checked': false });
+                $('#step-2 span[data-valmsg-for]').html('');
+            }
+        });
+
+        $('.next').on('click', function () {
+            var _this = $(this);
+            var parent = $(this).data('parent');
+            var target = $('#' + parent).nextAll('div:not(.hidden):first').attr('id');
+            if ($('#empClassFrm').valid()) {
+                $('#' + parent).slideUp(10, function () {
+                    $('#' + target).slideDown(10, function () {
+                        $('html, body').animate({
+                            scrollTop: 100
+                        }, 0);
+                    });
+                });
+            }
+        });
+
+        $('#otrulesave').on('click', function () {
+            var sft_Id = $('#sf-rules-cont').find('.highlight div.fs17').attr('id');
+
+            $('#OTRulesfrm input[type="text"]').each(function () {
+                var _this = $(this);
+                if (_this.val() == "" && !_this.is(':disabled')) {
+                    if (!_this.valid()){
+                        _this.focus();
+                        return false;
+                    }
+                    
+                }
+                
+            });
+            $('#OTRulesfrm input[type="radio"]').each(function () {
+                var _this = $(this);
+                if (!_this.is(':checked')) {
+                    _this.valid();
+                    _this.focus();
+                    return false;
+                    
+                }
+            });
+
+            $('#OTRulesfrm').find('.field-validation-error:first').focus();
+            var error = $('#OTRulesfrm').find('.field-validation-error').length;
+            if (!error) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Save OT Rule?",
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        var selected = $('.per-shift[data-id="' + sft_Id + '"] ul.otshiftrule');
+                        var ul = $('<ul>', { class: 'otshiftrule' });
+                        $('#OTRulesfrm input[type="text"]').each(function () {
+                            var _this = $(this);
+                            ul.append(
+                                   '<input type="hidden" class="' + _this.attr('name') + '" value="' + _this.val() + '"/>'
+                            );
+                            selected.before(ul[0]);
+                        });
+                        $('#OTRulesfrm input[type="radio"]:checked').each(function () {
+                            var _this = $(this);
+                            ul.append(
+                                   '<input type="hidden" class="' + _this.attr('name') + '" value="' + _this.val() + '"/>'
+                            );
+                            selected.before(ul[0]);
+                            selected.remove();
+                        });
+                        
+                    }
+                });
+            }
+            
+        });
+
+        $(".back").on('click', function () {
+            var _this = $(this);
+            var parent = $(this).data('parent');
+            var target = $('#' + parent).prevAll('div:not(.hidden):first').attr('id');
+
+            $('#' + parent).slideUp(10, function () {
+                $('#' + target).slideDown(10, function () {
+                    $('html, body').animate({
+                        scrollTop: 100
+                    }, 0);
+                });
+            });
+
+        });
+
+        $('.otrule').change(function () {
+            _this = $(this);
+            _this.closest('.otrules').find('input[type=text]').attr('disabled', false);
+            $('.otrule').not(this).closest('.otrules').find('input[type=text]').val('').attr('disabled', true);
+            $('#otvalidation .field-validation-error span').remove();
+        });
+
+        $(document).on('click', '.active1', function () {
+            var _this = $(this);
+            _this.closest('.input-default').addClass('highlight');
+            _this.closest('#sf-rules-cont').find('.highlight').find('.glyphicon').removeClass('hidden');
+            _this.closest('#sf-rules-cont').find('.highlight').not(_this.closest('.input-default')).removeClass('highlight').find('.glyphicon').addClass('hidden');
+            var data = _this.attr('id');
+            showRules(data);
+        });
+
+        $('#submit').on('click', function (e) {
+            var _this = $('#empClassFrm');
+            if (_this.valid()) {
+                bootbox.confirm({
+                    size: "small",
+                    message: "Update Employee Class?",
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "NO",
+                            className: "bg-orange001 text-white"
+                        },
+                        confirm: {
+                            label: "YES",
+                            className: "bg-green002 text-white"
+                        }
+
+                    },
+                    className: "fs17 ff-nt2",
+                    callback: function (result) {
+                        if (result) {
+                            var submit = submitForm();
+                            $.ajax({
+                                url: "@Url.Content("~/EmployeeClass/Update")",
+                                method: 'post',
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ data: submit }),
+                                success: function (results) {
+                                    if (!results) {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Error!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            }
+
+                                        });
+                                    }
+                                    else {
+                                        bootbox.alert({
+                                            size: "small",
+                                            message: "Successfully Saved!",
+                                            closeButton: false,
+                                            className: "fs17 ff-nt2",
+                                            buttons: {
+                                                ok:
+                                                {
+                                                    className: "bg-green002 text-white"
+                                                }
+                                            },
+                                            callback: function (sresult) {
+                                                window.location.href = '@Url.Content("~/EmployeeClass/Index")';
+
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+
+    function removeRule(col) {
+        var sft_Id = $('#sf-rules-cont').find('.highlight div.fs17').attr('id');
+        var selected = $('.per-shift[data-id="' + sft_Id + '"] ul[id="' + sft_Id + '"]');
+        selected.find('.well').each(function (index, elem) {
+            if (col == index) {
+                $(this).remove();
+            }
+        });
+
+    }
+
+    function submitForm() {
+        var serial = $('#empClassFrm').serializeArray();
+        var comp_id = $('#comp_id').val();
+        var Empclass = {};
+        for (var x in serial) {
+            Empclass[serial[x].name] = serial[x].value;
+            if ($('input[name="' + serial[x].name + '"]').is(':checkbox') || $('input[name="' + serial[x].name + '"]').is(':radio')) {
+                Empclass[serial[x].name] = $('input[name="' + serial[x].name + '"]:checked').val() || false;
+            }
+        }
+        Empclass["ClassShift"] = [];
+        Empclass["ClassShiftRules"] = [];
+        $('.per-shift tbody tr').each(function (index1, elem1) {
+            var _this = $(this);
+            $(_this).find('li').each(function (index, elem) {
+
+                ClassShift = {};
+                ClassShift["comp_id"] = comp_id;
+                ClassShift["class_id"] = $('#class_id').val();
+                ClassShift["sft_Id"] = $(elem).find('.sft_Id').val();
+                ClassShift["allowovertime"] = $(elem).find('.allowovertime').val();
+                ClassShift["allowtocomplete"] = $(elem).find('.allowtocomplete').val();
+                ClassShift["latefrom"] = $(elem).find('.latefrom').val();
+                ClassShift["sequence"] = index;
+                ClassShift["lateto"] = $(elem).find('.lateto').val();
+                ClassShift["maxhours"] = $(elem).find('.maxhours').val();
+                ClassShift["shiftrules"] = $(elem).find('.shiftrules').val();
+                Empclass["ClassShift"].push(ClassShift);
+            });
+        });
+
+        $('.per-shift tbody tr ul.otshiftrule').each(function (index1, elem1) {
+            ClassShiftRules = {};
+                ClassShiftRules["comp_id"] = comp_id;
+                ClassShiftRules["class_id"] = $('#class_id').val();
+                ClassShiftRules["sft_Id"] = $(elem1).closest('td').attr('data-id');
+                ClassShiftRules["minothours"] = $(elem1).find('.minothours').val();
+                ClassShiftRules["otrule"] = $(elem1).find('.otrule').val();
+                ClassShiftRules["automin1"] = $(elem1).find('.automin1').val();
+                ClassShiftRules["automin2"] = $(elem1).find('.automin2').val();
+                ClassShiftRules["autohours2"] = $(elem1).find('.autohours2').val();
+                ClassShiftRules["autohours3"] = $(elem1).find('.autohours3').val();
+                ClassShiftRules["automin3"] = $(elem1).find('.autohours3').val();
+                ClassShiftRules["fixtimefrom"] = $(elem1).find('.fixtimefrom').val();
+                ClassShiftRules["fixtimeto"] = $(elem1).find('.fixtimeto').val();
+                Empclass["ClassShiftRules"].push(ClassShiftRules);
+        });
+        return Empclass;
+    }
+
+    function setupCompanyDefaults(company) {
+
+        $.ajax({
+            url: '@Url.Content("~/LookUp/selectCompany")',
+            method: 'get',
+            data: { comp_id: company },
+            success: function (results) {
+                companyConfig = results;
+                $('input[name=cutoffperiod][value=A]').iCheck(!results.monthly ? 'disable' : 'enable');
+                $('input[name=cutoffperiod][value=B]').iCheck(!results.semimonthly ? 'disable' : 'enable');
+                $('input[name=cutoffperiod][value=C]').iCheck(!results.weekly ? 'disable' : 'enable');
+                $('input[name=cutoffperiod][value=D]').iCheck(!results.daily ? 'disable' : 'enable');
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Content("~/LookUp/shiftsPerCompany")',
+            method: 'get',
+            data: { comp_id: company },
+            success: function (results) {
+                shifts = results;
+                for (var x in dShifts) {
+                    dShifts[x][0].selectize.clearOptions();
+                    dShifts[x][0].selectize.load(function (callback) {
+                        callback(shifts);
+                    });
+                }
+                for (var x in shifts) {
+                    if ($('.per-shift[data-id=' + shifts[x].sft_Id + ']').length == 0) {
+                        var template = '<div class="input-default bg-gray006  margin-bottom-sm margin-top-default">' +
+                                            '<div class="fs17 h38 ff-nt2 flex flex-left" id="' + shifts[x].sft_Id + '">' +
+                                                    '<span class="active1" role="button" id="' + shifts[x].sft_Id + '">' +
+                                                        shifts[x].name1 + ' | ' + concat(shifts[x].starttime.Hours, 0, 2, false) + ':' + concat(shifts[x].starttime.Minutes, 0, 2, false) + ' - ' + concat(shifts[x].endtime.Hours, 0, 2, false) + ':' + concat(shifts[x].endtime.Minutes, 0, 2, false) +
+                                                        '&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down text-pink001 hidden " />' +
+                                                    '</span>' +
+                                            '</div>' +
+                                        '</div>';
+                        $('#sf-rules-cont').append(template);
+                        var tr = $("<tr/>");
+                        tr.append(
+                           '<td style="display:none" class="per-shift" data-id="' + shifts[x].sft_Id + '">' +
+                           '<ul id="' + shifts[x].sft_Id + '"></ul>'+ 
+                           '<ul class="otshiftrule">' +
+                           '</td>'
+                           );
+                        $('#tableid tbody').append(tr[0]);
+                    }
+                }
+                ClassShift(function(){
+                    ClassShiftRules();
+                });
+            }
+        });
+
+    }
+
+    function ClassShift(cb) {
+        var shifts = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.ClassShift));
+        for (var x in shifts) {
+            var selected = $('.per-shift[data-id="' + shifts[x].sft_id + '"]');
+            var tr = $('<li>', { class: 'well' });
+            tr.append(
+                        '<input type="hidden" class="comp_id" value="' + shifts[x].comp_id + '"/>' +
+                        '<input type="hidden" class="sft_Id" value="' + shifts[x].sft_id + '"/>' +
+                        '<input type="hidden" class="allowovertime" value="' + shifts[x].allowovertime + '"/>' +
+                        '<input type="hidden" class="allowtocomplete" value="' + shifts[x].allowtocomplete + '"/>' +
+                        '<input type="hidden" class="latefrom" value="' + shifts[x].latefrom + '"/>' +
+                        '<input type="hidden" class="lateto" value="' + shifts[x].lateto + '"/>' +
+                        '<input type="hidden" class="maxhours" value="' + shifts[x].maxhours + '"/>' +
+                        '<input type="hidden" class="sequence" value="' + shifts[x].sequence + '"/>'
+               );
+            if (shifts[x].shiftrules == null) {
+                tr.append(
+                '<input type="hidden" class="shiftrules" value=""/>'
+                );
+            }
+            else {
+                tr.append(
+                '<input type="hidden" class="shiftrules" value="' + shifts[x].shiftrules + '"/>'
+                );
+            }
+            selected.find('ul[id="'+shifts[x].sft_id+'"]').append(tr[0]);
+        }
+        cb();
+    }
+
+    function ClassShiftRules() {
+        var shiftsOTRules = @Html.Raw(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Model.ClassShiftRules));
+        for (var x in shiftsOTRules) {
+            var tr = $("<td/>");
+            var selected =$('#tableid tbody td.per-shift[data-id="'+shiftsOTRules[x].sft_id+'"]');
+            tr.append(
+                       '<input type="hidden" class="minothours" value="' + nullChecker(shiftsOTRules[x].minothours) + '"/>' +
+                       '<input type="hidden" class="otrule" value="' + nullChecker(shiftsOTRules[x].otrule) + '"/>' +
+                       '<input type="hidden" class="automin1" value="' + nullChecker(shiftsOTRules[x].automin1) + '"/>' +
+                       '<input type="hidden" class="automin2" value="' + nullChecker(shiftsOTRules[x].automin2) + '"/>' +
+                       '<input type="hidden" class="autohours2" value="' + nullChecker(shiftsOTRules[x].autohours2) + '"/>' +
+                       '<input type="hidden" class="automin3" value="' + nullChecker(shiftsOTRules[x].automin3) + '"/>' +
+                       '<input type="hidden" class="autohours3" value="' + nullChecker(shiftsOTRules[x].autohours3) + '"/>' +
+                '</ul>'
+                );
+            if (shiftsOTRules[x].otrule == "D") {
+                tr.append(
+                '<input type="hidden" class="fixtimefrom" value="' + concat(shiftsOTRules[x].fixtimefrom.Hours, 0, 2, false) + ':' + concat(shiftsOTRules[x].fixtimefrom.Minutes, 0, 2, false) + '"/>' +
+                       '<input type="hidden" class="fixtimeto" value="' + concat(shiftsOTRules[x].fixtimeto.Hours, 0, 2, false) + ':' + concat(shiftsOTRules[x].fixtimeto.Minutes, 0, 2, false) + '"/>'
+                       );
+            }
+            else {
+                tr.append(
+                '<input type="hidden" class="fixtimefrom" value=""/>' +
+                       '<input type="hidden" class="fixtimeto" value=""/>'
+                       );
+            }
+            selected.find('ul.otshiftrule').append(tr[0]);
+        }
+    }
+
+    function displayotrule(shift) {
+        var check = $('.per-shift[data-id="' + shift + '"] ul.otshiftrule').length;
+        $('#OTRulesfrm').find('input[type="radio"]').each(function() {
+            $(this).attr('checked',false)
+            $(this).closest('.otrules').find('input[type=text]').attr('disabled', true);;
+        });
+        if(check){
+            $('.per-shift[data-id="' + shift + '"] ul.otshiftrule').each(function (index, elem) {
+                var minothours = $(elem).find('.minothours').val();
+                var automin1 = $(elem).find('.automin1').val();
+                var automin2 = $(elem).find('.automin2').val();
+                var autohours2 = $(elem).find('.autohours2').val();
+                var automin3 = $(elem).find('.automin3').val();
+                var autohours3 = $(elem).find('.autohours3').val();
+                var fixtimefrom = $(elem).find('.fixtimefrom').val();
+                var fixtimeto = $(elem).find('.fixtimeto').val();
+                var otrule = $(elem).find('.otrule').val();
+                $('#minothours').val(minothours);
+                $('#automin1').val(automin1);
+                $('#automin2').val(automin2);
+                $('#autohours2').val(autohours2);
+                $('#autohours3').val(autohours3);
+                $('#automin3').val(automin3);
+                $('#fixtimefrom').val(fixtimefrom);
+                $('#fixtimeto').val(fixtimeto);
+                var _this = $("#OTRulesfrm input[type=radio][value=" + otrule + "]");
+                _this.prop('checked', true);
+                _this.closest('.otrules').find('input[type=text]').attr('disabled', false);
+            });
+        }
+        else{
+            $('#OTRulesfrm input[type="text"]').each(function(){
+                var _this = $(this);
+                _this.val('');
+
+            });
+            $('#OTRulesfrm').find('input[type="radio"]').each(function() {
+                $(this).attr('checked',false)
+                $(this).closest('.otrules').find('input[type=text]').attr('disabled', true);;
+            })
+
+        }
+
+    }
+
+    function showRules(shift) {
+        displayotrule(shift);
+        $('.srule').removeClass('collapse');
+        $('#table_empclass tbody tr').remove();;
+        $('.per-shift[data-id="' + shift + '"] li').each(function (index, elem) {
+            var latefrom = $(elem).find('.latefrom').val();
+            var lateto = $(elem).find('.lateto').val();
+            var allowovertime = $(elem).find('.allowovertime').val();
+            var allowtocomplete = $(elem).find('.allowtocomplete').val();
+            var maxhours = $(elem).find('.maxhours').val();
+            var sequence = $(elem).find('.sequence').val();
+            var shiftrules = $(elem).find('.shiftrules').val();
+            var tr = $("<tr/>");
+            tr.append(
+                 '<td style="text-align: center; width:10.8%"><span id="remove" role="button" class="glyphicon glyphicon-trash text-pink001"></span></td>' +
+                 '<td class="latefrom" value="' + latefrom + '" style="text-align: center;width:9.6%;">' + latefrom + '</td>' +
+                 '<td class="lateto" value="' + lateto + '" style="text-align: center;width:8.2%;">' + lateto + '</td>'
+            );
+            if (allowtocomplete == "true") {
+                tr.append(
+                    '<td style="text-align: center;width:13.2%;"><input type="hidden" class=" allowtocomplete" value="true" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>' +
+                    '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                    '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001 "></span></td>' +
+                    '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                    '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                    );
+            }
+            if (allowtocomplete == "false" && shiftrules == "") {
+                tr.append(
+                    '<td style="text-align: center;width:13.2%;"><input type="hidden" class=" allowtocomplete" value="true" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>' +
+                    '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                    '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001 "></span></td>' +
+                    '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                    '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                    );
+            }
+            if (shiftrules == "A") {
+                tr.append(
+                     '<td style="text-align: center;width:13.2%;"><input type="hidden" class="allowtocomplete" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>' +
+                     '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                    );
+            }
+            if (shiftrules == "C") {
+                tr.append(
+                     '<td style="text-align: center;width:13.2%""><input type="hidden" class="allowtocomplete" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:12.7%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                     '<td style="text-align: center;width:10.6%;"><input type="hidden" class="shiftrules" value="C" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>'
+                    );
+            }
+            if (shiftrules == "B") {
+                tr.append(
+                    '<td style="text-align: center;width:13.2%;"><input type="hidden" class="allowtocomplete" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                    '<td style="text-align: center;width:12.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>' +
+                    '<td style="text-align: center;width:12.7%;"><input type="hidden" class="shiftrules" value="B" /><span class="glyphicon glyphicon-ok-circle text-green001" ></span></td>' +
+                    '<td class="maxhours" value="' + maxhours + '" style="text-align: center;width:10.6%;">' + maxhours + '</td>' +
+                    '<td style="text-align: center;width:10.6%;"><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                    );
+            }
+            if (allowovertime == "true") {
+                tr.append(
+                    '<td style="text-align: center;"><input type="hidden" class="allowovertime" value="true" /><span class="glyphicon glyphicon-ok-circle text-green001"></span></td>'
+                    );
+            }
+            if (allowovertime == "false") {
+                tr.append(
+                     '<td style="text-align: center;"><input type="hidden" class="allowovertime" value="false" /><span class="glyphicon glyphicon-remove-circle text-pink001"></span></td>'
+                    );
+            }
+            $('#table_empclass tbody').append(tr[0]);
+        });
+    }
+
+</script>
+

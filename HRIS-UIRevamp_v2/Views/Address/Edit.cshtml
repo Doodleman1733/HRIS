@@ -1,0 +1,223 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model AddressUpdateViewModel
+@{
+    ViewBag.Title = "Address/Edit";
+}
+<div class="col-md-12 title">
+    UPDATE ADDRESS
+</div>
+
+@using (Html.BeginForm("Update", "Address", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "addressFrm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="body-content">
+        <div class="col-md-6 no-padding left-container">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+            @Html.TextBoxFor(model => model.address_id, new { @maxlength = "20", @class = "input-default h45 fs20 block hidden" })
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Address Names
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.name1, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.name2, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.name2, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        3.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.name3, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.name3, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12  margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.description, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextAreaFor(model => model.description, new { @maxlength = "250", @class = "input-default fs20 block", @rows = 5 })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-md-12 margin-top-default floatingLabel">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Location Address
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.streetaddress, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Street" })
+                        @Html.ValidationMessageFor(model => model.streetaddress, "", new { @class = "fs15 text-danger" })
+                    </div>
+                    <div class="col-md-6 ">
+                        @Html.TextBoxFor(model => model.city, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "City" })
+                        @Html.ValidationMessageFor(model => model.city, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-12 no-padding ">
+                    <div class="col-md-6 margin-top-default">
+                        @Html.TextBoxFor(model => model.province, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Province" })
+                        @Html.ValidationMessageFor(model => model.province, "", new { @class = "fs15 text-danger" })
+                    </div>
+                    <div class="col-md-6 margin-top-default">
+                        @Html.TextBoxFor(model => model.country, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Country" })
+                        @Html.ValidationMessageFor(model => model.country, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12  margin-top-default margin-bottom-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.postalcode, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm margin-bottom-lg">
+                    @Html.TextBoxFor(model => model.postalcode, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Enter Postal Code" })
+                    @Html.ValidationMessageFor(model => model.postalcode, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">CONTACT DETAILS</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Contact Persons
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.contactperson1, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.contactperson1, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.contactperson2, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.contactperson2, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Phone Numbers
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.phone1, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.phone1, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.phone2, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                        @Html.ValidationMessageFor(model => model.phone2, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Emails
+                </div>
+                <div class="col-md-12 floatingLabel">
+                    <div class="col-md-12 no-padding-right">
+                        @Html.TextBoxFor(model => model.email1, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Email 1" })
+                        @Html.ValidationMessageFor(model => model.email1, "", new { @class = "fs15 text-danger" })
+                    </div>
+                    <div class="col-md-12 margin-top-default no-padding-right">
+                        @Html.TextBoxFor(model => model.email2, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Email 2" })
+                        @Html.ValidationMessageFor(model => model.email2, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default margin-bottom-default">
+                <div class="col-md-12 ">
+                    <div class="col-md-12 fs20 ff-nt2 no-padding">
+                        @Html.LabelFor(model => model.addinfo, new { @class = "" })
+                    </div>
+                    <div class="col-md-12 margin-top-sm no-padding-right">
+                        @Html.TextAreaFor(model => model.addinfo, new { @maxlength = "250", @class = "input-default fs20 block", @rows = 5 })
+                        @Html.ValidationMessageFor(model => model.addinfo, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6 pull-right margin-top-lg margin-right-default flex flex-center no-padding-right margin-bottom-default">
+                    <div class="col-md-5 no-padding pull-right margin-right-sm">
+                        <input type="submit" value="UPDATE" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                    </div>
+                    <div class="no-padding col-md-7">
+                        <input type="button" value="CANCEL" data-target="@Url.Content("~/Address/Index")" class="checkChanges bg-orange001 button-default block h38 fs20 ff-nt2" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+}
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+    }
+
+    function initializeEvents() {
+
+        userForm = new FormPrompt({
+            form: $("#addressFrm"),
+            message: 'Update Address?'
+        });
+
+        userForm.run();
+    }
+</script>

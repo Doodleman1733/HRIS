@@ -1,0 +1,26 @@
+﻿ .floating-label
+ {
+
+  color: #1e94c8;
+  font-size: 16px;
+  position: relative;
+  top: 0;
+  font-weight: bold;
+  z-index: 2;
+  opacity: 0;
+  margin-bottom:-5px;
+
+ }
+
+.pin
+{
+  color: #f5a81c;
+  font-size:16px;
+}
+
+
+.pinblack 
+{
+  color: #808080;
+  font-size:16px;
+}

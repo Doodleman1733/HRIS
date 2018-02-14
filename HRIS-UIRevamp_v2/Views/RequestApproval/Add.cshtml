@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = "Request Approval";
+}
+
+<div class="col-md-12 fs70 title">
+    REQUEST APPROVAL
+</div>
+<div class="body-content">
+    <div class="col-md-5 left-container">
+        <div class="margin-top-default"></div>
+        <div class="margin-top-lg margin-bottom-default relative col-md-12">
+            <input id="date" class="has input-default h62 fs20 block" type="text" placeholder="Date"/>
+            <div id="datepicker" class="input-right glyphicon fs26 glyphicon-calendar text-orange001">
+            </div>
+        </div>
+        <div class="margin-top-lg margin-bottom-default relative col-md-12">
+            <input class="input-default h62 fs20 block" type="text" placeholder="Company" />
+            <div class="input-right badge badge-circle bg-orange001">
+                <div class="glyphicon glyphicon-chevron-down fs12"></div>
+            </div>
+        </div>
+        <div class="margin-top-lg margin-bottom-default relative col-md-12">
+            <input class="input-default h62 fs20 block" type="text" placeholder="Department" />
+            <div class="input-right badge badge-circle bg-orange001">
+                <div class="glyphicon glyphicon-chevron-down fs12"></div>
+            </div>
+        </div>
+        <div class="margin-top-lg margin-bottom-default relative col-md-12">
+            <input class="input-default h62 fs20 block" type="text" placeholder="Employee" />
+            <div class="input-right badge badge-circle bg-orange001">
+                <div class="glyphicon glyphicon-chevron-down fs12"></div>
+            </div>
+        </div>
+        <div class="margin-top-lg margin-bottom-default col-md-12">
+            <div class="col-md-6 no-padding-left">
+                <button class="h42 fs20 button-default block">SEARCH</button>
+            </div>
+            <div class="col-md-6 no-padding-right">
+                <button class="h42 fs20 button-default block">CLEAR FILTER</button>
+            </div>
+        </div>
+        <div class="margin-top-lg margin-bottom-default col-md-12">
+            <div class="col-md-6 no-padding-left">
+                <button class="h42 fs20 button-default block">CANCEL</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 no-padding">
+        <div class="tabs-default margin-bottom-default ff-nt2">
+            <button class="tab selected text-left">
+                <span class="margin-left-lg fs26">PENDING</span>
+                <div class="badge badge-circle fs20 bg-orange001 vmiddle margin-right-default pull-right">
+                    <div>3</div>
+                </div>
+            </button>
+        </div>
+        <div class="margin-bottom-lg col-md-12">
+            <div class="col-md-12" id="table-pending-container">
+                <table id='table-pending' class="table table-hover dyna-theme001">
+                    <thead>
+                        <tr>
+                            <th class="fs12" data-dynatable-column="date-needed">DATE NEEDED</th>
+                            <th class="fs12" data-dynatable-column="requestor">REQUESTOR</th>
+                            <th class="fs12" data-dynatable-column="department">DEPARTMENT</th>
+                            <th class="fs12" data-dynatable-column="request-type">REQUEST TYPE</th>
+                            <th class="fs12" data-dynatable-column="field-payroll-period">FIELD PAYROLL PERIOD</th>
+                            <th class="fs12" data-dynatable-column="action"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tabs-default margin-bottom-default ff-nt2">
+            <button class="tab selected text-left">
+                <span class="margin-left-lg fs26">WITHDRAWN</span>
+                <div class="badge badge-circle fs20 bg-orange001 vmiddle margin-right-default pull-right">
+                    <div>0</div>
+                </div>
+            </button>
+        </div>
+        <div class="margin-bottom-lg col-md-12">
+            <div class="col-md-12" id="table-withdrawn-container">
+                <table id='table-withdrawn' class="table table-hover dyna-theme001">
+                    <thead>
+                        <tr>
+                            <th class="fs12" data-dynatable-column="date-needed">DATE NEEDED</th>
+                            <th class="fs12" data-dynatable-column="requestor">REQUESTOR</th>
+                            <th class="fs12" data-dynatable-column="department">DEPARTMENT</th>
+                            <th class="fs12" data-dynatable-column="request-type">REQUEST TYPE</th>
+                            <th class="fs12" data-dynatable-column="field-payroll-period">FIELD PAYROLL PERIOD</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var recordsPending = [{
+        "date-needed": "01/18/18",
+        "requestor": "JOHN DOE",
+        "department": "Frabelle De Salcedo",
+        "request-type": "Overtime, Official Business",
+        "field-payroll-period": "Field Payroll Period",
+        "action": "<div class='badge badge-circle badge-circle--small bg-blue003'><span class='fs-12 glyphicon glyphicon-chevron-right'></span></div>"
+    }, {
+        "date-needed": "01/18/18",
+        "requestor": "JOHN DOE",
+        "department": "Frabelle De Salcedo",
+        "request-type": "Overtime, Official Business",
+        "field-payroll-period": "Field Payroll Period",
+        "action": "<div class='badge badge-circle badge-circle--small bg-blue003'><span class='fs-12 glyphicon glyphicon-chevron-right'></span></div>"
+    }, {
+        "date-needed": "01/18/18",
+        "requestor": "JOHN DOE",
+        "department": "Frabelle De Salcedo",
+        "request-type": "Overtime, Official Business",
+        "field-payroll-period": "Field Payroll Period",
+        "action": "<div class='badge badge-circle badge-circle--small bg-blue003'><span class='fs-12 glyphicon glyphicon-chevron-right'></span></div>"
+    }];
+
+    $('#table-pending').dynatable({
+        table: {
+            defaultColumnIdStyle: 'underscore',
+            copyHeaderClass: true
+        },
+        dataset: {
+            records: recordsPending
+        },
+        features: {
+            paginate: false,
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        }
+    });
+
+    var recordsWithdrawn = [];
+
+    $('#table-withdrawn').dynatable({
+        table: {
+            defaultColumnIdStyle: 'underscore',
+            copyHeaderClass: true
+        },
+        dataset: {
+            records: recordsWithdrawn
+        },
+        features: {
+            paginate: false,
+            search: false,
+            recordCount: false,
+            perPageSelect: false
+        }
+    });
+    
+    const ps = new PerfectScrollbar('#table-pending-container', {});
+    const ps2 = new PerfectScrollbar('#table-withdrawn-container', {});
+
+
+    $(window).resize(function () {
+        window.setTimeout(function () {
+            ps.update();
+            ps2.update();
+        }, 200);
+    });
+
+    $('#datepicker').daterangepicker({
+        "singleDatePicker": true,
+        "autoUpdateInput": false,
+        "opens": "left",
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
+
+    $('#datepicker').on('apply.daterangepicker', function (ev, picker) {
+        $('#date').val(picker.startDate.format('DD/MM/YYYY'));
+        $('#date').valid();
+    });
+</script>

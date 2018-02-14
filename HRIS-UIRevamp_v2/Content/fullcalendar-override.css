@@ -1,0 +1,278 @@
+.fc.fc-mini {
+    /*width: 306px;
+    margin-left: auto;*/
+}
+
+
+/*title-controls*/
+.fc .fc-prev-button, .fc .fc-next-button {
+    background-color: #f5a81c;
+    color: white;
+    border-radius: 100px;
+    font-size: 15px;
+    height: 35px;
+    border: 0px;
+    padding: 0px 10px;
+    outline: none!important;
+}
+
+.fc.fc-mini .fc-prev-button, .fc.fc-mini .fc-next-button {
+    font-size: 8px;
+    height: 16px;
+    padding: 0 4px;
+}
+    
+
+.fc .fc-prev-button {
+    position: relative;
+    top: 15px;
+    left: 50%;
+}
+
+.fc.fc-mini .fc-prev-button {
+    position: relative;
+    top: 13px;
+    left: 90%;
+}
+
+
+
+.fc .fc-next-button {
+    position: relative;
+    top: 15px;
+    right: 50%;
+}
+.fc.fc-mini .fc-next-button {
+    position: relative;
+    top: 13px;
+    right: 90%;
+}
+
+/*.fc .fc-toolbar > * > * {
+    margin-left: .1em;
+}*/
+/**/
+
+/*title*/
+
+.fc-toolbar {
+    background-color: #0e3659;
+    color: white;
+    height: 6.6vmin;
+    height: 63px;
+    border-radius: 10px;
+}
+
+.fc-mini .fc-toolbar {
+    height: 40px;
+    margin-bottom: 0px;
+}
+
+.fc-toolbar h2 {
+    padding-top: 14px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 35px;
+    text-transform: uppercase;
+    font-family: "Neutra Text 2";
+}
+
+.fc-mini .fc-toolbar h2 {
+    padding-top: 12px;
+    font-size: 16px;
+}
+/**/
+
+/*day-header*/
+.fc-day-header {
+    font-size: 22px;
+    color: #848484;
+}
+
+.fc th, .fc td {
+    padding: 0;
+    vertical-align: top;
+}
+
+.fc .fc-head-container .fc-row {
+    border-bottom: 0px solid white;
+}
+
+.fc.fc-mini .fc-head-container .fc-row {
+    display: none;
+}
+/**/
+
+.fc-row .fc-content-skeleton {
+    position: relative;
+    top: 35%;
+    text-align: center;
+    z-index: 4;
+    padding-bottom: 2px;
+}
+
+.fc-mini .fc-row .fc-content-skeleton {
+    top: 28%;
+}
+
+.fc-row .fc-content-skeleton td, .fc-row .fc-helper-skeleton td {
+    border: 0;
+}
+
+.fc-day-top {
+    /*width: 100%;*/
+    height: 100%;
+}
+
+.fc-mini .fc-day-top {
+    width: auto
+}
+
+.fc-basic-view .fc-week-number, .fc-basic-view .fc-day-number {
+    font-size: 25px;
+    font-size: 1.6vw;
+    font-family: "Neutra Text 2";
+    color: white;
+    float:none!important;
+}
+
+.fc-mini .fc-basic-view .fc-week-number, .fc-mini .fc-basic-view .fc-day-number {
+    font-size: 15px;
+    color: #808080;
+}
+
+/*fc-today*/
+.fc-mini .fc-basic-view .fc-week-number, .fc-mini .fc-basic-view .fc-today .fc-day-number {
+    color: white;
+}
+
+.fc-day {   
+    background-color: white;
+    position: relative;
+}
+
+.fc-day::after {
+    content: '';
+    width: 64%;
+    height: 4.6vw; /*todo - for IE*/
+    height: 76%;
+    display: inline-block;
+    border-style: solid;
+    border-color: white;
+    position: absolute;
+    top: .8vw; /*todo - for IE*/
+    top: 12%;
+    left: 17%;
+    border: none;
+    background-color: #d5d5d5;
+    border: 1px solid #d5d5d5;
+}
+
+.fc-mini .fc-day::after {
+    width: 76.78%;
+    height: 73.35%;
+
+    left: 9.3023%;
+    background-color: white;
+}
+
+/*fc-today*/
+.fc-mini .fc-day.fc-today::after {
+    background-color: #18b5c8;
+}
+
+.has-legend.fc-day::after {
+    background-color: white;
+}
+
+.on-leave.fc-day::after {
+    background-color: #e94f69;
+}
+
+.regular-holiday.fc-day::after {
+    background-color: #f5a623;
+}
+
+.special-holiday.fc-day::after {
+    background-color: #469546;
+}
+
+.rest-day.fc-day::after {
+    background-color: #2f76c8;
+}
+
+.has-legend.fc-day span {
+    position: absolute;
+    left: 25%;
+    top: 1.3vw; /*todo - for IE*/
+    top: 20%;
+    z-index: 1;
+    font-size: .9vw;
+}
+
+.has-legend.fc-day span ~ span {
+    left: 40%;
+}
+
+.has-legend.fc-day span ~ span ~ span {
+    left: 55%;
+}
+
+.fc table {
+    width: 100%;
+    box-sizing: border-box;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1em;
+    border-color: white;
+}
+
+.fc .fc-row {
+    border-style: solid;
+    border-width: 0;
+}
+
+.fc-basic-view .fc-body .fc-row {
+    min-height: 3em;
+}
+
+.fc-mini .fc-basic-view .fc-body .fc-row {
+    min-height: 2em;
+}
+
+.fc th, .fc td {
+    vertical-align: top;
+    border-color: white!important;
+}
+
+/*.fc-sat.fc-day, .fc-sun.fc-day {
+    background-color: #1453a2;
+}*/
+
+/*.fc-sat .fc-day-number, .fc-sun .fc-day-number {
+    color: white;
+}*/
+
+/*Events*/
+.fc-event {
+    font-size: .8em;
+}
+.fc-event-container {
+    /*position: absolute;*/
+    padding: 0px 3px!important;
+
+}
+
+td.fc-event-container:last-of-type {
+    padding-right:0px!important;
+}
+
+.fc-more {
+    padding: 0px 3px!important;
+    /*left: 50%;
+    top: 9px;
+    position: relative;
+    font-weight: bold;*/
+}
+/**/

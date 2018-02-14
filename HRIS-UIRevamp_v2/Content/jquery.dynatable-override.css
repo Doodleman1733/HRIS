@@ -1,0 +1,415 @@
+.dynatable-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    position: relative;
+    /*padding-bottom: 8px;*/
+}
+
+/*-------------HEADER--------------*/
+table.dyna-theme001 tr th {
+    background-color: #18b5c8;
+    color: white;
+    height: 42px;
+    vertical-align: middle;
+    border-bottom: 0px;
+    letter-spacing: .2em;
+    font-family: "Neutra Text 2";
+}
+
+table.dyna-theme001 th:first-of-type {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+table.dyna-theme001 th:last-of-type {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+table.dyna-theme001 th a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+table.dyna-theme002 {
+    margin-bottom: 0;
+}
+
+table.dyna-theme002 tr.header-1 th {
+    color: white;
+    vertical-align: middle;
+    font-family: "Neutra Text 2";
+    font-size: .85em;
+    padding: 15px;
+}
+
+table.dyna-theme002 tr.header-1 th:nth-child(odd) {
+    background-color: #0e3659;
+    border: 1px solid #0e3659;
+}
+
+table.dyna-theme002 tr.header-1 th:nth-child(even), table.dyna-theme002 tr.header-2 th:nth-child(2) {
+    background-color: #17517f;
+    border: 1px solid #17517f;
+}
+
+table.dyna-theme002 tr.header-1 th:first-child {
+    border-top-left-radius: 10px;
+}
+
+table.dyna-theme002 tr.header-1 th:last-child {
+    border-top-right-radius: 10px;
+}
+
+
+table.dyna-theme002 tr.header-2 th {
+    color: white;
+    vertical-align: middle;
+    font-family: "Neutra Text 2";
+    font-size: .85em;
+    padding: 4px 8px;
+}
+
+table.dyna-theme002 tr.header-2 th:nth-child(4n+3), table.dyna-theme002 tr.header-2 th:nth-child(4n+4), table.dyna-theme002 tr.header-2 th:first-child {
+    background-color: #f5a81c;
+    border: 1px solid #f5a81c;
+}
+
+table.dyna-theme002 tr.header-2 th:nth-child(4n+5), table.dyna-theme002 tr.header-2 th:nth-child(4n+6) {
+    background-color: #f5b44e;
+    border: 1px solid #f5b44e;
+}
+
+table.dyna-theme003 tr th {
+    background-color: #0e3659;
+    color: white;
+    height: 42px;
+    vertical-align: middle;
+    border-bottom: 0px;
+    letter-spacing: .2em;
+    font-family: "Neutra Text 2";
+}
+
+table.dyna-theme003 th:first-of-type {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+table.dyna-theme003 th:last-of-type {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+table.dyna-theme003 th a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+
+table.dyna-theme004 {
+    margin-bottom: 0;
+}
+
+table.dyna-theme004 tr.header-1 th {
+    color: white;
+    vertical-align: middle;
+    font-family: "Neutra Text 2";
+    font-size: .85em;
+    padding: 15px;
+}
+
+table.dyna-theme004 tr.header-1 th:nth-child(odd) {
+    background-color: #0e3659;
+    border: 1px solid #0e3659;
+}
+
+table.dyna-theme004 tr.header-1 th:nth-child(even){
+    background-color: #17517f;
+    border: 1px solid #17517f;
+}
+
+table.dyna-theme004 tr.header-1 th:first-child {
+    border-top-left-radius: 10px;
+}
+
+table.dyna-theme004 tr.header-1 th:last-child {
+    border-top-right-radius: 10px;
+}
+
+table.dyna-theme005 tr th {
+    background-color: #18b5c8;
+    color: white;
+    height: 42px;
+    vertical-align: middle;
+    border-bottom: 0px;
+    /*letter-spacing: .2em;*/
+    font-family: "Neutra Text 2";
+    font-size:15px;
+}
+
+table.dyna-theme005 th:first-of-type {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+table.dyna-theme005 th:last-of-type {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+table.dyna-theme005 th a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+table.dyna-theme006 {
+    margin-bottom: 0;
+}
+
+table.dyna-theme006 tr.header-1 th {
+    color: white;
+    vertical-align: middle;
+    font-family: "Neutra Text 2";
+    font-size: .85em;
+    padding: 15px;
+}
+
+table.dyna-theme006 tr.header-1 th:nth-child(odd) {
+    background-color: #0e3659;
+    border: 1px solid #0e3659;
+}
+
+table.dyna-theme006 tr.header-1 th:nth-child(even){
+    background-color: #17517f;
+    border: 1px solid #17517f;
+}
+
+table.dyna-theme006 tr.header-1 th:first-child {
+    border-top-left-radius: 10px;
+}
+
+table.dyna-theme006 tr.header-1 th:last-child {
+    border-top-right-radius: 10px;
+}
+
+table.dyna-theme007 tr th {
+    background-color: #18b5c8;
+    color: white;
+    height: 45px;
+    align-items:center;
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 0px;
+    vertical-align: middle;
+    font-family: "Neutra Text 2";
+    font-size: 16px;
+    text-align:center;
+}
+
+table.dyna-theme007 th:first-of-type {
+    border-top-left-radius: 7px;
+}
+
+table.dyna-theme007 th:last-of-type {
+    border-top-right-radius: 7px;
+}
+
+table.dyna-theme008 tr th {
+    color: white;
+    vertical-align: middle;
+    font-family: "Neutra Text 1";
+    font-size: .55em;
+    padding: 15px;
+}
+
+table.dyna-theme008 tr th:nth-child(odd) {
+    background-color: #0e3659;
+    border: 1px solid #0e3659;
+}
+
+table.dyna-theme008 tr th:nth-child(even){
+    background-color: #17517f;
+    border: 1px solid #17517f;
+}
+
+table.dyna-theme008 tr th:first-child {
+    border-top-left-radius: 10px;
+}
+
+table.dyna-theme008 tr th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/*-----------HEADER-END-----------*/
+/*.tbl-func tbody tr:hover,
+.tbl-func tbody tr.active,
+.tbl-func tbody tr.active>td,
+.data-mob-li.active
+{
+    background-color:#2aa24a!important;
+    color:#fff;
+}*/
+.panel table.dyna-theme001.table-bordered {
+    /*border: 1px solid #ddd;*/
+}
+/*#d8d8d8*/
+
+/*body cells*/
+table.dyna-theme001 tbody tr td {
+    height: 50px;
+    vertical-align: middle;
+}
+
+table.dyna-theme001 tbody tr:first-child td {
+    border-top: none;
+}
+
+
+table.dyna-theme001.table-hover tbody tr:hover td, table.dyna-theme001 tbody tr:hover, table.dyna-theme001 tbody tr.active, table.dyna-theme001 tbody tr.active>td  {
+   cursor:pointer;
+            /* add gradient */
+            border-radius: 10px;
+            background-color: #808080;
+            background: -webkit-gradient(linear,left bottom , left top, from(#8f8f8f), to(#c8c8c8));
+            color: #000;
+}
+
+table.dyna-theme002 tbody tr td {
+    border-right: 1px solid #e1e1e1;
+    border-bottom: none;
+    border-top: none;
+    padding: 15px 10px;
+}
+
+table.dyna-theme002 tbody tr td:last-child {
+    border-right: none;
+}
+
+table.dyna-theme002 tbody tr td:nth-child(2n+3) {
+    background-color: #eaeaea;
+}
+
+table.dyna-theme002 tbody tr td:nth-child(2n+4) {
+    background-color: white;
+}
+
+table.dyna-theme002.table-hover tbody tr:hover td {
+    background-color: #f5f5f5;
+}
+
+table.dyna-theme004 tbody tr td {
+    border-right: 1px solid #e1e1e1;
+    border-bottom: none;
+    border-top: none;
+    padding: 40px 10px;
+}
+
+table.dyna-theme004 tbody tr td:last-child {
+    border-right: none;
+}
+
+table.dyna-theme004 tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+table.dyna-theme004 tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table.dyna-theme004.table-hover tbody tr:hover td {
+    background-color: #f5f5f5;
+}
+
+table.dyna-theme005 tbody tr td {
+    font-size: 18px;
+    overflow-wrap: break-word;
+    border-bottom: none;
+    border-top: none;
+    padding: 5px 10px;
+}
+
+table.dyna-theme005 tbody tr td:last-child {
+    border-right: none;
+}
+
+table.dyna-theme005 tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+table.dyna-theme005 tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table.dyna-theme005.table-hover tbody tr:hover td, table.dyna-theme005 tbody tr:hover, table.dyna-theme005 tbody tr.active, table.dyna-theme005 tbody tr.active>td  {
+   cursor:pointer;
+            /* add gradient */
+            border-radius: 10px;
+            background-color: #808080;
+            background: -webkit-gradient(linear,left bottom , left top, from(#8f8f8f), to(#c8c8c8));
+            color: #000;
+}
+
+table.dyna-theme006 tbody tr td {
+    border-right: 1px solid #e1e1e1;
+    border-bottom: none;
+    border-top: none;
+    padding: 10px 10px;
+}
+
+table.dyna-theme006 tbody tr td:last-child {
+    border-right: none;
+}
+
+table.dyna-theme006 tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+table.dyna-theme006 tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table.dyna-theme006.table-hover tbody tr:hover td {
+    background-color: #f5f5f5;
+}
+
+table.dyna-theme007 tbody tr td {
+    border-left: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    border-top: none;
+    padding: 10px 10px;
+    vertical-align:middle;
+}
+
+table.dyna-theme007 tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+table.dyna-theme007 tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table.dyna-theme008 tbody tr td {
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 1px solid #eaeaea;
+    border-top: none;
+    padding: 15px 15px;
+    font-size: .60em;
+}
+
+table.dyna-theme008 tbody tr td:last-child {
+    border-right: none;
+}
+
+table.dyna-theme008 tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+table.dyna-theme008 tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table.dyna-theme008.table-hover tbody tr:hover td {
+    background-color: #f5f5f5;
+}

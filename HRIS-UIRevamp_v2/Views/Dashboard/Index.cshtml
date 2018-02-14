@@ -1,0 +1,456 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model List<DashboardLayoutViewModel>
+@{
+    ViewBag.Title = "Dashboard";
+}
+<div class="col-md-12 title">
+    DASHBOARD
+</div>
+<div class="body-content @*not-default*@">
+    @*@{ 
+        foreach(var widget in Model)
+        {
+            var left = widget.positionleft + "px";
+            var top = widget.positiontop + "px";
+            <div style="left:@left;top:@top;position:relative;">
+                @Html.Partial("~/Views/" + widget.url)
+            </div>
+        }
+    }*@
+    <div class="col-md-8 no-padding left-container">
+        <div class="col-md-12 margin-top-lg"></div>
+        <div class="col-md-8 no-padding">
+            <div class="col-md-6">
+                <div class="log-in bg-blue003 disable-select">
+                    <div class="log-in-item">
+                        <div class="log-in-header">
+                            TODAY'S LOG IN
+                        </div>
+                        <div class="log-in-body">
+                            <div class="log-in-time">
+                                <div class="log-in-hour">12</div>
+                                <div class="log-in-minute">00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="log-in log-in-slides bg-green002 disable-select">
+                    <div class="log-in-item">
+                        <div class="log-in-header">
+                            TEST
+                        </div>
+                        <div class="log-in-body">
+                            <div class="log-in-time">
+                                <div class="log-in-hour">11</div>
+                                <div class="log-in-minute">32</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="log-in-item">
+                        <div class="log-in-header">
+                            TEST1
+                        </div>
+                        <div class="log-in-body">
+                            <div class="log-in-time">
+                                <div class="log-in-hour">08</div>
+                                <div class="log-in-minute">00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="log-in-item">
+                        <div class="log-in-header">
+                            YESTERDAY'S LOG IN
+                        </div>
+                        <div class="log-in-body">
+                            <div class="log-in-time">
+                                <div class="log-in-hour">12</div>
+                                <div class="log-in-minute">00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="log-in-left-button glyphicon glyphicon-chevron-left"></span>
+                    <span class="log-in-right-button glyphicon glyphicon-chevron-right"></span>
+
+                </div>
+            </div>
+
+            <div class="accrued-ot col-md-12 no-padding margin-top-default">
+                <div class="col-md-12">
+                    <div class="accrued-ot-header">
+                        ACCRUED OVERTIME FOR TIME PERIOD
+                    </div>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="accrued-ot-body">
+                        <div class="col-md-6">
+                            <div class="accrued-ot-amount">
+                                <div class="accrued-ot-hour">12</div>
+                                <div class="accrued-ot-minute">25</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="accrued-ot-date">
+                                JUNE 26<br />TO 30, 2017
+                            </div>
+                            <span class="accrued-ot-more-info">
+                                VIEW MORE INFO
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="activity-feed">
+                <div class="activity-feed-header"> YOUR ACTIVITY FEED</div>
+                <div class="activity-feed-body" id="activity-feed-body">
+                    <div class="activity-feed-item">
+                        <div>
+                            <div class="activity-feed-message">
+                                15:05 has been approved
+                            </div>
+                            <span class="activity-feed-more">
+                                VIEW MORE
+                            </span>
+                        </div>
+                        <div class="glyphicon glyphicon-ok-circle text-green001 fs26"></div>
+                    </div>
+                    <div class="activity-feed-item">
+                        <div>
+                            <div class="activity-feed-message">
+                                Filed overtime from June 13
+                            </div>
+                            <span class="activity-feed-more">
+                                VIEW MORE
+                            </span>
+                        </div>
+                        <div class="glyphicon glyphicon-time text-blue003 fs26"></div>
+                    </div>
+                    <div class="activity-feed-item">
+                        <div>
+                            <div class="activity-feed-message">
+                                15:05 has been approved
+                            </div>
+                            <span class="activity-feed-more">
+                                VIEW MORE
+                            </span>
+                        </div>
+                        <div class="glyphicon glyphicon-ok-circle text-green001 fs26"></div>
+                    </div>
+                    <div class="activity-feed-item">
+                        <div>
+                            <div class="activity-feed-message">
+                                Filed overtime from June 13
+                            </div>
+                            <span class="activity-feed-more">
+                                VIEW MORE
+                            </span>
+                        </div>
+                        <div class="glyphicon glyphicon-time text-blue003 fs26"></div>
+                    </div>
+                    <div class="activity-feed-item">
+                        <div>
+                            <div class="activity-feed-message">
+                                15:05 has been approved
+                            </div>
+                            <span class="activity-feed-more">
+                                VIEW MORE
+                            </span>
+                        </div>
+                        <div class="glyphicon glyphicon-ok-circle text-green001 fs26"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 margin-top-lg">
+            <div id='calendar' class="fc-mini"></div>
+        </div>
+        <div class="col-md-6 margin-top-lg">
+            <div class="company-news disable-select">
+                <div class="company-news-header">
+                    COMPANY NEWS
+                </div>
+                <div class="company-news-body animation-fade">
+                    <div class="company-news-image">
+                        <img src="/images/company_news2.jpg">
+                    </div>
+                    <div>
+                        <div class="company-news-message">
+                            LIST OF 2017 PHILIPPINE HOLIDAYS!
+                        </div>
+                        <div class="company-news-date">
+                            12/31/16
+                        </div>
+                        <div class="company-news-more">
+                            <a>VIEW MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-news-body animation-fade">
+                    <div class="company-news-image">
+                        <img src="/images/company_news3.jpg">
+                    </div>
+                    <div>
+                        <div class="company-news-message">
+                            FREE PHONES TO EMPLOYEES! CLAIM YOURS NOW!
+                        </div>
+                        <div class="company-news-date">
+                            01/01/17
+                        </div>
+                        <div class="company-news-more">
+                            <a>VIEW MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="company-news-body animation-fade">
+                    <div class="company-news-image">
+                        <img src="/images/company_news.png">
+                    </div>
+                    <div>
+                        <div class="company-news-message">
+                            NEW OFFICES<br />WILL BE ANNOUNCED!
+                        </div>
+                        <div class="company-news-date">
+                            01/05/17
+                        </div>
+                        <div class="company-news-more">
+                            <a>VIEW MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <span class="company-news-left-button glyphicon glyphicon-chevron-left"></span>
+                <span class="company-news-right-button glyphicon glyphicon-chevron-right"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 no-padding">
+        <div class="announcement disable-select">
+            <div class="announcement-header">
+                ANNOUNCEMENTS
+            </div>
+            <div class="announcement-body animation-fade">
+                <div class="announcement-image">
+                    <img src="/images/announcement2.jpg">
+                </div>
+                <div class=" announcement-message">
+                    13TH MONTH PAY RELEASED
+                </div>
+            </div>
+            <div class="announcement-footer">
+                12/23/2016
+            </div>
+            <div class="announcement-body animation-fade">
+                <div class="announcement-image">
+                    <img src="/images/announcement.png">
+                </div>
+                <div class=" announcement-message">
+                    ALL EMPLOYEES HANDS ON DECK
+                </div>
+            </div>
+            <div class="announcement-footer">
+                01/05/2017
+            </div>
+            <span class="announcement-left-button glyphicon glyphicon-chevron-left"></span>
+            <span class="announcement-right-button glyphicon glyphicon-chevron-right"></span>
+        </div>
+        <div class="weather">
+            <div class="col-md-4 no-padding">
+                <div class="weather-icon"></div>
+            </div>
+            <div class=" col-md-8 text-center">
+                <div class="col-md-12 no-padding fs20 ff-nt2">TODAY'S WEATHER</div>
+                <div class="col-md-12 no-padding margin-top-sm border-bottom-gray"></div>
+                <div class="col-md-7 no-padding margin-top-sm">
+                    <div class="col-md-12 no-padding ff-nt2">PARTLY CLOUDY</div>
+                    <div class="col-md-12 no-padding">High: 11&#176; Low: 5&#176;</div>
+                    <div class="col-md-12 no-padding">Wind: E 11.27 km/h</div>
+                </div>
+                <div class="col-md-5">
+                    <div class="col-md-12 no-padding text-blue003 fs50 ff-nt2">9&#176;</div>
+                </div>
+            </div>
+        </div>
+        <div class="quote">
+            <span class="quote-left-button glyphicon glyphicon-chevron-left"></span>
+            <span class="quote-right-button glyphicon glyphicon-chevron-right"></span>
+            <div class="quote-header">
+                QUOTE OF THE DAY!
+            </div>
+            <div class="quote-message">
+                <img src="/images/quote.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#calendar').fullCalendar({
+        fixedWeekCount: false,
+        showNonCurrentDates: true,
+        //aspectRatio: 1.33,
+        contentHeight: 240,
+        dayNamesShort: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+        titleFormat: 'MMMM',
+        themeSystem: 'bootstrap3',
+        header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next'
+        }
+    });
+
+    doubleDigitDays();
+
+    $('.fc-prev-button').click(function () {
+        doubleDigitDays();
+    });
+
+    $('.fc-next-button').click(function () {
+        doubleDigitDays();
+    });
+
+    //prepend 0 on single digit days
+    function doubleDigitDays() {
+        $('.fc-day-number').each(function () {
+            var $this = $(this);
+            if ($this.text().length == 1) {
+                $this.text('0' + $this.text());
+            }
+        });
+    };
+
+    if ($('#activity-feed-body').length) {
+        const ps = new PerfectScrollbar('#activity-feed-body', {
+            wheelSpeed: .25,
+            maxScrollbarLength: 250,
+            scrollXMarginOffset: 5
+        });
+
+        $(window).resize(function () {
+            window.setTimeout(function () {
+                ps.update();
+            }, 200);
+        });
+    }
+
+
+   
+    var liSlides = $('.log-in-slides').find(".log-in-item");
+    var liSlideIndex = liSlides.length;
+
+    $('.log-in-left-button').click(function () {
+        liPlusSlides(-1);
+    });
+
+    $('.log-in-right-button').click(function () {
+        liPlusSlides(1);
+    });
+   
+
+    liShowSlides(liSlideIndex);
+
+    window.setTimeout(function () {
+        liSlides.css('transition', '.7s');
+    }, 1);
+
+    function liPlusSlides(n) {
+      liShowSlides(liSlideIndex += n);
+    }
+
+
+
+    function liShowSlides(n) {
+        var i;
+        //if (n > slides.length) { slideIndex = n - 1 }
+        //if (n < 1) { slideIndex = n + 1 }
+        if (n == liSlides.length) { $('.log-in-right-button').addClass("hidden"); }
+        else { $('.log-in-right-button').removeClass("hidden"); }
+
+        if (n == 1) { $('.log-in-left-button').addClass("hidden"); }
+        else { $('.log-in-left-button').removeClass("hidden"); }
+
+
+        for (i = 0; i < liSlides.length; i++) {
+            liSlides[i].style.right = (((n - 1) * 100) + '%');
+        }
+    }
+
+    if (cnSlideIndex) {
+        var cnSlides = $('.company-news').find(".company-news-body");
+        var cnSlideIndex = cnSlides.length;
+
+        $('.company-news-left-button').click(function () {
+            cnPlusSlides(-1);
+        });
+
+        $('.company-news-right-button').click(function () {
+            cnPlusSlides(1);
+        });
+
+
+        cnShowSlides(cnSlideIndex);
+
+        function cnPlusSlides(n) {
+            cnShowSlides(cnSlideIndex += n);
+        }
+
+        function cnShowSlides(n) {
+            var i;
+
+            if (n == cnSlides.length) { $('.company-news-right-button').addClass("hidden"); }
+            else { $('.company-news-right-button').removeClass("hidden"); }
+
+            if (n == 1) { $('.company-news-left-button').addClass("hidden"); }
+            else { $('.company-news-left-button').removeClass("hidden"); }
+
+
+            for (i = 0; i < cnSlides.length; i++) {
+                cnSlides[i].style.display = "none";
+            }
+            cnSlides[cnSlideIndex - 1].style.display = "flex";
+        }
+    }
+
+
+    if (ancSlideIndex) {
+        $('.announcement-left-button').click(function () {
+            ancPlusSlides(-1);
+        });
+
+        $('.announcement-right-button').click(function () {
+            ancPlusSlides(1);
+        });
+
+        var ancSlides = $('.announcement').find(".announcement-body");
+        var ancSlides2 = $('.announcement').find(".announcement-footer");
+
+        var ancSlideIndex = ancSlides.length;
+        ancShowSlides(ancSlideIndex);
+
+        function ancPlusSlides(n) {
+            ancShowSlides(ancSlideIndex += n);
+        }
+
+        function ancShowSlides(n) {
+            var i;
+
+            if (n == ancSlides.length) { $('.announcement-right-button').addClass("hidden"); }
+            else { $('.announcement-right-button').removeClass("hidden"); }
+
+            if (n == 1) { $('.announcement-left-button').addClass("hidden"); }
+            else { $('.announcement-left-button').removeClass("hidden"); }
+
+
+            for (i = 0; i < ancSlides.length; i++) {
+                ancSlides[i].style.display = "none";
+                ancSlides2[i].style.display = "none";
+            }
+            ancSlides[ancSlideIndex - 1].style.display = "flex";
+            ancSlides2[ancSlideIndex - 1].style.display = "flex";
+        }
+    }
+    
+
+</script>

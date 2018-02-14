@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="@Url.Content("~/images/monocrete.ico")" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/floatinglabel")
+    @Scripts.Render("~/bundles/perfectscroll")
+    <title>@ViewBag.Title</title>
+
+    <style>
+        html, body {
+            background: url(../../images/bg.png);
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register_body-content">
+        <div class="col-md-6 no-padding relative">
+            <div class="mySlide fade">
+                <img src="~/images/company_news.png" style="height:100%; width:100%;">
+            </div>
+            <div class="mySlide fade">
+                <img src="~/images/company_news2.jpg" style="height:100%; width:100%;">
+            </div>
+            <div class="mySlide fade">
+                <img src="~/images/company_news3.jpg" style="height:100%; width:100%;">
+            </div>
+            <div class="mySlide fade">
+                <img src="~/images/company_news.png" style="height:100%; width:100%;">
+            </div>
+
+            <div class="mySlide fade">
+                <img src="~/images/company_news2.jpg" style="height:100%; width:100%;">
+            </div>
+        </div>
+
+        @RenderBody()
+
+    </div>
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlide");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+
+    </script>
+
+
+</body>
+</html>

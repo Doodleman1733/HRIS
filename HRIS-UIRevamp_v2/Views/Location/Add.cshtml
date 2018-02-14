@@ -1,0 +1,235 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model LocationAddViewModel
+@{
+    ViewBag.Title = "Location/Add";
+}
+<div class="col-md-12 title">
+    ADD LOCATION
+</div>
+
+@using (Html.BeginForm("Add", "Location", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" , id = "locFrm"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="body-content">
+        <div class="col-md-6 no-padding left-container">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 ">
+                    @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Company" })
+                    @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-5 ">
+                    <div class="col-md-12 no-padding fs20 ff-nt2">
+                        @Html.LabelFor(model => model.loc_id, new { @class = "" })
+                    </div>
+                    @Html.TextBoxFor(model => model.loc_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.loc_id, "", new { @class = "fs15 text-danger" })
+                </div>
+                <div class="col-md-7">
+                    <div class="col-md-12 no-padding fs20 ff-nt2">
+                        @Html.LabelFor(model => model.name1, new { @class = "" })
+                    </div>
+                    @Html.TextBoxFor(model => model.name1, new { @maxlength = "50", @class = "input-default h45 fs20 block", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(model => model.name1, "", new { @class = "fs15 text-danger" })
+                </div>
+            </div>
+
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Description
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.description, new { @maxlength = "100", @class = "input-default h45 fs20 block"})
+                        @Html.ValidationMessageFor(model => model.description, "", new { @class = "fs15 text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+                    <div class="col-md-12 margin-top-default floatingLabel">
+                        <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                            Location Address
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.streetaddress, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Street" })
+                                @Html.ValidationMessageFor(model => model.streetaddress, "", new { @class = "fs15 text-danger" })
+                            </div>
+                            <div class="col-md-6 ">
+                                @Html.TextBoxFor(model => model.city, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "City" })
+                                @Html.ValidationMessageFor(model => model.city, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-6 margin-top-default">
+                                @Html.TextBoxFor(model => model.province, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Province" })
+                                @Html.ValidationMessageFor(model => model.province, "", new { @class = "fs15 text-danger" })
+                            </div>
+                            <div class="col-md-6 margin-top-default">
+                                @Html.TextBoxFor(model => model.country, new { @maxlength = "50", @class = "input-default h45 fs20 block", @placeholder = "Country" })
+                                @Html.ValidationMessageFor(model => model.country, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default margin-bottom-lg">
+
+                        <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                            Contact Persons
+                        </div>
+                        <div class="col-md-12 margin-top-default">
+                            <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                                1.
+                            </div>
+                            <div class="col-md-11 no-padding">
+                                @Html.TextBoxFor(model => model.contactperson1, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.contactperson1, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 margin-top-default">
+                            <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                                2.
+                            </div>
+                            <div class="col-md-11 no-padding">
+                                @Html.TextBoxFor(model => model.contactperson2, new { @maxlength = "20", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.contactperson2, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+
+                   
+                    </div>
+                </div>
+
+                <div class="col-md-6 no-padding">
+                    <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                        <div class="tab selected flex flex-left">
+                            <span class="margin-left-lg fs26"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default">
+                        <div class="col-md-12  fs20 ff-nt2 margin-bottom-sm">
+                            @Html.LabelFor(model => model.phone1, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding-right">
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.phone1, new { @maxlength = "15", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.phone1, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm margin-top-sm">
+                            @Html.LabelFor(model => model.phone2, new { @class = "" })
+                        </div>
+                        <div class="col-md-12 no-padding-right">
+                            <div class="col-md-12 ">
+                                @Html.TextBoxFor(model => model.phone2, new { @maxlength = "15", @class = "input-default h45 fs20 block" })
+                                @Html.ValidationMessageFor(model => model.phone2, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 margin-top-default margin-bottom-default">
+                        <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                            Emails
+                        </div>
+                        <div class="col-md-12 floatingLabel">
+                            <div class="col-md-12 no-padding-right">
+                                @Html.TextBoxFor(model => model.email1, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Email 1" })
+                                @Html.ValidationMessageFor(model => model.email1, "", new { @class = "fs15 text-danger" })
+                            </div>
+                            <div class="col-md-12 margin-top-default no-padding-right">
+                                @Html.TextBoxFor(model => model.email2, new { @maxlength = "100", @class = "input-default h45 fs20 block", @placeholder = "Email 2" })
+                                @Html.ValidationMessageFor(model => model.email2, "", new { @class = "fs15 text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 fs20 ff-nt2 margin-top-lg">
+                            <div class="col-md-12 no-padding">
+                                @Html.LabelFor(model => model.addinfo, new { @class = "" })
+                            </div>
+                        </div>
+
+                            <div class="col-md-12 no-padding-right">
+                                @Html.TextAreaFor(model => model.addinfo, new { @maxlength = "250", @class = "input-default fs20 block", @rows = 5 })
+                                @Html.ValidationMessageFor(model => model.addinfo, "", new { @class = "fs15 text-danger" })
+                            </div>
+
+                        <div class="col-md-6 pull-right margin-top-lg margin-right-default flex flex-center no-padding-right">
+                            <div class="col-md-5 no-padding pull-right margin-right-sm">
+                                <input type="submit" value="SAVE" class="bg-green002 button-default block h38 fs20 ff-nt2" />
+                            </div>
+                            <div class="no-padding col-md-7">
+                                <a type="button" href='@Url.Content("~/Location")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CANCEL</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+}
+<script>
+   
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            },
+            onBlur: function () {
+                $(this.$input[0]).valid();
+            },
+            onChange: function () {
+                $('#loc_id').removeData('previousValue');
+                $('#locFrm').validate().element(':input[name="loc_id"]');;
+            }
+        });
+    }
+
+    function initializeEvents() {
+
+        userForm = new FormPrompt({
+            form: $("#locFrm"),
+            message: 'Add Location?',
+
+        });
+
+        userForm.run();
+    }
+</script>

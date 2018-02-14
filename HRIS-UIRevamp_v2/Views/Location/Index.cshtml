@@ -1,0 +1,167 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model LocationIndexViewModel
+@{
+    ViewBag.Title = "Location";
+}
+
+    <div class="col-md-12 title">
+        LOCATION
+    </div>
+
+    <div class="body-content">
+        <div class="col-md-12 margin-top-default">
+            <div class="col-md-12 margin-top-lg margin-bottom-lg">
+                <div class="col-md-6">
+                    <div class="col-md-12 margin-bottom-default no-padding">
+                        <div class="col-md-3 no-padding fs20 ff-nt2 flex flex-left h45">
+                            @Html.LabelFor(model => model.comp_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.comp_id, Enumerable.Empty<SelectListItem>(), "", new { @class = "", @placeholder = "Select Company" })
+                            @Html.ValidationMessageFor(model => model.comp_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-bottom-default no-padding">
+                        <div class="col-md-3 no-padding fs20 ff-nt2 flex flex-left h45">
+                            @Html.LabelFor(model => model.loc_id, new { @class = "" })
+                        </div>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.loc_id, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Location ID" })
+                            @Html.ValidationMessageFor(model => model.loc_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-bottom-default no-padding">
+                        <div class="col-md-3 no-padding fs20 ff-nt2 flex flex-left h45">
+                            @Html.LabelFor(model => model.name1, new { @class = "" })
+                        </div>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.name1, new { @maxlength = "20", @class = "input-default h45 fs20 block", @placeholder = "Enter Location Name" })
+                            @Html.ValidationMessageFor(model => model.name1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-12 no-padding margin-top-default">
+                            <div class="col-md-4 no-padding pull-right margin-right-default">
+                                <button class="button-default block bg-orange001 h38 fs20 ff-nt2" id="search">SEARCH</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 no-padding h55 flex flex-center pull-right ">
+                    @Html.Action("ButtonLinks", "Layout")
+                </div>
+
+            </div>
+           
+
+            <div class="margin-bottom-lg col-md-12" id="table">
+                <div class="col-md-12 fs17">
+                    <table class="table dyna-theme001 d-table tableBodyScroll2" id="location-table">
+                        <thead>
+                            <tr>
+                                <th data-dynatable-column="comp_id">COMPANY ID</th>
+                                <th data-dynatable-column="loc_id">LOCATION ID</th>
+                                <th data-dynatable-column="name1">LOCATION NAME</th>
+                                <th data-dynatable-column="contactperson1">CONTACT PERSON</th>
+                                @*<th data-dynatable-column="name1">LOCATION IN CHARGE</th>*@
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+    var dtable;
+
+    var settings = {
+        features: {
+            paginate: true,
+            sort: true,
+            pushState: true,
+            search: false,
+            recordCount: true,
+            perPageSelect: false
+        },
+        dataset: {
+            records: [],
+            perPageDefault: 10,
+            perPageOptions: [10, 20, 50, 100, 200, 500, 1000]
+        }
+    };
+
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents();
+    });
+
+    function initializeUI() {
+
+        $('#comp_id').selectize({
+            valueField: 'KEY',
+            labelField: 'VALUE',
+            searchField: ['VALUE'],
+            sortField: [{ field: 'VALUE', direction: 'asc' }],
+            dropdownParent: 'body',
+            plugins: ['remove_button'],
+            onInitialize: function () {
+                __this = this;
+                __this.load(function (callback) {
+                    $.ajax({
+                        url: '@Url.Content("~/LookUp/AllowedFieldsPerUser")',
+                        method: 'get',
+                        success: function (results) {
+                            callback(results);
+                        },
+                        error: function () {
+                            callback();
+                        }
+                    });
+                });
+            }
+        });
+        dtable = $(".d-table").bind('dynatable:init', function (e, dynatable) {
+        }).dynatable(settings).data('dynatable');
+
+    }
+
+    function initializeEvents() {
+         
+        $("#search").on('click', function (e) {
+            e.preventDefault();
+            var comp_id = $("#comp_id");
+            var loc_id = $("#loc_id");
+            var name1 = $("#name1");
+            if ($('#location-table').is(':visible')) {
+                if (comp_id.val().length) {
+                    dtable.queries.add('comp_id', comp_id.val());
+                } else {
+                    dtable.queries.remove('comp_id');
+                }
+                if (loc_id.val().length) {
+                    dtable.queries.add('loc_id', loc_id.val());
+                } else {
+                    dtable.queries.remove('loc_id');
+                }
+                if (name1.val().length) {
+                    dtable.queries.add('name1', name1.val());
+                } else {
+                    dtable.queries.remove('name1');
+                }
+                dtable.queries.add('ajax', 'yes');
+                dtable.settings.dataset.ajax = true;
+                dtable.settings.dataset.ajaxUrl = "@Url.Content("~/Location/SearchResult")";
+                dtable.settings.dataset.ajaxOnLoad = false;
+                dtable.process();
+            }
+        });
+
+    }
+
+
+</script>

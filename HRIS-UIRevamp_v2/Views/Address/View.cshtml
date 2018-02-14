@@ -1,0 +1,207 @@
+﻿@using HRIS_UIRevamp_v2.ViewModel
+@model AddressUpdateViewModel
+@{
+    ViewBag.Title = "Address/View";
+}
+<div class="col-md-12 title">
+    VIEW ADDRESS
+</div>
+
+    <div class="body-content">
+        <div class="col-md-6 no-padding left-container">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">BASIC INFORMATION</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Address Names
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.name1, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled=true })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.name2, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        3.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.name3, new { @maxlength = "20", @class = "input-default h45 fs20 block" , @disabled = true })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12  margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.description, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm">
+                    @Html.TextAreaFor(model => model.description, new { @maxlength = "250", @class = "input-default fs20 block", @rows = 5, @disabled = true })
+                </div>
+            </div>
+
+
+            <div class="col-md-12 margin-top-default floatingLabel">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Location Address
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(model => model.streetaddress, new { @maxlength = "100", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                    <div class="col-md-6 ">
+                        @Html.TextBoxFor(model => model.city, new { @maxlength = "50", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+
+                <div class="col-md-12 no-padding ">
+                    <div class="col-md-6 margin-top-default">
+                        @Html.TextBoxFor(model => model.province, new { @maxlength = "50", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                    <div class="col-md-6 margin-top-default">
+                        @Html.TextBoxFor(model => model.country, new { @maxlength = "50", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12  margin-top-default margin-bottom-lg">
+                <div class="col-md-12 fs20 ff-nt2">
+                    @Html.LabelFor(model => model.postalcode, new { @class = "" })
+                </div>
+                <div class="col-md-12 margin-top-sm margin-bottom-lg">
+                    @Html.TextBoxFor(model => model.postalcode, new { @maxlength = "50", @class = "input-default h45 fs20 block", @disabled = true })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 no-padding">
+            <div class="col-md-12 no-padding tabs-default h55 ff-nt2">
+                <div class="tab selected flex flex-left">
+                    <span class="margin-left-lg fs26">CONTACT DETAILS</span>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Contact Persons
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.contactperson1, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.contactperson2, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Phone Numbers
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.phone1, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.phone2, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default">
+                <div class="col-md-12 fs20 ff-nt2 margin-bottom-sm">
+                    Emails
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        1.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.email1, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+                <div class="col-md-12 margin-top-default">
+                    <div class="no-padding col-md-1 h45 fs20 ff-nt2 margin-bottom-sm flex flex-center">
+                        2.
+                    </div>
+                    <div class="col-md-11 no-padding">
+                        @Html.TextBoxFor(model => model.email2, new { @maxlength = "20", @class = "input-default h45 fs20 block", @disabled = true })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 margin-top-default margin-bottom-default">
+                <div class="col-md-12 ">
+                    <div class="col-md-12 fs20 ff-nt2 no-padding">
+                        @Html.LabelFor(model => model.addinfo, new { @class = "" })
+                    </div>
+                    <div class="col-md-12 margin-top-sm no-padding-right">
+                        @Html.TextAreaFor(model => model.addinfo, new { @maxlength = "250", @class = "input-default fs20 block", @rows = 5, @disabled = true })
+                    </div>
+                </div>
+
+                <div class="col-md-4 pull-right margin-top-lg margin-bottom-default">
+                    <div class="no-padding col-md-12 pull-right">
+                        <a type="button" href='@Url.Content("~/Address")' class="bg-orange001 button-default block h38 fs20 ff-nt2">CLOSE</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+<script>
+
+    $(document).ready(function () {
+        initializeUI();
+        initializeEvents()
+    });
+
+    function initializeUI() {
+
+    }
+
+    function initializeEvents() {
+
+        userForm = new FormPrompt({
+            form: $("#addressFrm"),
+            message: 'Add Address?'
+        });
+
+        userForm.run();
+    }
+</script>
